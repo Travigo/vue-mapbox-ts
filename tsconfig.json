@@ -1,12 +1,14 @@
-{
+{  
   "compilerOptions": {
+    "declarationDir": "lib",
+    "declaration": true,
+    "rootDir": "src",
     "target": "es5",
-    "module": "esnext",
+    "module": "es6",
     "strict": true,
     "jsx": "preserve",
     "importHelpers": true,
-    "moduleResolution": "node",
-    "skipLibCheck": true,
+    "moduleResolution": "Node",
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "sourceMap": true,
@@ -14,12 +16,16 @@
     "types": [
       "webpack-env",
       "mocha",
-      "chai"
+      "chai",
+    ],
+    "typeRoots": [
+      "./node_modules/@types",
+      "./src/types",
     ],
     "paths": {
       "@/*": [
         "src/*"
-      ]
+      ],
     },
     "lib": [
       "esnext",
@@ -36,6 +42,7 @@
     "tests/**/*.tsx"
   ],
   "exclude": [
-    "node_modules"
+    "node_modules/**",
+    "tests/**"
   ]
 }
