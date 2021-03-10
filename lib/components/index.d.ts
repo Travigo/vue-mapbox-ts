@@ -6,3 +6,4 @@ import MapboxAttributionControl from './MapboxAttributionControl.vue';
 import MapboxScaleControl from './MapboxScaleControl.vue';
 import MapboxGeolocateControl from './MapboxGeolocateControl.vue';
 export { MapboxMap, MapboxMarker, MapboxNavigationControl, MapboxPopup, MapboxAttributionControl, MapboxScaleControl, MapboxGeolocateControl, };
+//# sourceMappingURL=index.d.ts.map

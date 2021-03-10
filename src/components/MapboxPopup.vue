@@ -1,9 +1,9 @@
-<template lang="pug">
-div
-  div(ref="content")
-    slot
-      div Whaddup Bitches
-    
+<template>
+<div>
+  <div ref="content">
+    <slot/>
+  </div>
+</div>
 </template>
 
 <script lang="ts">

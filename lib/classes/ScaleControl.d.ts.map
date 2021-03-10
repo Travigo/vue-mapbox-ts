@@ -1,0 +1,1 @@
+{"version":3,"file":"ScaleControl.d.ts","sourceRoot":"","sources":["../../src/classes/ScaleControl.ts"],"names":[],"mappings":"AAAA,aAAK,gBAAgB,GAAG,UAAU,GAAG,QAAQ,GAAG,UAAU,CAAC;AAE3D,MAAM,WAAW,mBAAmB;IAClC,QAAQ,EAAE,MAAM,CAAC;IACjB,IAAI,EAAE,gBAAgB,CAAA;CACvB;AAED,OAAO,EACL,gBAAgB,EACjB,CAAC"}

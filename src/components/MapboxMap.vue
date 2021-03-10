@@ -1,21 +1,25 @@
-<template lang="pug">
-div(:style="style")
-  div(v-if="vmb_map.isResolved" ref="root" :style="style")
-    slot 
-  div(v-else)
-    slot(name="loader")
-      div(:style="style")
-
+<template>
+<div :style="style">
+  <div v-if="vmb_map.isResolved" ref="root" :style="style">
+    <slot />
+  </div>
+  <div v-else>
+    <slot name="loader">
+      <div :style="style" />
+    </slot>
+  </div>
+</div>
 </template>
 
 <script lang="ts">
-import { defineComponent, onMounted, provide, ref } from 'vue';
+import { defineComponent, getCurrentInstance, onMounted, provide, ref, SetupContext } from 'vue';
+import { _instance } from '../install';
 import mapboxgl, { LngLat, LngLatBounds, Map, MapboxOptions } from 'mapbox-gl';
 import Deferred from 'my-deferred';
 import mountMap from '../services/MapboxMap.moutMap';
 
-
 export default defineComponent({
+  name: 'MapboxMap',
   props: {
     accessToken: {
       type: String,
@@ -198,13 +202,19 @@ export default defineComponent({
       default: false
     }
   },
-  setup(props) {
+  setup: (props:any, stuff:any) => {
+    console.log('SETUP');
+    const instance = getCurrentInstance();
+    console.log(_instance);
+    console.log(instance);
     const root = ref(null);
     const vmb_map = new Deferred<Map>();
     
     provide('vmb_map', vmb_map);
 
     onMounted(() => {
+      console.log('MOUNTED');
+      console.log(getCurrentInstance());
       mapboxgl.accessToken = props.accessToken;
       mountMap(props, vmb_map, root);
     });
@@ -214,13 +224,13 @@ export default defineComponent({
     };
   },
   computed: {
-    style(): Record<string,string | number>{
+    style(): any{
       return {
-        height: this.height,
-        width: this.width,
-        '--zoom-logo': this.zoomLogo >= 0.8 ? this.zoomLogo : 1,
-        '--display-attrib': this.hideAttribution ? 'none' : 'block'
-      };
+        height: (this as any).height,
+        width: (this as any).width,
+        '--zoom-logo': (this as any).zoomLogo >= 0.8 ? (this as any).zoomLogo : 1,
+        '--display-attrib': (this as any).hideAttribution ? 'none' : 'block'
+      } as any;
     }
   }
 });

@@ -1,5 +1,5 @@
-<template lang="pug">
-div
+<template>
+<div />
 
 
 </template>
@@ -9,8 +9,7 @@ import { defineComponent, inject, onMounted, provide, ref } from 'vue';
 import mapboxgl, { LngLat, LngLatBounds, Map, MapboxOptions } from 'mapbox-gl';
 import { getNavigationControlOptions, mountNavigationControl } from '../services/MapboxNavigationControl';
 import Deferred from 'my-deferred';
-import mountMap from '../services/MapboxMap.moutMap';
-import { NavigationControlPosition } from '@/classes/NavigationControll';
+import { NavigationControlPosition } from '../classes/NavigationControll';
 
 
 export default defineComponent({

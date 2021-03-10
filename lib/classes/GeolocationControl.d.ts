@@ -6,3 +6,4 @@ export interface GeolocationControlOptions {
     showAccuracyCircle: boolean;
     showUserLocation: boolean;
 }
+//# sourceMappingURL=GeolocationControl.d.ts.map

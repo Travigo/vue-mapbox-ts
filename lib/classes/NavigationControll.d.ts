@@ -5,3 +5,4 @@ export interface NavigationControlOptions {
 }
 declare type NavigationControlPosition = 'bottom-left' | 'bottom-right' | 'top-left' | 'top-right';
 export { NavigationControlPosition };
+//# sourceMappingURL=NavigationControll.d.ts.map
