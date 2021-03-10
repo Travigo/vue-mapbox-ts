@@ -4,3 +4,4 @@ export interface ScaleControlOptions {
     unit: ScaleControlUnit;
 }
 export { ScaleControlUnit };
+//# sourceMappingURL=ScaleControl.d.ts.map

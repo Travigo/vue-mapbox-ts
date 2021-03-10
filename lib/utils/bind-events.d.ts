@@ -17,3 +17,4 @@ export declare function bindEvents(vueElement: any, mapboxElement: any, events?:
  * @return {void}
  */
 export declare function unbindEvents(vueElement: any, mapboxElement: any, layerId?: any): void;
+//# sourceMappingURL=bind-events.d.ts.map

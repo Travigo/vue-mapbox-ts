@@ -9,3 +9,4 @@
 export declare const propNeedsBinding: (prop: any) => boolean;
 export declare const getSetMethodName: (propName: string) => string;
 export default function bindProps(vueElement: any, mapboxElement: any, props: any): void;
+//# sourceMappingURL=bind-props.d.ts.map

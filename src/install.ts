@@ -1,19 +1,17 @@
 // import { VueConstructor } from 'vue';
 import * as components from './components';
 
-export let _Vue: any;
-export let _CompositionApi: any;
 /**
  * Install all components
  *
  * @param  {Vue}  Vue The Vue object
  * @return {void}
  */
+export let _instance:any;
 
-export default (Vue: any) => {
-  _Vue = Vue;
-
+export default (instance: any) => {
+  _instance = instance;
   Object.keys(components).forEach((name) => {
-    Vue.component(name, (components as any)[name]);
+    instance.component(name, (components as any)[name]);
   });
 };

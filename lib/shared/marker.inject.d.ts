@@ -6,3 +6,4 @@ declare const _default: {
     };
 };
 export default _default;
+//# sourceMappingURL=marker.inject.d.ts.map

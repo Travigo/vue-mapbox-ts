@@ -4,3 +4,4 @@
  * @return {String}        A (prefixed) uniq id
  */
 export default function uniqId(prefix?: string): string;
+//# sourceMappingURL=uniq-id.d.ts.map

@@ -1,10 +1,10 @@
-<template lang="pug">
-div
+<template>
+<div />
 </template>
 
 <script lang="ts">
 import { defineComponent, inject, onMounted, } from 'vue';
-import mapboxgl, { FitBoundsOptions, Map, PositionOptions } from 'mapbox-gl';
+import mapboxgl, { Map } from 'mapbox-gl';
 import { getAttributionControlOptions, mountAttributionControl } from '../services/MapboxAttributionControl';
 import Deferred from 'my-deferred';
 
