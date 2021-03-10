@@ -7,6 +7,8 @@ import MapboxMap from './MapboxMap.vue';
 import MapboxMarker from './MapboxMarker.vue';
 import MapboxNavigationControl from './MapboxNavigationControl.vue';
 import MapboxPopup from './MapboxPopup.vue';
+import MapboxAttributionControl from './MapboxAttributionControl.vue';
+import MapboxScaleControl from './MapboxScaleControl.vue';
 // import MapboxSource from './MapboxSource.vue';
 import MapboxGeolocateControl from './MapboxGeolocateControl.vue';
 // import TestComponentInject from './Test.Component.inject.vue';
@@ -21,6 +23,8 @@ export {
   MapboxMarker,
   MapboxNavigationControl,
   MapboxPopup,
+  MapboxAttributionControl,
+  MapboxScaleControl,
   // MapboxSource,
   MapboxGeolocateControl,
   // TestComponentInject,

@@ -173,9 +173,9 @@ declare const _default: import("vue").DefineComponent<{
         type: BooleanConstructor;
         default: boolean;
     };
-    hideLogo: {
-        type: BooleanConstructor;
-        default: boolean;
+    zoomLogo: {
+        type: NumberConstructor;
+        default: number;
     };
     hideAttribution: {
         type: BooleanConstructor;
@@ -230,7 +230,7 @@ declare const _default: import("vue").DefineComponent<{
     collectResourceTiming: boolean;
     fadeDuration: number;
     crossSourceCollisions: boolean;
-    hideLogo: boolean;
+    zoomLogo: number;
     hideAttribution: boolean;
 } & {}>, {
     accessToken: string;
@@ -276,7 +276,7 @@ declare const _default: import("vue").DefineComponent<{
     collectResourceTiming: boolean;
     fadeDuration: number;
     crossSourceCollisions: boolean;
-    hideLogo: boolean;
+    zoomLogo: number;
     hideAttribution: boolean;
 }>;
 export default _default;
