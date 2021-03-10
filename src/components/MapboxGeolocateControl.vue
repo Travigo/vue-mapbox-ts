@@ -3,12 +3,10 @@ div
 </template>
 
 <script lang="ts">
-import { defineComponent, inject, onMounted, provide, ref } from 'vue';
-import mapboxgl, { FitBoundsOptions, LngLat, LngLatBounds, Map, MapboxOptions, PositionOptions } from 'mapbox-gl';
+import { defineComponent, inject, onMounted, } from 'vue';
+import mapboxgl, { FitBoundsOptions, Map, PositionOptions } from 'mapbox-gl';
 import { getGeolocationControlOptions } from '../services/MapboxGeolocationControl';
 import Deferred from 'my-deferred';
-import mountMap from '../services/MapboxMap.moutMap';
-import { GeolocationControlOptions } from '../classes/GeolocationControl';
 
 
 export default defineComponent({

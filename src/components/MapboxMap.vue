@@ -189,9 +189,9 @@ export default defineComponent({
       type: Boolean,
       default: true,
     },
-    hideLogo: {
-      type: Boolean,
-      default: false
+    zoomLogo: {
+      type: Number,
+      default: 1
     },
     hideAttribution: {
       type: Boolean,
@@ -218,7 +218,7 @@ export default defineComponent({
       return {
         height: this.height,
         width: this.width,
-        '--display-logo': this.hideLogo ? 'none' : 'block',
+        '--zoom-logo': this.zoomLogo >= 0.8 ? this.zoomLogo : 1,
         '--display-attrib': this.hideAttribution ? 'none' : 'block'
       };
     }
@@ -228,10 +228,10 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 :deep(.mapboxgl-ctrl-logo) {
-  display: var(--display-logo);
+  zoom: var(--zoom-logo);
 }
 
-:deep(.mapboxgl-ctrl.mapboxgl-ctrl-attrib){
+:deep(.mapboxgl-ctrl.mapboxgl-ctrl-attrib:last-child){
   display: var(--display-attrib)
 }
 
