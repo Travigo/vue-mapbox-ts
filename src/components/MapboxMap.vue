@@ -16,14 +16,14 @@ import { defineComponent, getCurrentInstance, onMounted, provide, ref, SetupCont
 import { _instance } from '../install';
 import mapboxgl, { LngLat, LngLatBounds, Map, MapboxOptions } from 'mapbox-gl';
 import Deferred from 'my-deferred';
-import mountMap from '../services/MapboxMap.moutMap';
+import { getStyle, mountMap } from '../services/MapboxMap';
 
 export default defineComponent({
   name: 'MapboxMap',
   props: {
     accessToken: {
       type: String,
-      default: ''
+      default: undefined
     },
     height: {
       type: String,
@@ -197,42 +197,23 @@ export default defineComponent({
       type: Number,
       default: 1
     },
-    hideAttribution: {
-      type: Boolean,
-      default: false
-    }
   },
-  setup: (props:any, stuff:any) => {
-    console.log('SETUP');
-    const instance = getCurrentInstance();
-    console.log(_instance);
-    console.log(instance);
+  setup: (props:any) => {
     const root = ref(null);
     const vmb_map = new Deferred<Map>();
-    
     provide('vmb_map', vmb_map);
 
+    const style = getStyle(props);
+
     onMounted(() => {
-      console.log('MOUNTED');
-      console.log(getCurrentInstance());
       mapboxgl.accessToken = props.accessToken;
       mountMap(props, vmb_map, root);
     });
 
     return {
-      vmb_map, root
+      vmb_map, root, style
     };
   },
-  computed: {
-    style(): any{
-      return {
-        height: (this as any).height,
-        width: (this as any).width,
-        '--zoom-logo': (this as any).zoomLogo >= 0.8 ? (this as any).zoomLogo : 1,
-        '--display-attrib': (this as any).hideAttribution ? 'none' : 'block'
-      } as any;
-    }
-  }
 });
 </script>
 
@@ -240,16 +221,4 @@ export default defineComponent({
 :deep(.mapboxgl-ctrl-logo) {
   zoom: var(--zoom-logo);
 }
-
-:deep(.mapboxgl-ctrl.mapboxgl-ctrl-attrib:last-child){
-  display: var(--display-attrib)
-}
-
 </style>
-
-// @mixin hide-logo($hide-logo){
-//   @if $hide-logo{
-//     display:none;
-//   }
-// }
-

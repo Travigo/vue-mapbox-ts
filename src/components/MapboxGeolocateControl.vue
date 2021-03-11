@@ -10,6 +10,7 @@ import Deferred from 'my-deferred';
 
 
 export default defineComponent({
+  name: 'MapboxGeolocateControl',
   props: {
     positionOptions: {
       type: Object as () => PositionOptions,

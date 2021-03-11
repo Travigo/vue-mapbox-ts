@@ -61,6 +61,16 @@ To add a map to your application it needs to be installed either locally or glob
 <mapbox-map :accessToken="myAccessToken" />
 ```
 
+To add a different map Style do
+
+```html
+<mapbox-map 
+  :accessToken="myAccessToken"
+  mapStyle="light-v10"
+/>
+```
+You may notice that for map style you won't need the complete syntax. In this case Vue Mapbox TS will automatically interpret this style as mapbox://styles/mapbox/light-v10. However you can of course use the complete syntax as well
+
 [Full API of mapbox-map](./documentation/MapboxMap.md)
 
 ### Adding a Marker

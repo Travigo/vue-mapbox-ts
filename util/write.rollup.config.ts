@@ -48,7 +48,7 @@ const postcssConfigList = [
 
 const argv = minimist(process.argv.slice(2));
 
-const projectRoot = path.resolve(__dirname, '.');
+const projectRoot = path.dirname;
 
 let postVueConfig = [
   // Process only `<style module>` blocks.
@@ -76,7 +76,7 @@ let postVueConfig = [
 ];
 
 if(process.env.SEP_CSS){
-  postVueConfig = [css({ output: './lib/bundle.css' }), ...postVueConfig];
+  postVueConfig = [css({ output: './lib/bundle.css' }) as any, ...postVueConfig];
 }
 
 const baseConfig = {
@@ -86,12 +86,12 @@ const baseConfig = {
         entries: [
           {
             find: '@',
-            replacement: `${path.resolve(projectRoot, 'src')}`
+            replacement: `${path.resolve(projectRoot as any, 'src')}`
           }
         ],
         customResolver: resolve({
           extensions: ['.js', '.jsx', '.vue']
-        })
+        }) as any
       }),
       // pug()
     ],
@@ -195,7 +195,7 @@ if (!argv.format || argv.format === 'es') {
       typescript(),
       replace(baseConfig.plugins.replace),
       ...baseConfig.plugins.preVue,
-      vue(baseConfig.plugins.vue),
+      vue(baseConfig.plugins.vue as any),
       ...baseConfig.plugins.postVue,
       // babel({
       //   ...baseConfig.plugins.babel,
@@ -216,7 +216,7 @@ if (!argv.format || argv.format === 'es') {
       typescript(),
       replace(baseConfig.plugins.replace),
       ...baseConfig.plugins.preVue,
-      vue(baseConfig.plugins.vue),
+      vue(baseConfig.plugins.vue as any),
       ...baseConfig.plugins.postVue,
       // babel({
       //   ...baseConfig.plugins.babel,
@@ -250,7 +250,7 @@ if (!argv.format || argv.format === 'iife') {
       typescript(),
       replace(baseConfig.plugins.replace),
       ...baseConfig.plugins.preVue,
-      vue(baseConfig.plugins.vue),
+      vue(baseConfig.plugins.vue as any),
       ...baseConfig.plugins.postVue,
       // babel(baseConfig.plugins.babel),
       commonjs(),
@@ -283,10 +283,10 @@ if (!argv.format || argv.format === 'cjs') {
       vue({
         ...baseConfig.plugins.vue,
         template: {
-          ...baseConfig.plugins.vue.template,
+          ...(baseConfig.plugins.vue as any).template,
           optimizeSSR: true
         }
-      }),
+      } as any),
       ...baseConfig.plugins.postVue,
       // babel(baseConfig.plugins.babel),
       commonjs(),
@@ -295,5 +295,6 @@ if (!argv.format || argv.format === 'cjs') {
   buildFormats.push(cjsConfig);
 }
 // Export config
-fs.writeFileSync(`${path.resolve(projectRoot, 'rollup.config.output.js')}`, JSON.stringify(buildFormats, null, 2));
-export default buildFormats;
+fs.writeFileSync(`${path.dirname}/../rollup.config.js`, buildFormats.toString());
+
+// export default buildFormats;

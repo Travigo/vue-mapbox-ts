@@ -1,6 +1,6 @@
 {
   "name": "vue-mapbox-ts",
-  "version": "0.0.1-beta.20",
+  "version": "0.0.1-beta.21",
   "description": "Mapbox Framework for Vue.js written in TypeScript",
   "homepage": "https://gitlab.com/relief-melone/vue-mapbox-ts",
   "bugs": {
@@ -16,9 +16,10 @@
     "email": "relief.melone@gmail.com"
   },
   "config": {
-    "rollup": "rollup.config.js"
+    "rollup": "rollup.config.js",
+    "createRollup": "util/write.rollup.config"
   },
-  "scripts": {    
+  "scripts": {
     "build": "rm -rf lib/ && yarn build:js",
     "build:js": "rimraf dist && cross-env NODE_ENV=production rollup --config $npm_package_config_rollup && yarn build:types",
     "build:types": "tsc --build tsconfigtypes.json",
@@ -40,6 +41,7 @@
     "@types/chai": "^4.2.11",
     "@types/mapbox-gl": "^2.1.0",
     "@types/mocha": "^5.2.4",
+    "crypto-random-string": "^3.3.1",
     "mapbox-gl": "^2.1.1",
     "my-deferred": "^1.0.3",
     "vue": "^3.0.0"

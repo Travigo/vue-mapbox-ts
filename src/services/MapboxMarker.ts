@@ -1,9 +1,24 @@
+import LngLatInput from '@/classes/LngLatInput';
 import mapboxgl, { MapboxOptions, Map, Marker, MarkerOptions } from 'mapbox-gl';
 import Deferred from 'my-deferred';
-import { Component, Ref } from 'vue';
+import { Component, Ref, ComponentInternalInstance } from 'vue';
 
 
-const getMarkerOptions = (props: Partial<MarkerOptions>): MarkerOptions => {
+
+export const parentIsMarker = async (instance:any, vmb_marker?: Deferred<Marker> | null):Promise<boolean> => {
+  
+  if(!vmb_marker)
+    return false;    
+  
+  if (instance.parent.provides)
+    // Vue3
+    return !!instance.parent.provides.vmb_marker;
+  else 
+    // Vue2
+    return !!instance.parent.data.vmb_marker; 
+};
+
+const getMarkerOptions = (props: MarkerOptions): MarkerOptions => {
   const { 
     element,
     offset,
@@ -49,32 +64,37 @@ const addPopupToMapIfPresent = (markerComponent: any, marker: mapboxgl.Marker) =
   }
 };
 
-const registerMarkerEvents = (marker: mapboxgl.Marker, component: any) => {
+const registerMarkerEvents = (marker: mapboxgl.Marker, component: ComponentInternalInstance) => {
   marker.on('drag', (evt: any) => {
     const { lng, lat } = evt.target._lngLat;
     (component as any)._lngLat = [lng, lat];
-    component.$emit('drag', evt);
+    component.emit('drag', evt);
   });
 
   marker.on('dragend', (evt: any) => {
-    component.$emit('dragend', evt);
+    component.emit('dragend', evt);
   });
 
   marker.on('dragstart', (evt: any) => {
-    component.$emit('dragstart', evt);
+    component.emit('dragstart', evt);
   });
 
   marker.getElement().addEventListener('click', _ev => {
-    component.$emit('click', marker);
+    component.emit('click', marker);
   });
 };
 
-export default (props:Record<string,any>, vmb_map:Deferred<Map>, vmb_marker:Deferred<Marker>) =>
+export const mountMarker = (options:MarkerOptions, vmb_map:Deferred<Map>, vmb_marker:Deferred<Marker>, instance: ComponentInternalInstance, lngLat: LngLatInput, element?: Ref<HTMLElement>) =>
   (async () => {
     const map = await vmb_map.promise;
-    const options = getMarkerOptions(props);
-    const marker = new Marker(options)
-      .setLngLat(props.lngLat);
+    if(element)
+      options.element = element.value;
 
-    // addPopupToMapIfPresent()
+    const marker = new Marker(options)
+      .setLngLat(lngLat);
+
+    registerMarkerEvents(marker, instance);
+    marker.addTo(map);
+
+    vmb_marker.resolve(marker);
   })();

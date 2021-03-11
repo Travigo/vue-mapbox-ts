@@ -1,16 +1,13 @@
 import { Marker, Popup, PopupOptions, Map } from 'mapbox-gl';
 import Deferred from 'my-deferred';
-import { ComponentInternalInstance, getCurrentInstance, Ref } from 'vue';
-
-
-export const parentIsMarker = (instance:any):boolean => instance.parent.provides.vmb_marker;
+import { Ref } from 'vue';
+import { parentIsMarker } from './MapboxMarker';
 
 export const attachToMarker = async (instance: any, vmb_marker: Deferred<Marker> | null, popup:Popup) => {
   if(vmb_marker){
     const marker = await vmb_marker.promise;
     marker.setPopup(popup);
   }
-  
 };
 
 export const getPopupOptions = (props: Partial<PopupOptions>): PopupOptions => {
@@ -38,7 +35,9 @@ export const getPopupOptions = (props: Partial<PopupOptions>): PopupOptions => {
 };
 
 export const mountPopup = async (
-  instance: ComponentInternalInstance | null,
+// instance: ComponentInternalInstance | null,
+
+  instance: any | null,
   vmb_popup: Popup, 
   vmb_marker:Deferred<Marker> | null, 
   vmb_map: Deferred<Map>,
@@ -49,7 +48,7 @@ export const mountPopup = async (
 
   popup.setDOMContent(content.value);
 
-  if(parentIsMarker(instance))
+  if(await parentIsMarker(instance, vmb_marker))
     await attachToMarker(instance, vmb_marker, popup);
   else{
     popup.addTo(map);

@@ -9,6 +9,9 @@ import MapboxNavigationControl from './MapboxNavigationControl.vue';
 import MapboxPopup from './MapboxPopup.vue';
 import MapboxAttributionControl from './MapboxAttributionControl.vue';
 import MapboxScaleControl from './MapboxScaleControl.vue';
+import MapboxFullscreenControl from './MapboxFullscreenControl.vue';
+import MapboxSourceGeoJson from './MapboxSource.GeoJson.vue';
+import MapboxIcon from './MapboxIcon.vue';
 // import MapboxSource from './MapboxSource.vue';
 import MapboxGeolocateControl from './MapboxGeolocateControl.vue';
 // import TestComponentInject from './Test.Component.inject.vue';
@@ -20,12 +23,14 @@ export {
   // MapboxImages,
   // MapboxLayer,
   MapboxMap,
+  MapboxIcon,
   MapboxMarker,
   MapboxNavigationControl,
   MapboxPopup,
   MapboxAttributionControl,
   MapboxScaleControl,
-  // MapboxSource,
+  MapboxFullscreenControl,
+  MapboxSourceGeoJson,
   MapboxGeolocateControl,
   // TestComponentInject,
   // TestComponentProvide

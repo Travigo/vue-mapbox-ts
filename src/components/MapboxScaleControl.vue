@@ -11,6 +11,7 @@ import Deferred from 'my-deferred';
 
 
 export default defineComponent({
+  name: 'MapboxScaleControl',
   props: {
     maxWidth: {
       type: Number,
