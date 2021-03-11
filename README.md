@@ -71,7 +71,7 @@ To add a different map Style do
 ```
 You may notice that for map style you won't need the complete syntax. In this case Vue Mapbox TS will automatically interpret this style as mapbox://styles/mapbox/light-v10. However you can of course use the complete syntax as well
 
-[Full API of mapbox-map](https://gitlab.com/relief-melone/vue-mapbox-ts/documentation/MapboxMap.md)
+[Full API of mapbox-map](https://gitlab.com/relief-melone/vue-mapbox-ts/-/tree/master/documentation/MapboxMap.md)
 
 ### Adding a Marker
 To add a marker to your existing map add it as a child to your map
@@ -81,7 +81,7 @@ To add a marker to your existing map add it as a child to your map
 </mapbox-map>
 ```
 
-[Full API of mapbox-marker](https://gitlab.com/relief-melone/vue-mapbox-ts/documentation/MapboxMarker.md)
+[Full API of mapbox-marker](https://gitlab.com/relief-melone/vue-mapbox-ts/-/tree/master/documentation/MapboxMarker.md)
 
 ### Adding a Popup
 To add a popup just like a marker add it to a map as a child. You can also set it as the child of a marker. In that case it will ignore it's coordinates and attach itsself to that marker.
@@ -106,7 +106,7 @@ To add a popup just like a marker add it to a map as a child. You can also set i
 </mapbox-map>
 ```
 
-[Full API of mapbox-popup](https://gitlab.com/relief-melone/vue-mapbox-ts/documentation/MapboxPopup.md)
+[Full API of mapbox-popup](https://gitlab.com/relief-melone/vue-mapbox-ts/-/tree/master/documentation/MapboxPopup.md)
 
 
 ### Adding Controls
@@ -121,7 +121,7 @@ Want to add Navigation Controls to your map? As always just insert the navigatio
 </mapbox-map>
 ```
 
-[Full API of mapbox-navigation-control](https://gitlab.com/relief-melone/vue-mapbox-ts/documentation/MapboxNavigationControl.md)
+[Full API of mapbox-navigation-control](https://gitlab.com/relief-melone/vue-mapbox-ts/-/tree/master/documentation/MapboxNavigationControl.md)
 
 #### Mapbox Geolocate Control
 If you want to add information about the current users whereabouts instert the geolocate control as a child to your map
@@ -132,6 +132,6 @@ If you want to add information about the current users whereabouts instert the g
 </mapbox-map>
 
 ```
-[Full API of mapbox-geolocate-control](https://gitlab.com/relief-melone/vue-mapbox-ts/documentation/MapboxGeolocateControl.md)
+[Full API of mapbox-geolocate-control](https://gitlab.com/relief-melone/vue-mapbox-ts/-/tree/master/documentation/MapboxGeolocateControl.md)
 
 [repository]: .
