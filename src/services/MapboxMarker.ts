@@ -1,7 +1,8 @@
-import LngLatInput from '@/classes/LngLatInput';
+import LngLatInput from '../classes/LngLatInput';
 import mapboxgl, { MapboxOptions, Map, Marker, MarkerOptions } from 'mapbox-gl';
 import Deferred from 'my-deferred';
 import { Component, Ref, ComponentInternalInstance } from 'vue';
+import { slotIsNotEmpty } from './VueHelpers';
 
 
 
@@ -87,7 +88,7 @@ const registerMarkerEvents = (marker: mapboxgl.Marker, component: ComponentInter
 export const mountMarker = (options:MarkerOptions, vmb_map:Deferred<Map>, vmb_marker:Deferred<Marker>, instance: ComponentInternalInstance, lngLat: LngLatInput, element?: Ref<HTMLElement>) =>
   (async () => {
     const map = await vmb_map.promise;
-    if(element)
+    if(element && slotIsNotEmpty(element.value))
       options.element = element.value;
 
     const marker = new Marker(options)

@@ -7,10 +7,10 @@
 <script lang="ts">
 import { defineComponent, getCurrentInstance, inject, onMounted, Ref, ref, } from 'vue';
 import { Map, Marker } from 'mapbox-gl';
-import { getMapboxIconOptions, mountMapboxIcon } from '@/services/MapboxIcon';
+import { getMapboxIconOptions, mountMapboxIcon } from '../services/MapboxIcon';
 import Deferred from 'my-deferred';
 import randomString from 'crypto-random-string';
-import { Icon } from '@/classes/Icon';
+import { Icon } from '../classes/Icon';
 
 
 export default defineComponent({
