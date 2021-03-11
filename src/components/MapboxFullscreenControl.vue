@@ -5,7 +5,7 @@
 <script lang="ts">
 import { defineComponent, inject, onMounted, } from 'vue';
 import mapboxgl, { Map } from 'mapbox-gl';
-import { getFullscreenControlOptions, mountFullscreenControl } from '@/services/MapboxFullscreenControl';
+import { getFullscreenControlOptions, mountFullscreenControl } from '../services/MapboxFullscreenControl';
 import Deferred from 'my-deferred';
 
 

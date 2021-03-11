@@ -14,8 +14,7 @@ import Deferred from 'my-deferred/dist/src';
 import injectMap from '../shared/map.inject';
 
 import LngLatInput from '../classes/LngLatInput';
-import { mountMarker } from '@/services/MapboxMarker';
-
+import { mountMarker } from '../services/MapboxMarker';
 
 const getMarkerOptions = (props: Partial<MarkerOptions>): MarkerOptions => {
   const { 

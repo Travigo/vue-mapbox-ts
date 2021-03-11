@@ -2,7 +2,7 @@ import mapboxgl, { MapboxOptions, Map } from 'mapbox-gl';
 import Deferred from 'my-deferred';
 import { ref, Ref } from 'vue';
 
-import { MapboxMapInput } from '@/classes/MapboxMap';
+import { MapboxMapInput } from '../classes/MapboxMap';
 
 export const getStyle = (props:any) => ref({
   height: props.height,
