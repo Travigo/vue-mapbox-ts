@@ -1,4 +1,4 @@
-import LngLatInput from '@/classes/LngLatInput';
+import LngLatInput from '../classes/LngLatInput';
 import mapboxgl, { Map, Marker, MarkerOptions } from 'mapbox-gl';
 import Deferred from 'my-deferred';
 import { Ref, ComponentInternalInstance } from 'vue';
