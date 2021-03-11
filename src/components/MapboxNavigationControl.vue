@@ -13,6 +13,7 @@ import { NavigationControlPosition } from '../classes/NavigationControll';
 
 
 export default defineComponent({
+  name: 'MapboxNavigationControl',
   props: {
     showCompass: {
       type: Boolean,
