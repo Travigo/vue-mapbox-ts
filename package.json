@@ -37,6 +37,7 @@
   "publishConfig": {
     "access": "public"
   },
+  "files": ["lib"],
   "dependencies": {
     "@types/chai": "^4.2.11",
     "@types/geojson": "^7946.0.7",
