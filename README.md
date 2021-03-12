@@ -125,7 +125,7 @@ Want to add Navigation Controls to your map? As always just insert the navigatio
 </mapbox-map>
 ```
 
-[Full API of mapbox-navigation-control](https://gitlab.com/relief-melone/vue-mapbox-ts/-/tree/master/documentation/MapboxNavigationControl.md)
+[Full API of mapbox-navigation-control](./tree/master/documentation/MapboxNavigationControl.md)
 
 #### Mapbox Geolocate Control
 If you want to add information about the current users whereabouts instert the geolocate control as a child to your map
@@ -136,7 +136,7 @@ If you want to add information about the current users whereabouts instert the g
 </mapbox-map>
 
 ```
-[Full API of mapbox-geolocate-control](/documentation/MapboxGeolocateControl.md)
+[Full API of mapbox-geolocate-control](https://gitlab.com/relief-melone/vue-mapbox-ts/-/tree/master/documentation/MapboxGeolocateControl.md)
 
 [repository]: .
 
@@ -157,5 +157,6 @@ To add a circle to your map add the component to it. *center* and *radius* are m
     :radius="15"
   />
 </mapbox-map>
-
 ```
+
+[Full API of mapbox-geolocate-control](https://gitlab.com/relief-melone/vue-mapbox-ts/-/tree/master/documentation/MapboxGeogeometry.md)
