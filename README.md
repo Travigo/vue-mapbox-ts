@@ -17,7 +17,9 @@ npm install -S vue-mapbox-ts
 In your main.ts file install the plugin like this 
 
 **Vue2**
-This library is not compatible with Vue2. I will add a link to vue-mapbox-ts-legacy soon which will add vue support and be duplicate of this library using Vue2 and it's composition api
+
+This library is not compatible with Vue2. For this purpose I have released a clone of this Repo utilizing @vue/composition-api for Vue2 support. Just head over to [vue-mapbox-ts-legacy](https://www.npmjs.com/package/vue-mapbox-ts-legacy).
+Please keep in mind that this repo will be the master and the legacy version will receive updates later.
 
 **Vue3**
 ```ts
