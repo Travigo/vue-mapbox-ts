@@ -2,24 +2,13 @@ import LngLatInput from '../classes/LngLatInput';
 import mapboxgl, { MapboxOptions, Map, Marker, MarkerOptions } from 'mapbox-gl';
 import Deferred from 'my-deferred';
 import { Component, Ref, ComponentInternalInstance } from 'vue';
-import { slotIsNotEmpty } from './VueHelpers';
+import { parentsNameIs, slotIsNotEmpty } from './VueHelpers';
 
 
+export const parentIsMarker = (instance:any):boolean => 
+  parentsNameIs(instance, 'MapboxMarker');
 
-export const parentIsMarker = async (instance:any, vmb_marker?: Deferred<Marker> | null):Promise<boolean> => {
-  
-  if(!vmb_marker)
-    return false;    
-  
-  if (instance.parent.provides)
-    // Vue3
-    return !!instance.parent.provides.vmb_marker;
-  else 
-    // Vue2
-    return !!instance.parent.data.vmb_marker; 
-};
-
-const getMarkerOptions = (props: MarkerOptions): MarkerOptions => {
+export const getMarkerOptions = (props: MarkerOptions): MarkerOptions => {
   const { 
     element,
     offset,

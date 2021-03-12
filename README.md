@@ -2,8 +2,9 @@
 
 This project has been created to bring a modern vue component library utilizing TypeScript and Vue3.
 
-The goal is that it is easy to use and to have the look and feel of a vue component.
+The goal is that it is easy to use and to have the look and feel of a vue component. This should also be possible if you are not completely familiar with Mapboxs' 'mapbox-gl'-API.
 
+For that reason additional components like Geogeometry have been added to add simple geometry like circles rectangles or polygons to your map without the need of an understanding of geoJSON
 
 ## Installation
 
@@ -84,7 +85,10 @@ To add a marker to your existing map add it as a child to your map
 [Full API of mapbox-marker](https://gitlab.com/relief-melone/vue-mapbox-ts/-/tree/master/documentation/MapboxMarker.md)
 
 ### Adding a Popup
-To add a popup just like a marker add it to a map as a child. You can also set it as the child of a marker. In that case it will ignore it's coordinates and attach itsself to that marker.
+To add a popup just like a marker add it to a map as a child. You can also set it as the child of a marker. In that case it will ignore it's coordinates and attach itsself to that marker. Popups can be attached to
+
+- Markers
+- Geo-Geometries
 
 **Standalone Popup**
 ```html
@@ -132,6 +136,26 @@ If you want to add information about the current users whereabouts instert the g
 </mapbox-map>
 
 ```
-[Full API of mapbox-geolocate-control](https://gitlab.com/relief-melone/vue-mapbox-ts/-/tree/master/documentation/MapboxGeolocateControl.md)
+[Full API of mapbox-geolocate-control](/documentation/MapboxGeolocateControl.md)
 
 [repository]: .
+
+
+### Geogeometry
+
+Geogemetry components allow you to easily add simple geometry to your map. Currently those are circle, rectangle and polygon. You can also add popups to geogeometry just like you can with [Markers](#adding-a-marker)
+
+
+#### Circle
+
+To add a circle to your map add the component to it. *center* and *radius* are mandatory. The rest is optionl. The radius is measured in km
+
+```html
+<mapbox-map :accessToken="myAccessToken">
+  <mapbox-geogeometry-circle
+    :center="[3,8]"
+    :radius="15"
+  />
+</mapbox-map>
+
+```

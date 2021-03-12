@@ -10,6 +10,10 @@ import mapboxgl, {  Marker, Anchor, Map } from 'mapbox-gl';
 import { getPopupOptions, mountPopup } from '../services/MapboxPopup';
 import Deferred from 'my-deferred/dist/src';
 import LngLatInput from '../classes/LngLatInput';
+import { Circle } from '../classes/GeogeometryCircle';
+import { Polygon } from '../classes/GeogeometryPolygon';
+import { GeogeometryType } from '../classes/Geogeomerty';
+import { Rectangle } from '../classes/GeogeometryRectangle';
 
 export default defineComponent({
   name: 'MapboxPopup',
@@ -52,8 +56,14 @@ export default defineComponent({
   setup(props) {
     const content = ref(null) as Ref<any>;
 
-    const vmb_marker: Deferred<Marker> | null = inject('vmb_marker', null) as Deferred<Marker> | null;
     const vmb_map:Deferred<Map> = inject('vmb_map') as Deferred<Map>;
+    const vmb_marker: Deferred<Marker> | null = inject('vmb_marker', null);
+    
+    const vmb_circle: Circle | null = inject('vmb_circle', null);
+    const vmb_polygon: Polygon | null = inject('vmb_polygon', null);
+    const vmb_rectangle: Rectangle | null = inject('vmb_rectangle', null);
+
+    const vmb_geometry:GeogeometryType | null = vmb_circle || vmb_polygon || vmb_rectangle || null;
 
     const popupOptions = getPopupOptions(props);
     const vmb_popup = new mapboxgl.Popup(popupOptions)    
@@ -61,7 +71,7 @@ export default defineComponent({
 
     onMounted(async () => {
       const instance = getCurrentInstance();
-      await mountPopup(instance, vmb_popup, vmb_marker, vmb_map, content);  
+      await mountPopup(instance, vmb_map, vmb_popup, vmb_marker, vmb_geometry, content);  
     });
 
     return { vmb_marker, vmb_popup, popupOptions, content, vmb_map };
