@@ -1,1 +1,0 @@
-{"version":3,"file":"NavigationControll.d.ts","sourceRoot":"","sources":["../../src/classes/NavigationControll.ts"],"names":[],"mappings":"AAEA,MAAM,WAAW,wBAAwB;IACvC,WAAW,EAAE,OAAO,CAAC;IACrB,QAAQ,EAAE,OAAO,CAAC;IAClB,cAAc,EAAE,OAAO,CAAC;CACzB;AAED,aAAK,yBAAyB,GAAG,aAAa,GAAG,cAAc,GAAG,UAAU,GAAG,WAAW,CAAC;AAE3F,OAAO,EACL,yBAAyB,EAC1B,CAAC"}
