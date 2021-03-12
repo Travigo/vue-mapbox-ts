@@ -1,10 +1,12 @@
 <template>
-<div />
+<div ref="features">
+  <slot />
+</div>
 </template>
 
 <script lang="ts">
 import { defineComponent, inject, onMounted, } from 'vue';
-import mapboxgl, { Map } from 'mapbox-gl';
+import mapboxgl, { GeoJSONSource, Map } from 'mapbox-gl';
 import { getFullscreenControlOptions, mountFullscreenControl } from '../services/MapboxFullscreenControl';
 import Deferred from 'my-deferred';
 
@@ -19,10 +21,16 @@ export default defineComponent({
   },
   setup(props) {
 
+    const vmb_map = inject('vmb_map') as Deferred<Map>;
+    const vmb_source = new GeoJSONSource();
+
     onMounted(async () => {
+      const map = await vmb_map.promise;
+      map.addSource;
     });
 
     return {
+      vmb_map
     };
   }
 });

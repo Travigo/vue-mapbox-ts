@@ -14,35 +14,8 @@ import Deferred from 'my-deferred/dist/src';
 import injectMap from '../shared/map.inject';
 
 import LngLatInput from '../classes/LngLatInput';
-import { mountMarker } from '../services/MapboxMarker';
+import { mountMarker, getMarkerOptions } from '../services/MapboxMarker';
 
-const getMarkerOptions = (props: Partial<MarkerOptions>): MarkerOptions => {
-  const { 
-    element,
-    offset,
-    anchor,
-    color,
-    draggable,
-    clickTolerance,
-    rotation,
-    rotationAlignment,
-    pitchAlignment,
-    scale
-  } = props; 
-
-  return {
-    element,
-    offset,
-    anchor,
-    color,
-    draggable,
-    clickTolerance,
-    rotation,
-    rotationAlignment,
-    pitchAlignment,
-    scale
-  };
-};
 
 const getPopupChildren = (marker: any): Component | null => {  
   for (const child of marker.$slots.default()){
