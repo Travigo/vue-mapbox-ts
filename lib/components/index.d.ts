@@ -8,5 +8,8 @@ import MapboxFullscreenControl from './MapboxFullscreenControl.vue';
 import MapboxSourceGeoJson from './MapboxSource.GeoJson.vue';
 import MapboxIcon from './MapboxIcon.vue';
 import MapboxGeolocateControl from './MapboxGeolocateControl.vue';
-export { MapboxMap, MapboxIcon, MapboxMarker, MapboxNavigationControl, MapboxPopup, MapboxAttributionControl, MapboxScaleControl, MapboxFullscreenControl, MapboxSourceGeoJson, MapboxGeolocateControl, };
+import MapboxGeogeometryCircle from './MapboxGeogeometryCircle.vue';
+import MapboxGeogeometryPolygon from './MapboxGeogeometryPolygon.vue';
+import MapboxGeogeometryRectangle from './MapboxGeogeometryRectangle.vue';
+export { MapboxMap, MapboxIcon, MapboxMarker, MapboxNavigationControl, MapboxPopup, MapboxAttributionControl, MapboxScaleControl, MapboxFullscreenControl, MapboxSourceGeoJson, MapboxGeolocateControl, MapboxGeogeometryCircle, MapboxGeogeometryPolygon, MapboxGeogeometryRectangle };
 //# sourceMappingURL=index.d.ts.map
