@@ -40,7 +40,7 @@ export default defineComponent({
   },
   setup(props) {
 
-    const vmb_map = inject('vmb_map') as Deferred<Map>;
+    const vmb_map = inject('vmb_map', null) as Deferred<Map> | null;
     const vmb_polygon = new Polygon({
       id: props.id,
       path: props.path,
@@ -53,17 +53,22 @@ export default defineComponent({
     provide('vmb_polygon', vmb_polygon);
 
     onMounted(async () => {
-      await updatePolygon(vmb_map, vmb_polygon);
+      if(vmb_map)
+        await updatePolygon(vmb_map, vmb_polygon);
     });
 
     onUnmounted(async () => {
-      const map = await vmb_map.promise;
-      map.removeLayer(vmb_polygon.id);
+      if(vmb_map){
+        const map = await vmb_map.promise;
+        map.removeLayer(vmb_polygon.id);
+      }      
     });
 
     watch(props, async () => {
-      vmb_polygon.updateOptions(props);
-      await updatePolygon(vmb_map, vmb_polygon);
+      if(vmb_map){
+        vmb_polygon.updateOptions(props);
+        await updatePolygon(vmb_map, vmb_polygon);
+      }      
     });
 
     return {

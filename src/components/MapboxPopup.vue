@@ -56,7 +56,7 @@ export default defineComponent({
   setup(props) {
     const content = ref(null) as Ref<any>;
 
-    const vmb_map:Deferred<Map> = inject('vmb_map') as Deferred<Map>;
+    const vmb_map = inject('vmb_map', null) as Deferred<Map> | null;
     const vmb_marker: Deferred<Marker> | null = inject('vmb_marker', null);
     
     const vmb_circle: Circle | null = inject('vmb_circle', null);
@@ -71,7 +71,8 @@ export default defineComponent({
 
     onMounted(async () => {
       const instance = getCurrentInstance();
-      await mountPopup(instance, vmb_map, vmb_popup, vmb_marker, vmb_geometry, content);  
+      if(vmb_map)
+        await mountPopup(instance, vmb_map, vmb_popup, vmb_marker, vmb_geometry, content);  
     });
 
     onUnmounted(async () => {

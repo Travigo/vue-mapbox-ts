@@ -46,7 +46,7 @@ export default defineComponent({
     localGeocoderOnly:  { type: Boolean, default: () => undefined }
   },
   setup(props) {
-    const vmb_map = inject('vmb_map') as Deferred<Map> | null;
+    const vmb_map = inject('vmb_map', null) as Deferred<Map> | null;
   
     const vmb_geocoder = new Deferred<MapboxGeocoder>();
 
@@ -65,7 +65,6 @@ export default defineComponent({
 
       if(vmb_map){
         const map = await vmb_map.promise;
-
         map.removeControl(geocoder);
       }
       

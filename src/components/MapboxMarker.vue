@@ -89,7 +89,7 @@ export default defineComponent({
 
     onMounted(async () => {
       const instance = getCurrentInstance();
-      if(instance)
+      if(instance && vmb_map)
         await mountMarker(options, vmb_map, vmb_marker, instance, i_lngLat.value, icon);
     });
 

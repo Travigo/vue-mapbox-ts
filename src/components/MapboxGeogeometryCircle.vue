@@ -48,7 +48,7 @@ export default defineComponent({
   },
   setup(props) {
 
-    const vmb_map = inject('vmb_map') as Deferred<Map>;
+    const vmb_map = inject('vmb_map', null) as Deferred<Map> | null;
     const vmb_circle = new Circle({
       id: props.id,
       radius: props.radius,
@@ -63,17 +63,23 @@ export default defineComponent({
     provide('vmb_circle', vmb_circle);
 
     onMounted(async () => {
-      await updateCircle(vmb_map, vmb_circle);
+      if(vmb_map)
+        await updateCircle(vmb_map, vmb_circle);
     });
 
     onUnmounted(async () => {
-      const map = await vmb_map.promise;
-      map.removeLayer(vmb_circle.id); 
+      if(vmb_map){
+        const map = await vmb_map.promise;
+        map.removeLayer(vmb_circle.id); 
+      }
+      
     });
 
     watch(props, async () => {
-      vmb_circle.updateOptions(props);
-      await updateCircle(vmb_map, vmb_circle);
+      if(vmb_map){
+        vmb_circle.updateOptions(props);
+        await updateCircle(vmb_map, vmb_circle);
+      }      
     });
 
     return {

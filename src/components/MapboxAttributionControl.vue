@@ -26,7 +26,7 @@ export default defineComponent({
     const opts = getAttributionControlOptions(props);
     const vmb_attributionControl = new mapboxgl.AttributionControl(opts);
 
-    const vmb_map = inject('vmb_map') as Deferred<Map>;
+    const vmb_map = inject('vmb_map', null) as Deferred<Map> | null;
 
     onMounted(async () => {
       if(vmb_map)
@@ -34,8 +34,10 @@ export default defineComponent({
     });
 
     onUnmounted(async () => {
-      const map = await vmb_map.promise;
-      map.removeControl(vmb_attributionControl);
+      if(vmb_map){
+        const map = await vmb_map.promise;
+        map.removeControl(vmb_attributionControl);
+      }      
     });
 
     return {

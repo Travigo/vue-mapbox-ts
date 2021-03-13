@@ -33,18 +33,21 @@ export default defineComponent({
     }
   },
   setup(props) {
-    const vmb_map:Deferred<Map> = inject('vmb_map') as Deferred<Map>;
+    const vmb_map = inject('vmb_map', null) as Deferred<Map> | null;
     const navOptions = getNavigationControlOptions(props);
     const vmb_navigationControl = new mapboxgl.NavigationControl(navOptions);
     const position = props.position; 
 
     onMounted(() => {
-      mountNavigationControl(vmb_navigationControl, vmb_map, position);
+      if(vmb_map)
+        mountNavigationControl(vmb_navigationControl, vmb_map, position);
     });
 
     onUnmounted(async () => {
-      const map = await vmb_map.promise;
-      map.removeControl(vmb_navigationControl);
+      if(vmb_map){
+        const map = await vmb_map.promise;
+        map.removeControl(vmb_navigationControl);
+      }      
     });
 
     return {
