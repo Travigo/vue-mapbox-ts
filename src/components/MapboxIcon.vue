@@ -49,8 +49,7 @@ export default defineComponent({
       if(instance){
         await mountMapboxIcon(icon, vmb_map, vmb_marker, instance);
         vmb_icon.resolve(icon);
-      }
-      
+      }      
     });
 
     return {

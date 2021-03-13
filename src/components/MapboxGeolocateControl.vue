@@ -3,7 +3,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, inject, onMounted, } from 'vue';
+import { defineComponent, inject, onMounted, onUnmounted, } from 'vue';
 import mapboxgl, { FitBoundsOptions, Map, PositionOptions } from 'mapbox-gl';
 import { getGeolocationControlOptions } from '../services/MapboxGeolocationControl';
 import Deferred from 'my-deferred';
@@ -42,6 +42,11 @@ export default defineComponent({
     onMounted(async () => {
       const map = await vmb_map.promise;
       map.addControl(vmb_geolocationControl);
+    });
+
+    onUnmounted(async () => {
+      const map = await vmb_map.promise;
+      map.removeControl(vmb_geolocationControl);
     });
 
     return {

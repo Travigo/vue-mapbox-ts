@@ -5,7 +5,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, getCurrentInstance, inject, onMounted, Ref, ref } from 'vue';
+import { defineComponent, getCurrentInstance, inject, onMounted, onUnmounted, Ref, ref } from 'vue';
 import mapboxgl, {  Marker, Anchor, Map } from 'mapbox-gl';
 import { getPopupOptions, mountPopup } from '../services/MapboxPopup';
 import Deferred from 'my-deferred/dist/src';
@@ -72,6 +72,10 @@ export default defineComponent({
     onMounted(async () => {
       const instance = getCurrentInstance();
       await mountPopup(instance, vmb_map, vmb_popup, vmb_marker, vmb_geometry, content);  
+    });
+
+    onUnmounted(async () => {
+      vmb_popup.remove();
     });
 
     return { vmb_marker, vmb_popup, popupOptions, content, vmb_map };

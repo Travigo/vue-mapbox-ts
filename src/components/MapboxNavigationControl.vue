@@ -5,7 +5,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, inject, onMounted, provide, ref } from 'vue';
+import { defineComponent, inject, onMounted, onUnmounted, provide, ref } from 'vue';
 import mapboxgl, { LngLat, LngLatBounds, Map, MapboxOptions } from 'mapbox-gl';
 import { getNavigationControlOptions, mountNavigationControl } from '../services/MapboxNavigationControl';
 import Deferred from 'my-deferred';
@@ -40,6 +40,11 @@ export default defineComponent({
 
     onMounted(() => {
       mountNavigationControl(vmb_navigationControl, vmb_map, position);
+    });
+
+    onUnmounted(async () => {
+      const map = await vmb_map.promise;
+      map.removeControl(vmb_navigationControl);
     });
 
     return {

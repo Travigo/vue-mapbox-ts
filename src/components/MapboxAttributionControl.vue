@@ -3,7 +3,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, inject, onMounted, } from 'vue';
+import { defineComponent, inject, onMounted, onUnmounted, } from 'vue';
 import mapboxgl, { Map } from 'mapbox-gl';
 import { getAttributionControlOptions, mountAttributionControl } from '../services/MapboxAttributionControl';
 import Deferred from 'my-deferred';
@@ -26,11 +26,16 @@ export default defineComponent({
     const opts = getAttributionControlOptions(props);
     const vmb_attributionControl = new mapboxgl.AttributionControl(opts);
 
-    const vmb_map = inject('vmb_map') as Deferred<Map> | undefined;
+    const vmb_map = inject('vmb_map') as Deferred<Map>;
 
     onMounted(async () => {
       if(vmb_map)
         mountAttributionControl(vmb_map, vmb_attributionControl);
+    });
+
+    onUnmounted(async () => {
+      const map = await vmb_map.promise;
+      map.removeControl(vmb_attributionControl);
     });
 
     return {

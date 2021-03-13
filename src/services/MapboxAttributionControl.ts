@@ -1,17 +1,11 @@
 import { AttributionControllOptions } from '../classes/AttributionControl';
 import { AttributionControl, Map } from 'mapbox-gl';
 import Deferred from 'my-deferred/dist/src';
+import { filterObject } from './VueHelpers';
 
-export const getAttributionControlOptions = (props:AttributionControllOptions):AttributionControllOptions => {
-  const {
-    compact,
-    customAttribution
-  } = props;
-  return {
-    compact,
-    customAttribution
-  };
-};
+export const getAttributionControlOptions = (props:AttributionControllOptions):AttributionControllOptions => 
+  filterObject(props);
+
 
 export const mountAttributionControl = async (
   vmb_map: Deferred<Map>, 

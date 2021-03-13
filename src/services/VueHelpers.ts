@@ -1,6 +1,22 @@
+export type Primitive = number | string | boolean | bigint | symbol | null | undefined;
+
 export const slotIsNotEmpty = (el:HTMLElement):boolean =>
   el && el.outerHTML !== '<div></div>';
 
+
+export const filterObject = <T>(object:T, keys?:(keyof T)[], blacklist:Array<any> = [ undefined ]):T => {
+  const result:T = {} as T;
+  const _keys = keys || Object.keys(object) as (keyof T)[];
+  
+
+  for(const key of _keys){
+    if(!blacklist.some(b => b === object[key] )){
+      result[key] = object[key];
+    }
+  }
+
+  return result;
+};
 
 export const parentsNameIs = (instance:any, parentName: string) => {
   if(!instance.parent)
@@ -14,7 +30,7 @@ export const parentsNameIs = (instance:any, parentName: string) => {
   if(instance.parent.vnode.tag)
     return (instance.parent.vnode.tag as string).endsWith(parentName);
     
-  throw ('VueHelper.parentNameIs: Unknown Error');
+  return false;
 };
   
 export const parentNameContains = (instance:any, parentNameFragment:string):boolean => {
@@ -23,11 +39,11 @@ export const parentNameContains = (instance:any, parentNameFragment:string):bool
     
   // Vue 3
   if(instance.parent.type)
-    (instance.parent.type.name as string).includes(parentNameFragment);
+    return (instance.parent.type.name as string).includes(parentNameFragment);
     
   // Vue 2
   if(instance.parent.vnode.tag)
     return (instance.parent.vnode.tag as string).includes(parentNameFragment);
   
-  throw ('VueHelper.parentNameContains: Unknown Error');
+  return false;
 };

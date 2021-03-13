@@ -21,7 +21,7 @@ module.exports = {
     'camelcase': 'off',
     'no-unused-vars': 'off',
     'object-curly-spacing':['warn', 'always'],
-    'object-property-newline': ["error", { "allowAllPropertiesOnSameLine": true }]
+    'object-property-newline': ['error', { 'allowAllPropertiesOnSameLine': true }]
   },
   parserOptions: {
     parser: '@typescript-eslint/parser'
@@ -34,6 +34,15 @@ module.exports = {
       env: {
         mocha: true
       }
+    },
+    {
+      files: [
+        '**/__tests__/*.{j,t}s?(x)',
+        '**/tests/unit/**/*.spec.{j,t}s?(x)'
+      ],
+      env: {
+        mocha: true
+      }
     }
   ]
-}
+};
