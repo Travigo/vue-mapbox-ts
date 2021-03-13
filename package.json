@@ -1,5 +1,8 @@
 {
   "name": "vue-mapbox-ts",
+  "logo":  {
+    "file": "./documentation/logo.png"
+  },
   "version": "0.1.1-beta.2",
   "description": "Mapbox Framework for Vue.js written in TypeScript",
   "author": {
