@@ -35,7 +35,7 @@ export default defineComponent({
 
     onUnmounted(async () => {
       if(vmb_map){
-        const map = await vmb_map?.promise;      
+        const map = await vmb_map.promise;      
         map.removeControl(vmb_scaleControl);
       }
       
