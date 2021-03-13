@@ -5,7 +5,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, inject, onMounted, onUnmounted, provide, ref, watch, } from 'vue';
+import { defineComponent, inject, onMounted, onUnmounted, provide, watch, } from 'vue';
 import { Map } from 'mapbox-gl';
 import Deferred from 'my-deferred';
 
@@ -48,7 +48,7 @@ export default defineComponent({
   },
   setup(props) {
 
-    const vmb_map = inject('vmb_map') as Deferred<Map>;
+    const vmb_map = inject('vmb_map', null) as Deferred<Map> | null;
     const vmb_rectangle = new Rectangle({
       id: props.id,
       width: props.width,
@@ -63,17 +63,22 @@ export default defineComponent({
     provide('vmb_rectangle', vmb_rectangle);
 
     onMounted(async () => {
-      await updateRectangle(vmb_map, vmb_rectangle);
+      if(vmb_map)
+        await updateRectangle(vmb_map, vmb_rectangle);
     });
 
     onUnmounted(async () => {
-      const map = await vmb_map.promise;
-      map.removeLayer(vmb_rectangle.id);
+      if(vmb_map){
+        const map = await vmb_map.promise;
+        map.removeLayer(vmb_rectangle.id);
+      }      
     });
 
     watch(props, async () => {
-      vmb_rectangle.updateOptions(props);
-      await updateRectangle(vmb_map, vmb_rectangle);
+      if(vmb_map){
+        vmb_rectangle.updateOptions(props);
+        await updateRectangle(vmb_map, vmb_rectangle);
+      }      
     });
 
     return {

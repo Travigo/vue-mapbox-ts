@@ -1,4 +1,3 @@
-import { Circle } from '../classes/GeogeometryCircle';
 import { Marker, Popup, PopupOptions, Map } from 'mapbox-gl';
 import Deferred from 'my-deferred';
 import { Ref } from 'vue';

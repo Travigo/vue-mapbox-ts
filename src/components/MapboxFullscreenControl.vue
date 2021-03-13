@@ -18,17 +18,20 @@ export default defineComponent({
     }
   },
   setup(props) {
-    const vmb_map = inject('vmb_map') as Deferred<Map>;
+    const vmb_map = inject('vmb_map', null) as Deferred<Map> | null;
     const options = getFullscreenControlOptions(props);
     const vmb_fullscreenControl = new mapboxgl.FullscreenControl(options);
 
     onMounted(async () => {
-      await mountFullscreenControl(vmb_fullscreenControl, vmb_map);
+      if(vmb_map)
+        await mountFullscreenControl(vmb_fullscreenControl, vmb_map);
     });
 
     onUnmounted(async () => {
-      const map = await vmb_map.promise;
-      map.removeControl(vmb_fullscreenControl);
+      if(vmb_map){
+        const map = await vmb_map.promise;
+        map.removeControl(vmb_fullscreenControl);
+      }      
     });
 
     return {

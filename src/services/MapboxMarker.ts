@@ -1,5 +1,5 @@
 import LngLatInput from '../classes/LngLatInput';
-import mapboxgl, { MapboxOptions, Map, Marker, MarkerOptions } from 'mapbox-gl';
+import mapboxgl, { Map, Marker, MarkerOptions } from 'mapbox-gl';
 import Deferred from 'my-deferred';
 import { Component, Ref, ComponentInternalInstance } from 'vue';
 import { parentsNameIs, slotIsNotEmpty } from './VueHelpers';

@@ -1,4 +1,3 @@
-import { metersToPixelsAtMaxZoom } from '../services/MapboxGeogeometryCircle';
 import { Geogeometry, GeogeometryInput } from './Geogeomerty';
 import { AnySourceData, FillPaint } from 'mapbox-gl';
 

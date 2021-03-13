@@ -12,9 +12,8 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, getCurrentInstance, onMounted, onUnmounted, provide, ref, SetupContext } from 'vue';
-import { _instance } from '../install';
-import mapboxgl, { LngLat, LngLatBounds, Map, MapboxOptions } from 'mapbox-gl';
+import { defineComponent, onMounted, onUnmounted, provide, ref } from 'vue';
+import mapboxgl, { LngLat, LngLatBounds, Map } from 'mapbox-gl';
 import Deferred from 'my-deferred';
 import { getStyle, mountMap } from '../services/MapboxMap';
 

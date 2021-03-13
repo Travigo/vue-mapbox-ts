@@ -1,6 +1,6 @@
 import { ScaleControlOptions } from '../classes/ScaleControl';
 import { ScaleControl, Map } from 'mapbox-gl';
-import Deferred from 'my-deferred/dist/src';
+import Deferred from 'my-deferred';
 
 export const getScaleControlOptions = (props:ScaleControlOptions):ScaleControlOptions => {
   const { 

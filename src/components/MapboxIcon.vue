@@ -31,7 +31,7 @@ export default defineComponent({
   },
   setup(props) {
     const content = ref(null) as Ref<HTMLElement | null>;
-    const vmb_map = inject('vmb_map') as Deferred<Map>;
+    const vmb_map = inject('vmb_map', null) as Deferred<Map> | null;
     const vmb_marker = inject('vmb_marker', null) as Deferred<Marker> | null;
     const vmb_icon = new Deferred<Icon>();
 
@@ -46,7 +46,7 @@ export default defineComponent({
 
     onMounted(async () => {
       const instance = getCurrentInstance();
-      if(instance){
+      if(instance && vmb_map){
         await mountMapboxIcon(icon, vmb_map, vmb_marker, instance);
         vmb_icon.resolve(icon);
       }      

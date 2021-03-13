@@ -4,7 +4,7 @@
 
 <script lang="ts">
 import { defineComponent, inject, onMounted, onUnmounted, } from 'vue';
-import mapboxgl, { FitBoundsOptions, Map, PositionOptions } from 'mapbox-gl';
+import mapboxgl, { Map } from 'mapbox-gl';
 import { ScaleControlUnit } from '../classes/ScaleControl';
 import { getScaleControlOptions, mountScaleControl } from '../services/MapboxScaleControl';
 import Deferred from 'my-deferred';
@@ -34,9 +34,11 @@ export default defineComponent({
     });
 
     onUnmounted(async () => {
-      const map = await vmb_map?.promise;
-      if(map)
+      if(vmb_map){
+        const map = await vmb_map.promise;      
         map.removeControl(vmb_scaleControl);
+      }
+      
     });
 
     return {

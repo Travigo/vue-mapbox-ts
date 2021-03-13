@@ -35,18 +35,22 @@ export default defineComponent({
     
   },
   setup(props) {
-    const vmb_map:Deferred<Map> = inject('vmb_map') as Deferred<Map>;
+    const vmb_map = inject('vmb_map', null) as Deferred<Map> | null;
     const options = getGeolocationControlOptions(props);
     const vmb_geolocationControl = new mapboxgl.GeolocateControl(options);
 
     onMounted(async () => {
-      const map = await vmb_map.promise;
-      map.addControl(vmb_geolocationControl);
+      if(vmb_map){
+        const map = await vmb_map.promise;
+        map.addControl(vmb_geolocationControl);
+      }      
     });
 
     onUnmounted(async () => {
-      const map = await vmb_map.promise;
-      map.removeControl(vmb_geolocationControl);
+      if(vmb_map){
+        const map = await vmb_map.promise;
+        map.removeControl(vmb_geolocationControl);
+      }      
     });
 
     return {
