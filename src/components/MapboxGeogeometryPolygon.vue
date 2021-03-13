@@ -5,7 +5,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, inject, onMounted, provide, ref, watch, } from 'vue';
+import { defineComponent, inject, onMounted, onUnmounted, provide, ref, watch, } from 'vue';
 import { Map } from 'mapbox-gl';
 import Deferred from 'my-deferred';
 
@@ -54,6 +54,11 @@ export default defineComponent({
 
     onMounted(async () => {
       await updatePolygon(vmb_map, vmb_polygon);
+    });
+
+    onUnmounted(async () => {
+      const map = await vmb_map.promise;
+      map.removeLayer(vmb_polygon.id);
     });
 
     watch(props, async () => {

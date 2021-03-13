@@ -1,5 +1,5 @@
 
-// import MapboxGeocoder from './MapboxGeocoder.vue';
+import MapboxGeocoderControl from './MapboxGeocoderControl.vue';
 // import MapboxImage from './MapboxImage.vue';
 // import MapboxImages from './MapboxImages.vue';
 // import MapboxLayer from './MapboxLayer.vue';
@@ -19,7 +19,7 @@ import MapboxGeogeometryPolygon from './MapboxGeogeometryPolygon.vue';
 import MapboxGeogeometryRectangle from './MapboxGeogeometryRectangle.vue';
 
 export {
-  // MapboxGeocoder,
+  MapboxGeocoderControl,
   // MapboxImage,
   // MapboxImages,
   // MapboxLayer,

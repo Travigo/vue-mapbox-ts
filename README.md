@@ -136,12 +136,28 @@ If you want to add information about the current users whereabouts instert the g
 <mapbox-map :accessToken="myAccessToken">
   <mapbox-geolocate-control />
 </mapbox-map>
-
 ```
 [Full API of mapbox-geolocate-control](https://gitlab.com/relief-melone/vue-mapbox-ts/-/tree/master/documentation/MapboxGeolocateControl.md)
 
-[repository]: .
 
+#### Mapbox Geocoder Control
+The Geocoder is used to find Places on your map. To add a Geocoder to your map just add the component as a child
+
+**Geocoder Control integrated in Map**
+```html
+<mapbox-map :accessToken="myAccessToken">
+  <mapbox-geocoder-control />    
+</mapbox-map>
+```
+
+You can also use the Geocoder control as a standalone component in your app. providing a search find locations without a map. Please note that at this time the standalone component will not be able to communicate wit your map but I will add that feature later.
+
+**Geocoder Control as standalone component**
+```html
+<mapbox-geocoder-control :accessToken="myAccessToken" @result="handleResult" />
+```
+
+[Full API of mapbox-geocoder-control](https://gitlab.com/relief-melone/vue-mapbox-ts/-/tree/master/documentation/MapboxGeocoderControl.md)
 
 ### Geogeometry
 
@@ -161,4 +177,4 @@ To add a circle to your map add the component to it. *center* and *radius* are m
 </mapbox-map>
 ```
 
-[Full API of mapbox-geolocate-control](https://gitlab.com/relief-melone/vue-mapbox-ts/-/tree/master/documentation/MapboxGeogeometry.md)
+[Full API of mapbox-geogeometry](https://gitlab.com/relief-melone/vue-mapbox-ts/-/tree/master/documentation/MapboxGeogeometry.md)

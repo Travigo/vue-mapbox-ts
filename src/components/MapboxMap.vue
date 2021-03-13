@@ -12,7 +12,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, getCurrentInstance, onMounted, provide, ref, SetupContext } from 'vue';
+import { defineComponent, getCurrentInstance, onMounted, onUnmounted, provide, ref, SetupContext } from 'vue';
 import { _instance } from '../install';
 import mapboxgl, { LngLat, LngLatBounds, Map, MapboxOptions } from 'mapbox-gl';
 import Deferred from 'my-deferred';
@@ -208,6 +208,11 @@ export default defineComponent({
     onMounted(() => {
       mapboxgl.accessToken = props.accessToken;
       mountMap(props, vmb_map, root);
+    });
+
+    onUnmounted(async () => {
+      const map = await vmb_map.promise;
+      map.remove();
     });
 
     return {

@@ -8,7 +8,7 @@
 </template>
 
 <script lang="ts">
-import { Component,defineComponent, getCurrentInstance, onMounted, provide, Ref, ref, } from 'vue';
+import { Component,defineComponent, getCurrentInstance, onMounted, onUnmounted, provide, Ref, ref, } from 'vue';
 import mapboxgl, { Marker, MarkerOptions, PointLike, Anchor, Alignment } from 'mapbox-gl';
 import Deferred from 'my-deferred/dist/src';
 import injectMap from '../shared/map.inject';
@@ -33,26 +33,6 @@ const addPopupToMapIfPresent = (markerComponent: any, marker: mapboxgl.Marker) =
     marker
       .setPopup(mbPopup);
   }
-};
-
-const registerMarkerEvents = (marker: mapboxgl.Marker, component: any) => {
-  marker.on('drag', (evt: any) => {
-    const { lng, lat } = evt.target._lngLat;
-    (component as any)._lngLat = [lng, lat];
-    component.$emit('drag', evt);
-  });
-
-  marker.on('dragend', (evt: any) => {
-    component.$emit('dragend', evt);
-  });
-
-  marker.on('dragstart', (evt: any) => {
-    component.$emit('dragstart', evt);
-  });
-
-  marker.getElement().addEventListener('click', _ev => {
-    component.$emit('click', marker);
-  });
 };
 
 export default defineComponent({
@@ -111,6 +91,11 @@ export default defineComponent({
       const instance = getCurrentInstance();
       if(instance)
         await mountMarker(options, vmb_map, vmb_marker, instance, i_lngLat.value, icon);
+    });
+
+    onUnmounted( async () => {
+      const marker = await vmb_marker.promise;
+      marker.remove();
     });
 
     return { vmb_map, vmb_marker, i_lngLat, i_popups, options, icon };

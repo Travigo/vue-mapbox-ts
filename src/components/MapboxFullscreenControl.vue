@@ -3,7 +3,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, inject, onMounted, } from 'vue';
+import { defineComponent, inject, onMounted, onUnmounted, } from 'vue';
 import mapboxgl, { Map } from 'mapbox-gl';
 import { getFullscreenControlOptions, mountFullscreenControl } from '../services/MapboxFullscreenControl';
 import Deferred from 'my-deferred';
@@ -24,6 +24,11 @@ export default defineComponent({
 
     onMounted(async () => {
       await mountFullscreenControl(vmb_fullscreenControl, vmb_map);
+    });
+
+    onUnmounted(async () => {
+      const map = await vmb_map.promise;
+      map.removeControl(vmb_fullscreenControl);
     });
 
     return {
