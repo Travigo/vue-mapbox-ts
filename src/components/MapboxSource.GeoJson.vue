@@ -6,8 +6,7 @@
 
 <script lang="ts">
 import { defineComponent, inject, onMounted, } from 'vue';
-import mapboxgl, { GeoJSONSource, Map } from 'mapbox-gl';
-import { getFullscreenControlOptions, mountFullscreenControl } from '../services/MapboxFullscreenControl';
+import { GeoJSONSource, Map } from 'mapbox-gl';
 import Deferred from 'my-deferred';
 
 

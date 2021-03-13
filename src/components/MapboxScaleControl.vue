@@ -4,7 +4,7 @@
 
 <script lang="ts">
 import { defineComponent, inject, onMounted, onUnmounted, } from 'vue';
-import mapboxgl, { FitBoundsOptions, Map, PositionOptions } from 'mapbox-gl';
+import mapboxgl, { Map } from 'mapbox-gl';
 import { ScaleControlUnit } from '../classes/ScaleControl';
 import { getScaleControlOptions, mountScaleControl } from '../services/MapboxScaleControl';
 import Deferred from 'my-deferred';

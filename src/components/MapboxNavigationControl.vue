@@ -5,8 +5,8 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, inject, onMounted, onUnmounted, provide, ref } from 'vue';
-import mapboxgl, { LngLat, LngLatBounds, Map, MapboxOptions } from 'mapbox-gl';
+import { defineComponent, inject, onMounted, onUnmounted } from 'vue';
+import mapboxgl, { Map } from 'mapbox-gl';
 import { getNavigationControlOptions, mountNavigationControl } from '../services/MapboxNavigationControl';
 import Deferred from 'my-deferred';
 import { NavigationControlPosition } from '../classes/NavigationControll';

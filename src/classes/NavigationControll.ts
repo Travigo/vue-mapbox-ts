@@ -1,5 +1,3 @@
-import { NavigationControl } from 'mapbox-gl';
-
 export interface NavigationControlOptions {
   showCompass: boolean;
   showZoom: boolean;

@@ -9,7 +9,7 @@
 
 <script lang="ts">
 import { Component,defineComponent, getCurrentInstance, onMounted, onUnmounted, provide, Ref, ref, } from 'vue';
-import mapboxgl, { Marker, MarkerOptions, PointLike, Anchor, Alignment } from 'mapbox-gl';
+import mapboxgl, { Marker, PointLike, Anchor, Alignment } from 'mapbox-gl';
 import Deferred from 'my-deferred/dist/src';
 import injectMap from '../shared/map.inject';
 

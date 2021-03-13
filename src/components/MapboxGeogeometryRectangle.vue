@@ -5,7 +5,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, inject, onMounted, onUnmounted, provide, ref, watch, } from 'vue';
+import { defineComponent, inject, onMounted, onUnmounted, provide, watch, } from 'vue';
 import { Map } from 'mapbox-gl';
 import Deferred from 'my-deferred';
 

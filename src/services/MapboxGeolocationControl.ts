@@ -1,21 +1,8 @@
 import { GeolocationControlOptions } from '../classes/GeolocationControl';
+import { filterObject } from './VueHelpers';
 
 export const getGeolocationControlOptions = (
   props:GeolocationControlOptions
-):GeolocationControlOptions => {
-  const {
-    fitBoundsOptions,
-    positionOptions,
-    showAccuracyCircle,
-    showUserLocation,
-    trackUserLocation
-  } = props;
+):GeolocationControlOptions => 
+  filterObject(props);
 
-  return {
-    fitBoundsOptions,
-    positionOptions,
-    showAccuracyCircle,
-    showUserLocation,
-    trackUserLocation
-  };
-};

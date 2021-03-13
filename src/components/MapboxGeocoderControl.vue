@@ -5,17 +5,14 @@
 <script lang="ts">
 import '@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css';
 
-import { defineComponent, inject, onMounted, provide, ref, watch, defineEmit, getCurrentInstance, onUnmounted } from 'vue';
-import MapboxGeocoder, { LngLatLiteral, Result } from '@mapbox/mapbox-gl-geocoder';
-import mapboxgl, { FitBoundsOptions, FlyToOptions, LngLat, Map } from 'mapbox-gl';
+import { defineComponent, inject, onMounted, watch, getCurrentInstance, onUnmounted } from 'vue';
+import MapboxGeocoder, { LngLatLiteral } from '@mapbox/mapbox-gl-geocoder';
+import { FitBoundsOptions, FlyToOptions, Map } from 'mapbox-gl';
 
 import Deferred from 'my-deferred/dist/src';
 
 import { mountGeocoderControl, mountGeocoderEvents } from '../services/MapboxGeocoderControl';
 import { FilterFunction, ExternalGeocoderFunction, RenderFunction, GetItemValueFunction, LocalGeocoderFunction } from '../classes/GeocoderControl';
-import { mount } from '@vue/test-utils';
-
-
 
 export default defineComponent({
   name: 'MapboxGeocoderControl',
