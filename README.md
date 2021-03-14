@@ -54,6 +54,13 @@ Also please keep in mind that this project still has limited functionality compa
 
 I will do my best to add functionality and update this documentation when I find the time.
 
+### Reactiveness
+
+Making the components themselves reactive is a work in progress. While it is no problem to add and remove components dyanamically a lot of them currently don't react to property changes.
+
+The current focus is on making the components reactive. While some mapbox-gl provides methods to change some parameters during runtime for others no methods have been implemented (e.g. Marker colors).
+
+I will first focus on making the properties with methods provided by mapbox-gl reactive and then look for ways to get as much parameters reactive with no provided methods. I will update the readme for the specific components with information about which properties have been made reactive at the moment.
 
 ## Use
 

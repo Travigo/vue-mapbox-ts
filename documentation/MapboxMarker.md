@@ -48,17 +48,17 @@ You can also replace mapboxs' default maker by your own. Just put it in the icon
 
 The properties will match mapbox documentations properties as much as possible. Here are the current properties for Markers
 
-| Property          | Type                       | Interface   | Default Value |
-| :---------------- | :------------------------- | :---------- | :------------ |
-| lngLat            | [number, number]           | LngLatInput | [0,0]         |
-| offset            | number | [number, number ] | Offset      | undefined     |
-| anchor            | string                     | Anchor      | "left"        |
-| color             | string                     |             | null          |
-| scale             | number                     |             | 1             |
-| draggable         | boolean                    |             | false         |
-| rotation          | number                     |             | 0             |
-| pitchAlignment    | string                     | Alignment   | "auto"        |
-| rotationAlignment | string                     | Alignment   | "auto"        |
+| Property          | Type                      | Interface   | Default Value | Reactive |
+| :---------------- | :------------------------ | :---------- | :------------ | -------- |
+| lngLat            | [number, number]          | LngLatInput | [0,0]         | x        |
+| offset            | number; [number, number ] | Offset      | undefined     | x        |
+| anchor            | string                    | Anchor      | "left"        |          |
+| color             | string                    |             | null          |          |
+| scale             | number                    |             | 1             |          |
+| draggable         | boolean                   |             | false         | x        |
+| rotation          | number                    |             | 0             | x        |
+| pitchAlignment    | string                    | Alignment   | "auto"        | x        |
+| rotationAlignment | string                    | Alignment   | "auto"        | x        |
 
 
 ## Events
@@ -68,6 +68,7 @@ The properties will match mapbox documentations properties as much as possible. 
 | drag          | Object           |
 | dragstart     | Object           |
 | dragend       | Object           |
+| click         | Object           |
 | update:lngLat | [number, number] |
 
 #### drag

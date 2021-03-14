@@ -5,9 +5,9 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, getCurrentInstance, inject, onMounted, onUnmounted, Ref, ref } from 'vue';
+import { defineComponent, getCurrentInstance, inject, onMounted, onUnmounted, Ref, ref, watch } from 'vue';
 import mapboxgl, {  Marker, Anchor, Map } from 'mapbox-gl';
-import { getPopupOptions, mountPopup } from '../services/MapboxPopup';
+import { getPopupOptions, mountPopup, PopupEmits, registerPopupEvents, updatePopup } from '../services/MapboxPopup';
 import Deferred from 'my-deferred/dist/src';
 import LngLatInput from '../classes/LngLatInput';
 import { Circle } from '../classes/GeogeometryCircle';
@@ -17,6 +17,7 @@ import { Rectangle } from '../classes/GeogeometryRectangle';
 
 export default defineComponent({
   name: 'MapboxPopup',
+  emits: PopupEmits,
   props: {
     lngLat: {
       default: () => [0,0] as LngLatInput,
@@ -71,8 +72,15 @@ export default defineComponent({
 
     onMounted(async () => {
       const instance = getCurrentInstance();
-      if(vmb_map)
-        await mountPopup(instance, vmb_map, vmb_popup, vmb_marker, vmb_geometry, content);  
+      if(vmb_map && instance){
+        await mountPopup(instance, vmb_map, vmb_popup, vmb_marker, vmb_geometry, content);
+        registerPopupEvents(vmb_popup, instance);
+      }
+        
+    });
+
+    watch(props, props => {
+      updatePopup(props, vmb_popup);
     });
 
     onUnmounted(async () => {

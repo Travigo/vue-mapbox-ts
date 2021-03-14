@@ -18,6 +18,20 @@ You may notice that for map style you won't need the complete syntax. In this ca
 
 ## Properties
 
+All parameters from mapbox-gl can also be used to configure your map with the exception of container (which is set to this component). Please see their [documentation](https://docs.mapbox.com/mapbox-gl-js/api/map/#map-parameters)
+
+Please note that the parameter style cannot be used as it is already reserved by Vue to configure css styling. to use a different style for your map use the property *mapStyle*
+
+### Currently Reactive
+- center
+- bearing
+- maxBounds
+- maxPitch
+- maxZoom
+- minPitch
+- pitch
+- renderWorldCopies
+- zoom
 
 ## Events
 

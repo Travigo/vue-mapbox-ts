@@ -1,6 +1,7 @@
-import mapboxgl, { MapboxOptions, Map, LngLatLike } from 'mapbox-gl';
+import mapboxgl, { MapboxOptions, Map } from 'mapbox-gl';
 import Deferred from 'my-deferred';
-import { ComponentInternalInstance, ref, Ref } from 'vue';
+import { ref, Ref } from 'vue';
+import { ComponentInternalInstance } from 'vue';
 
 import { MapboxMapInput } from '../classes/MapboxMap';
 import { duplicateEvents, filterObject } from './VueHelpers';
@@ -102,7 +103,7 @@ export const updateMap = async (vmb_map:Deferred<Map>, props:MapboxMapInput, roo
     map.setZoom(opts.zoom);
 };
 
-export const MapEvents = [
+export const MapGlEvents = [
   'boxzoomstart',
   'click',
   'contextmenu',
@@ -149,8 +150,8 @@ export const MapEvents = [
   'zoomend',
   'zoomstart'
 ];
-export const mapEmits = [
-  ...MapEvents, 
+export const MapEmits = [
+  ...MapGlEvents, 
   'update:center',
   'update:zoom',
   'update:pitch',
@@ -158,7 +159,7 @@ export const mapEmits = [
 
 export const registerMapEvents = async (vmb_map:Deferred<Map>, instance:ComponentInternalInstance) => {
   const map = await vmb_map.promise;
-  duplicateEvents<Map>(map, instance, MapEvents);
+  duplicateEvents<Map>(map, instance, MapGlEvents);
   
   map.on('zoomend', evt => {
     instance.emit('update:zoom', evt.target.getZoom());

@@ -1,5 +1,4 @@
 export type Primitive = number | string | boolean | bigint | symbol | null | undefined;
-import { Map } from 'mapbox-gl';
 import { ComponentInternalInstance } from 'vue';
 import { InstanceWithOn } from '../classes/VueMapbox';
 

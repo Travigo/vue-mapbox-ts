@@ -13,13 +13,14 @@
 
 <script lang="ts">
 import { defineComponent, getCurrentInstance, onMounted, onUnmounted, provide, ref, watch } from 'vue';
-import mapboxgl, { LngLat, LngLatBounds, Map } from 'mapbox-gl';
+import mapboxgl, { LngLatBounds, Map } from 'mapbox-gl';
 import Deferred from 'my-deferred';
-import { registerMapEvents, getStyle, mountMap, updateMap } from '../services/MapboxMap';
+import { registerMapEvents, getStyle, mountMap, updateMap, MapEmits } from '../services/MapboxMap';
 import { MapboxMapInput } from '../classes/MapboxMap';
 
 export default defineComponent({
   name: 'MapboxMap',
+  emits: MapEmits,
   props: {
     accessToken: {
       type: String,

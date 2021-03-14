@@ -14,11 +14,11 @@ import Deferred from 'my-deferred/dist/src';
 import injectMap from '../shared/map.inject';
 
 import LngLatInput from '../classes/LngLatInput';
-import { mountMarker, getMarkerOptions, updateMarker } from '../services/MapboxMarker';
+import { mountMarker, getMarkerOptions, updateMarker, registerMarkerEvents, MarkerEmits } from '../services/MapboxMarker';
 
 export default defineComponent({
   name: 'MapboxMarker',
-  emits: ['drag', 'dragend', 'dragstart', 'update:lngLat'],
+  emits: MarkerEmits,
   props: {
     lngLat: {
       default: () => [0,0] as LngLatInput,
@@ -69,9 +69,10 @@ export default defineComponent({
     onMounted(async () => {
       const instance = getCurrentInstance();
       if(instance && vmb_map){
-        await mountMarker(options, vmb_map, vmb_marker, instance, props.lngLat, icon);        
+        await mountMarker(options, vmb_map, vmb_marker, instance, props.lngLat, icon);
+        const marker = await vmb_marker.promise;
+        registerMarkerEvents(marker, instance);
       }
-        
     });
 
     onUnmounted( async () => {
@@ -87,3 +88,7 @@ export default defineComponent({
   },
 });
 </script>
+
+function registerMarkerEvents(marker: any, instance: ComponentInternalInstance) {
+  throw new Error('Function not implemented.');
+}

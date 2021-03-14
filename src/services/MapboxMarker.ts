@@ -2,7 +2,7 @@ import LngLatInput from '../classes/LngLatInput';
 import mapboxgl, { Map, Marker, MarkerOptions } from 'mapbox-gl';
 import Deferred from 'my-deferred';
 import { ComponentInternalInstance } from 'vue';
-import { Component, Ref  } from 'vue';
+import { Ref } from 'vue';
 import { duplicateEvents, filterObject, parentsNameIs, slotIsNotEmpty } from './VueHelpers';
 import { MarkerProps } from '../classes/Marker';
 
@@ -24,8 +24,11 @@ export const getMarkerOptions = (props: MarkerOptions): MarkerOptions =>
     'scale'
   ]);
 
-const registerMarkerEvents = (marker: mapboxgl.Marker, component: ComponentInternalInstance) => {
-  duplicateEvents<Marker>(marker, component, ['drag', 'dragend', 'dragstart']);
+export const MarkerGlEvents = ['drag', 'dragend', 'dragstart'];
+export const MarkerEmits = [...MarkerGlEvents, 'update:lngLat', 'click'];
+
+export const registerMarkerEvents = (marker: mapboxgl.Marker, component: ComponentInternalInstance) => {
+  duplicateEvents<Marker>(marker, component, MarkerGlEvents);
   
   marker.on('dragend', (evt: any) => 
     component.emit('update:lngLat', evt.target._lngLat.toArray())
@@ -66,8 +69,7 @@ export const mountMarker = async (options:MarkerOptions, vmb_map:Deferred<Map>, 
 
   const marker = new Marker(options)
     .setLngLat(lngLat);
-
-  registerMarkerEvents(marker, instance);
+  
   marker.addTo(map);
 
   vmb_marker.resolve(marker);
