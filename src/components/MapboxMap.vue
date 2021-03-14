@@ -12,10 +12,11 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, onMounted, onUnmounted, provide, ref } from 'vue';
+import { defineComponent, getCurrentInstance, onMounted, onUnmounted, provide, ref, watch } from 'vue';
 import mapboxgl, { LngLat, LngLatBounds, Map } from 'mapbox-gl';
 import Deferred from 'my-deferred';
-import { getStyle, mountMap } from '../services/MapboxMap';
+import { registerMapEvents, getStyle, mountMap, updateMap } from '../services/MapboxMap';
+import { MapboxMapInput } from '../classes/MapboxMap';
 
 export default defineComponent({
   name: 'MapboxMap',
@@ -141,8 +142,7 @@ export default defineComponent({
       default: true,
     },
     center: {
-      type: [Object, Array] as any as () => LngLat | [number, number] | Record<string, any>,
-      default: () => [ 0, 0 ],
+      default: () => [ 0, 0 ] as [number, number],
     },
     zoom: {
       type: Number,
@@ -204,14 +204,22 @@ export default defineComponent({
 
     const style = getStyle(props);
 
-    onMounted(() => {
+    onMounted(async () => {
+      const instance = getCurrentInstance();
       mapboxgl.accessToken = props.accessToken;
       mountMap(props, vmb_map, root);
+      if(instance)
+        await registerMapEvents(vmb_map, instance);
     });
 
     onUnmounted(async () => {
       const map = await vmb_map.promise;
       map.remove();
+    });
+
+    watch(props, async p => {
+      console.log('PROPS CHANGED');
+      updateMap(vmb_map, p as MapboxMapInput, root);
     });
 
     return {

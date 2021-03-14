@@ -1,4 +1,7 @@
 export type Primitive = number | string | boolean | bigint | symbol | null | undefined;
+import { Map } from 'mapbox-gl';
+import { ComponentInternalInstance } from 'vue';
+import { InstanceWithOn } from '../classes/VueMapbox';
 
 export const slotIsNotEmpty = (el:HTMLElement):boolean =>
   el && el.outerHTML !== '<div></div>';
@@ -46,4 +49,13 @@ export const parentNameContains = (instance:any, parentNameFragment:string):bool
     return (instance.parent.vnode.tag as string).includes(parentNameFragment);
   
   return false;
+};
+
+export const duplicateEvents = <
+  T extends InstanceWithOn<any>, 
+>(object:T, instance: ComponentInternalInstance, events:Array<string>) => {
+  for(const event of events)
+    object.on(event, (evt) => {
+      instance.emit(event, evt);
+    });
 };

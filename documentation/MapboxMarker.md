@@ -59,6 +59,27 @@ The properties will match mapbox documentations properties as much as possible. 
 | rotation          | number                     |             | 0             |
 | pitchAlignment    | string                     | Alignment   | "auto"        |
 | rotationAlignment | string                     | Alignment   | "auto"        |
-|                   |                            |             |               |
+
+
+## Events
+
+| Event         | Return Type      |
+| :------------ | :--------------- |
+| drag          | Object           |
+| dragstart     | Object           |
+| dragend       | Object           |
+| update:lngLat | [number, number] |
+
+#### drag
+Event from mapbox-gl-gs. Triggered while dragging Marker
+
+#### dragstart
+Event from mapbox-gl-gs. Triggered when starting to drag marker
+
+#### dragend
+Event from mapbox-gl-gs. Triggered when drag of marker ends
+
+#### update:lngLat
+Event triggeredd when drag ends. Used to enable two way data binding to your lngLat property.
 
 Also see Mapboxs' [Documentation for Markers](https://docs.mapbox.com/mapbox-gl-js/api/markers/#marker)
