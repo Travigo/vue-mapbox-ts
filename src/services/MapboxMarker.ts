@@ -1,90 +1,80 @@
 import LngLatInput from '../classes/LngLatInput';
 import mapboxgl, { Map, Marker, MarkerOptions } from 'mapbox-gl';
 import Deferred from 'my-deferred';
-import { Component, Ref, ComponentInternalInstance } from 'vue';
-import { parentsNameIs, slotIsNotEmpty } from './VueHelpers';
+import { ComponentInternalInstance } from 'vue';
+import { Ref } from 'vue';
+import { duplicateEvents, filterObject, parentsNameIs, slotIsNotEmpty } from './VueHelpers';
+import { MarkerProps } from '../classes/Marker';
 
 
 export const parentIsMarker = (instance:any):boolean => 
   parentsNameIs(instance, 'MapboxMarker');
 
-export const getMarkerOptions = (props: MarkerOptions): MarkerOptions => {
-  const { 
-    element,
-    offset,
-    anchor,
-    color,
-    draggable,
-    clickTolerance,
-    rotation,
-    rotationAlignment,
-    pitchAlignment,
-    scale
-  } = props; 
+export const getMarkerOptions = (props: MarkerOptions): MarkerOptions => 
+  filterObject(props, [
+    'element',
+    'offset',
+    'anchor',
+    'color',
+    'draggable',
+    'clickTolerance',
+    'rotation',
+    'rotationAlignment',
+    'pitchAlignment',
+    'scale'
+  ]);
 
-  return {
-    element,
-    offset,
-    anchor,
-    color,
-    draggable,
-    clickTolerance,
-    rotation,
-    rotationAlignment,
-    pitchAlignment,
-    scale
-  };
-};
+export const MarkerGlEvents = ['drag', 'dragend', 'dragstart'];
+export const MarkerEmits = [...MarkerGlEvents, 'update:lngLat', 'click'];
 
-const getPopupChildren = (marker: any): Component | null => {  
-  for (const child of marker.$children){
-    if(child.$vnode.tag && child.$vnode.tag.includes('MapboxPopup'))
-      return (child);
-  }
-  return null;
-};
-
-const addPopupToMapIfPresent = (markerComponent: any, marker: mapboxgl.Marker) => {
-  const popup: any = getPopupChildren(markerComponent);  
-  if(popup){
-    const mbPopup: mapboxgl.Popup = popup.$popup;
-
-    marker
-      .setPopup(mbPopup);
-  }
-};
-
-const registerMarkerEvents = (marker: mapboxgl.Marker, component: ComponentInternalInstance) => {
-  marker.on('drag', (evt: any) => {
-    const { lng, lat } = evt.target._lngLat;
-    (component as any)._lngLat = [lng, lat];
-    component.emit('drag', evt);
-  });
-
-  marker.on('dragend', (evt: any) => {
-    component.emit('dragend', evt);
-  });
-
-  marker.on('dragstart', (evt: any) => {
-    component.emit('dragstart', evt);
-  });
+export const registerMarkerEvents = (marker: mapboxgl.Marker, component: ComponentInternalInstance) => {
+  duplicateEvents<Marker>(marker, component, MarkerGlEvents);
+  
+  marker.on('dragend', (evt: any) => 
+    component.emit('update:lngLat', evt.target._lngLat.toArray())
+  );
 
   marker.getElement().addEventListener('click', _ev => {
     component.emit('click', marker);
   });
 };
 
-export const mountMarker = (options:MarkerOptions, vmb_map:Deferred<Map>, vmb_marker:Deferred<Marker>, instance: ComponentInternalInstance, lngLat: LngLatInput, element?: Ref<HTMLElement>) =>
-  (async () => {
-    const map = await vmb_map.promise;
-    if(element && slotIsNotEmpty(element.value))
-      options.element = element.value;
+export const updateMarker = async (props:MarkerProps, vmb_marker:Deferred<Marker>) => {
+  const marker = await vmb_marker.promise;
+  const opts = filterObject(props);
 
-    const marker = new Marker(options)
-      .setLngLat(lngLat);
+  if(typeof opts.draggable === 'boolean')
+    marker.setDraggable(opts.draggable);
 
-    registerMarkerEvents(marker, instance);
-    marker.addTo(map);
+  if(opts.lngLat)
+    marker.setLngLat(opts.lngLat);
 
-    vmb_marker.resolve(marker);
-  })();
+  if(opts.offset)
+    marker.setOffset(opts.offset);
+
+  if(opts.rotation)
+    marker.setRotation(opts.rotation);
+  
+  if(opts.pitchAlignment)
+    marker.setPitchAlignment(opts.pitchAlignment);
+
+  if(opts.rotationAlignment)
+    marker.setRotationAlignment(opts.rotationAlignment);    
+};
+
+export const mountMarker = async (options:MarkerOptions, vmb_map:Deferred<Map>, vmb_marker:Deferred<Marker>, instance: ComponentInternalInstance, lngLat: LngLatInput, element?: Ref<HTMLElement>) => {
+  const map = await vmb_map.promise;
+  if(element && slotIsNotEmpty(element.value))
+    options.element = element.value;
+
+  const marker = new Marker(options)
+    .setLngLat(lngLat);
+  
+  marker.addTo(map);
+
+  vmb_marker.resolve(marker);
+};
+
+export const updateOffset = async (vmb_marker:Deferred<Marker>, color:string) => {
+  const marker = await vmb_marker.promise;
+};

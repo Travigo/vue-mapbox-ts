@@ -8,40 +8,20 @@
 </template>
 
 <script lang="ts">
-import { Component,defineComponent, getCurrentInstance, onMounted, onUnmounted, provide, Ref, ref, } from 'vue';
-import mapboxgl, { Marker, PointLike, Anchor, Alignment } from 'mapbox-gl';
+import { defineComponent, getCurrentInstance, onMounted, onUnmounted, provide, Ref, ref, watch, } from 'vue';
+import { Marker, PointLike, Anchor, Alignment } from 'mapbox-gl';
 import Deferred from 'my-deferred/dist/src';
 import injectMap from '../shared/map.inject';
 
 import LngLatInput from '../classes/LngLatInput';
-import { mountMarker, getMarkerOptions } from '../services/MapboxMarker';
-
-
-const getPopupChildren = (marker: any): Component | null => {  
-  for (const child of marker.$slots.default()){
-    if(child.type.__file.includes('MapboxPopup'))
-      return (child);
-  }
-  return null;
-};
-
-const addPopupToMapIfPresent = (markerComponent: any, marker: mapboxgl.Marker) => {
-  const popup: any = getPopupChildren(markerComponent);  
-  if(popup){
-    const mbPopup: mapboxgl.Popup = popup.$popup;
-
-    marker
-      .setPopup(mbPopup);
-  }
-};
+import { mountMarker, getMarkerOptions, updateMarker, registerMarkerEvents, MarkerEmits } from '../services/MapboxMarker';
 
 export default defineComponent({
   name: 'MapboxMarker',
+  emits: MarkerEmits,
   props: {
     lngLat: {
-    // type: Array as () => Array<number>,
       default: () => [0,0] as LngLatInput,
-    // required: true,
     },
     offset: {
       type: [Array] as any as () => PointLike,
@@ -79,33 +59,36 @@ export default defineComponent({
   setup(props) {
     const { vmb_map } = injectMap.setup();
     const vmb_marker = new Deferred<Marker>();
-    const i_lngLat = ref(props.lngLat);
-    const i_popups: Ref<Component | null> = ref(null);
 
     const icon = ref(null) as Ref<any | null>;
 
     const options = getMarkerOptions(props);
+    
     provide('vmb_marker', vmb_marker);
 
     onMounted(async () => {
       const instance = getCurrentInstance();
-      if(instance && vmb_map)
-        await mountMarker(options, vmb_map, vmb_marker, instance, i_lngLat.value, icon);
+      if(instance && vmb_map){
+        await mountMarker(options, vmb_map, vmb_marker, instance, props.lngLat, icon);
+        const marker = await vmb_marker.promise;
+        registerMarkerEvents(marker, instance);
+      }
     });
 
     onUnmounted( async () => {
       const marker = await vmb_marker.promise;
       marker.remove();
+    });    
+
+    watch(props, async (p) => {
+      await updateMarker(p, vmb_marker);
     });
 
-    return { vmb_map, vmb_marker, i_lngLat, i_popups, options, icon };
-  },
-
-  watch: {
-    $children(children){
-      console.log('CHILDREN CHANGED');
-      console.log(children);
-    }
+    return { vmb_map, vmb_marker, options, icon };
   },
 });
 </script>
+
+function registerMarkerEvents(marker: any, instance: ComponentInternalInstance) {
+  throw new Error('Function not implemented.');
+}

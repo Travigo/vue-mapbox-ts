@@ -26,7 +26,9 @@ export default defineComponent({
     },
     name: {
       type: String,
-      default: () => randomString({ length: 10, type: 'alphanumeric' })
+      default: () => randomString(
+        { length: 10, type: 'alphanumeric' }
+      )
     }
   },
   setup(props) {
