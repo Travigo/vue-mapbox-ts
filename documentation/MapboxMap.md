@@ -22,6 +22,19 @@ All parameters from mapbox-gl can also be used to configure your map with the ex
 
 Please note that the parameter style cannot be used as it is already reserved by Vue to configure css styling. to use a different style for your map use the property *mapStyle*
 
+#### flyToOptions
+
+Fly to options apply if your properties for center or zoom change. While center or zoom are controlled via their respective properties the rest of the fly to Options can be set in this object. By default it will use the defaults set in the [documentation of mapboxgls fly-to-options](https://docs.mapbox.com/mapbox-gl-js/api/map/#map#flyto)
+
+An example to implement would be
+```html
+<mapbox-map 
+  :accessToken="myAccessToken"
+  mapStyle="light-v10"
+  :flyToOptions="{ maxDuration: 2000, speed: 1.2 }"
+/>
+```
+
 ### Currently Reactive
 - center
 - bearing

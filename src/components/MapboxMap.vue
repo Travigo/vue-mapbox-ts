@@ -16,7 +16,7 @@ import { defineComponent, getCurrentInstance, onMounted, onUnmounted, provide, r
 import mapboxgl, { LngLatBounds, Map } from 'mapbox-gl';
 import Deferred from 'my-deferred';
 import { registerMapEvents, getStyle, mountMap, updateMap, MapEmits } from '../services/MapboxMap';
-import { MapboxMapInput } from '../classes/MapboxMap';
+import { MapboxMapInput, FlyToOptions } from '../classes/MapboxMap';
 
 export default defineComponent({
   name: 'MapboxMap',
@@ -197,6 +197,9 @@ export default defineComponent({
       type: Number,
       default: 1
     },
+    flyToOptions: {
+      default: () => ({ } as FlyToOptions)
+    }
   },
   setup: (props:any) => {
     const root = ref(null);
@@ -219,7 +222,6 @@ export default defineComponent({
     });
 
     watch(props, async p => {
-      console.log('PROPS CHANGED');
       updateMap(vmb_map, p as MapboxMapInput, root);
     });
 

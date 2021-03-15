@@ -22,7 +22,7 @@ export class Geogeometry {
 
   constructor(input: GeogeometryInput){
     this.id = input.id;
-    this.fillColor = input.fillColor || '#3FB1CE';
+    this.fillColor = input.fillColor || '#4668F2';
     this.antialias = typeof input.antialias === 'boolean' ? input.antialias : true;
     this.opacity = typeof input.opacity === 'number' ? input.opacity : 0.6;
     
