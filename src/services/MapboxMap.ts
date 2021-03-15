@@ -74,16 +74,18 @@ export const mountMap = (props:MapboxMapInput, vmb_map:Deferred<Map>, rootRef: R
     map.on('load', () => {
       vmb_map.resolve(map);
     });
-
   })();
+
+export const coordsChanged = (newCoords:[number, number], oldCorrds: [number, number]) => 
+  newCoords[0] !== oldCorrds[0] || newCoords[1] !== newCoords[1];
+
 
 export const updateMap = async (vmb_map:Deferred<Map>, props:MapboxMapInput, rootRef: Ref<any>) => {
   const map = await vmb_map.promise;
   const element = rootRef.value;
   const opts = getMapboxOptions(props, element);
-  
-  if(opts.center)
-    map.setCenter(opts.center);
+  const flyToOptions = filterObject(props.flyToOptions, ['curve', 'maxDuration', 'minZoom', 'screenSpeed', 'speed']);
+  let positionUpdated = false;
   
   if(typeof opts.bearing === 'number')
     map.setBearing(opts.bearing);  
@@ -99,8 +101,30 @@ export const updateMap = async (vmb_map:Deferred<Map>, props:MapboxMapInput, roo
     map.setPitch(opts.pitch);
   if(typeof opts.renderWorldCopies === 'boolean')
     map.setRenderWorldCopies(opts.renderWorldCopies);
-  if(typeof opts.zoom === 'number')
-    map.setZoom(opts.zoom);
+
+  if(opts.center && !positionUpdated){
+    const newCenter = opts.center as [number, number];
+    const currentCenter = map.getCenter().toArray() as [number, number];
+    if(coordsChanged(newCenter, currentCenter)){
+      map.flyTo({
+        center: opts.center,
+        zoom: opts.zoom,
+        ...flyToOptions
+      });
+      positionUpdated = true;
+    }
+  }
+  
+  if(typeof opts.zoom === 'number' && !positionUpdated)
+    if(map.getZoom() !== opts.zoom && !positionUpdated){
+      map.flyTo({
+        center: opts.center,
+        zoom: opts.zoom,
+        ...flyToOptions
+      });
+      positionUpdated = true;
+    }
+      
 };
 
 export const MapGlEvents = [

@@ -53,7 +53,7 @@ The properties will match mapbox documentations properties as much as possible. 
 | lngLat            | [number, number]          | LngLatInput | [0,0]         | x        |
 | offset            | number; [number, number ] | Offset      | undefined     | x        |
 | anchor            | string                    | Anchor      | "left"        |          |
-| color             | string                    |             | null          |          |
+| color             | string                    |             | null          | *        |
 | scale             | number                    |             | 1             |          |
 | draggable         | boolean                   |             | false         | x        |
 | rotation          | number                    |             | 0             | x        |
