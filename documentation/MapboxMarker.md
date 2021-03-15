@@ -48,17 +48,17 @@ You can also replace mapboxs' default maker by your own. Just put it in the icon
 
 The properties will match mapbox documentations properties as much as possible. Here are the current properties for Markers
 
-| Property          | Type                      | Interface   | Default Value | Reactive |
-| :---------------- | :------------------------ | :---------- | :------------ | -------- |
-| lngLat            | [number, number]          | LngLatInput | [0,0]         | x        |
-| offset            | number; [number, number ] | Offset      | undefined     | x        |
-| anchor            | string                    | Anchor      | "left"        |          |
-| color             | string                    |             | "#4668F2"     | *        |
-| scale             | number                    |             | 1             |          |
-| draggable         | boolean                   |             | false         | x        |
-| rotation          | number                    |             | 0             | x        |
-| pitchAlignment    | string                    | Alignment   | "auto"        | x        |
-| rotationAlignment | string                    | Alignment   | "auto"        | x        |
+| Property          | Type                      | Interface   | Default Value | Reactive           |
+| :---------------- | :------------------------ | :---------- | :------------ | ------------------ |
+| lngLat            | [number, number]          | LngLatInput | [0,0]         | :white_check_mark: |
+| offset            | number; [number, number ] | Offset      | undefined     | :white_check_mark: |
+| anchor            | string                    | Anchor      | "left"        |                    |
+| color             | string                    |             | "#4668F2"     | :white_check_mark: |
+| scale             | number                    |             | 1             |                    |
+| draggable         | boolean                   |             | false         | :white_check_mark: |
+| rotation          | number                    |             | 0             | :white_check_mark: |
+| pitchAlignment    | string                    | Alignment   | "auto"        | :white_check_mark: |
+| rotationAlignment | string                    | Alignment   | "auto"        | :white_check_mark: |
 
 
 ## Events
