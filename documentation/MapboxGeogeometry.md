@@ -7,7 +7,7 @@ The unit for distances in Geogeometry Components is always km.
 | Property     | Type    | Interface | Default Value | Mandatory |
 | :----------- | :------ | :-------- | :------------ | :-------- |
 | id           | string  |           | *generated*   |           |
-| fillColor    | string  |           | "#3fb1cE"     |           |
+| fillColor    | string  |           | "#4668F2"     |           |
 | antialias    | boolean |           | true          |           |
 | opacity      | number  |           | 0.6           |           |
 | outlineColor | string  |           | undefined     |           |
