@@ -1,5 +1,5 @@
 import { removeLayerIfPresent } from '../services/MapboxLayer';
-import { AnyLayer, AnySourceData, FillPaint, GeoJSONSource, GeoJSONSourceRaw, Map } from 'mapbox-gl';
+import { AnyLayer, AnyPaint, AnySourceData, FillPaint, GeoJSONSource, GeoJSONSourceRaw, Map } from 'mapbox-gl';
 import Deferred from 'my-deferred/dist/src';
 import { Circle } from './GeogeometryCircle';
 import { Polygon } from './GeogeometryPolygon';
@@ -44,7 +44,7 @@ export class Geogeometry {
       this.outlineColor = input.outlineColor;
   }
   
-  getPaint():FillPaint{
+  getPaint():AnyPaint{
     const paint = {} as FillPaint;
 
     if(this.fillColor)
@@ -65,7 +65,7 @@ export class Geogeometry {
       'type': 'fill',
       'source': this.id,
       'layout': {},
-      'paint': this.getPaint()
+      'paint': this.getPaint() as FillPaint
     }; 
   }
 }
