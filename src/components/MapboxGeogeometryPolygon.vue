@@ -10,7 +10,8 @@ import { Map } from 'mapbox-gl';
 import Deferred from 'my-deferred';
 
 import { Polygon } from '../classes/GeogeometryPolygon';
-import { updatePolygon } from '../services/MapboxGeogeometryPolygon';
+import { mountGeogeometry, updateGeogeometry } from '../services/MapboxGeogeometry';
+import { filterObject } from '../services/VueHelpers';
 
 let polygonsAdded = 0;
 
@@ -41,33 +42,33 @@ export default defineComponent({
   setup(props) {
 
     const vmb_map = inject('vmb_map', null) as Deferred<Map> | null;
-    const vmb_polygon = new Polygon({
-      id: props.id,
-      path: props.path,
-      fillColor: props.fillColor,
-      outlineColor: props.outlineColor,
-      opacity: props.opacity,
-      antialias: props.antialias
-    });
+    const vmb_polygon = new Polygon(filterObject(props, [
+      'id',
+      'path',
+      'fillColor',
+      'outlineColor',
+      'opacity',
+      'antialias'
+    ]));
 
     provide('vmb_polygon', vmb_polygon);
 
     onMounted(async () => {
       if(vmb_map)
-        await updatePolygon(vmb_map, vmb_polygon);
+        await mountGeogeometry(vmb_map, vmb_polygon);
+    });
+
+    watch(props, async () => {
+      if(vmb_map){
+        vmb_polygon.updateOptions(props);
+        await updateGeogeometry(props, vmb_map, vmb_polygon);
+      }      
     });
 
     onUnmounted(async () => {
       if(vmb_map){
         const map = await vmb_map.promise;
         map.removeLayer(vmb_polygon.id);
-      }      
-    });
-
-    watch(props, async () => {
-      if(vmb_map){
-        vmb_polygon.updateOptions(props);
-        await updatePolygon(vmb_map, vmb_polygon);
       }      
     });
 

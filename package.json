@@ -1,6 +1,6 @@
 {
   "name": "vue-mapbox-ts",
-  "logo":  {
+  "logo": {
     "file": "./documentation/logo.png"
   },
   "version": "0.1.2-beta.3",

@@ -1,5 +1,5 @@
-import { Geogeometry, GeogeometryInput } from './Geogeomerty';
-import { AnySourceData, FillPaint } from 'mapbox-gl';
+import { Geogeometry, GeogeometryInput } from './Geogeometry';
+import { AnyLayer, AnySourceData, FillPaint, GeoJSONSource, GeoJSONSourceRaw, Map } from 'mapbox-gl';
 import { distanceToLong, distanceToLat } from '../services/MapboxGeogeometry';
 
 export type RadiusType = 'absolute' | 'relative';
@@ -33,7 +33,7 @@ export class Circle extends Geogeometry {
       this.center = input.center;
   }
 
-  getGeoJSON():AnySourceData{
+  getGeoJSON():GeoJSONSourceRaw{
     const points = this.edges;
     const long = distanceToLong(this.radius, this.center[1]);
     const lat = distanceToLat(this.radius);
@@ -63,4 +63,6 @@ export class Circle extends Geogeometry {
       }
     };
   }
+
+
 }

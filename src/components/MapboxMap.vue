@@ -222,7 +222,7 @@ export default defineComponent({
     });
 
     watch(props, async p => {
-      updateMap(vmb_map, p as MapboxMapInput, root);
+      updateMap(vmb_map, p as any as MapboxMapInput, root);
     });
 
     return {
