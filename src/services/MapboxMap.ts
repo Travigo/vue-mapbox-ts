@@ -3,10 +3,10 @@ import Deferred from 'my-deferred';
 import { ref, Ref } from 'vue';
 import { ComponentInternalInstance } from 'vue';
 
-import { MapboxMapInput } from '../classes/MapboxMap';
+import { DivStyle, MapboxMapInput } from '../classes/MapboxMap';
 import { duplicateEvents, filterObject } from './VueHelpers';
 
-export const getStyle = (props:any) => ref({
+export const getStyle = (props:any):DivStyle =>({
   height: props.height,
   width: props.width,
   '--zoom-logo': props.zoomLogo >= 0.8 ? props.zoomLogo : 1,
@@ -80,12 +80,21 @@ export const coordsChanged = (newCoords:[number, number], oldCorrds: [number, nu
   newCoords[0] !== oldCorrds[0] || newCoords[1] !== newCoords[1];
 
 
+export const updateStyle = (props:any, style:Ref<DivStyle>):void => {
+  style.value = getStyle(props);
+};
+
+
 export const updateMap = async (vmb_map:Deferred<Map>, props:MapboxMapInput, rootRef: Ref<any>) => {
   const map = await vmb_map.promise;
   const element = rootRef.value;
   const opts = getMapboxOptions(props, element);
   const flyToOptions = filterObject(props.flyToOptions, ['curve', 'maxDuration', 'minZoom', 'screenSpeed', 'speed']);
+  const dimentionOptions = filterObject(props, ['width', 'height']);
   let positionUpdated = false;
+
+  if(dimentionOptions.width || dimentionOptions.height)
+    map.resize();
   
   if(typeof opts.bearing === 'number')
     map.setBearing(opts.bearing);  
