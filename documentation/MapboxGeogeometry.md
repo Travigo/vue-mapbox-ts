@@ -110,3 +110,32 @@ If you need more flexibility you can also draw polygons. All you need is a path 
 #### path
 
 Path of your polygon represented by an array of points. please note that if you want to have a closed Polygon you will need to include your first point as the last one also to make your polygon closed.
+
+
+### Examples
+
+#### Pulsating Circle
+
+To demonstrate the reactiveness of our component, we will create a circle that is pulsating. Lets add the following html
+
+```html
+<mapbox-map :accessToken="myAccessToken">
+  <mapbox-geogeometry-circle
+    :center="[0,0]"
+    :zoom="10"
+    :radius="radius"
+  />
+</mapbox-map>
+```
+
+Now in our setup function we'll write the following
+
+```ts
+let radius = ref(20);
+setInterval(() => {
+  radius.value = 5 + 3*Math.abs(Math.sin(new Date()).getTime()/500)
+}, 30)
+
+return { radius }
+```
+This will make our circle pulsate between a radius of 5 and 8 km. The value is being calculated every 30 seconds. In the same way you can dynamically repaint all reactive properties of geogeometry components
