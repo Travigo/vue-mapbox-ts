@@ -1,6 +1,6 @@
 <template>
 <div :style="style">
-  <div v-if="vmb_map.isResolved" ref="root" :style="style">
+  <div v-if="vmb_map.isResolved" ref="root" :style="{height: '100%', width: '100%' }">
     <slot />
   </div>
   <div v-else>
@@ -15,7 +15,7 @@
 import { defineComponent, getCurrentInstance, onMounted, onUnmounted, provide, ref, watch } from 'vue';
 import mapboxgl, { LngLatBounds, Map } from 'mapbox-gl';
 import Deferred from 'my-deferred';
-import { registerMapEvents, getStyle, mountMap, updateMap, MapEmits } from '../services/MapboxMap';
+import { registerMapEvents, getStyle, mountMap, updateMap, MapEmits, updateStyle } from '../services/MapboxMap';
 import { MapboxMapInput, FlyToOptions } from '../classes/MapboxMap';
 
 export default defineComponent({
@@ -206,7 +206,7 @@ export default defineComponent({
     const vmb_map = new Deferred<Map>();
     provide('vmb_map', vmb_map);
 
-    const style = getStyle(props);
+    const style = ref(getStyle(props));
 
     onMounted(async () => {
       const instance = getCurrentInstance();
@@ -216,14 +216,18 @@ export default defineComponent({
         await registerMapEvents(vmb_map, instance);
     });
 
+    watch(props, async p => {
+      console.log('UPDATED MAP');
+      updateMap(vmb_map, p as any as MapboxMapInput, root);
+      updateStyle(p, style);
+    });
+
     onUnmounted(async () => {
       const map = await vmb_map.promise;
       map.remove();
     });
 
-    watch(props, async p => {
-      updateMap(vmb_map, p as any as MapboxMapInput, root);
-    });
+    
 
     return {
       vmb_map, root, style

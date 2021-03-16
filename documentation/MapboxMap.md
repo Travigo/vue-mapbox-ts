@@ -20,7 +20,20 @@ You may notice that for map style you won't need the complete syntax. In this ca
 
 All parameters from mapbox-gl can also be used to configure your map with the exception of container (which is set to this component). Please see their [documentation](https://docs.mapbox.com/mapbox-gl-js/api/map/#map-parameters)
 
-Please note that the parameter style cannot be used as it is already reserved by Vue to configure css styling. to use a different style for your map use the property *mapStyle*
+Please note that the parameter style cannot be used as it is already reserved by Vue to configure css styling. to use a different style for your map use the property *mapStyle* In addition to the mapbox-gl parameters properties are
+
+| Property     | Type   | Interface    | Default Value | Mandatory             | Reactive              |
+| :----------- | :----- | :----------- | :------------ | --------------------- | --------------------- |
+| height       | string |              | "500px"       | :white_medium_square: | :white_square_button: |
+| width        | string |              | "100%"        | :white_medium_square: | :white_square_button: |
+| flyToOptions | Object | FlyToOptions | {}            | :white_medium_square: | :white_square_button: |
+
+
+#### height
+Height your map should have. Defaults to "500px"
+
+#### width
+The width your map should have. Defaults to "100%"
 
 #### flyToOptions
 

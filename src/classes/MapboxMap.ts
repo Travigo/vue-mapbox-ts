@@ -1,10 +1,16 @@
-import { getMapboxOptions } from '@/services/MapboxMap';
 import { Map, MapboxOptions } from 'mapbox-gl';
-import Deferred from 'my-deferred';
+
+export interface DivStyle {
+  height: string;
+  width: string;
+  '--zoom-logo': number;
+}
 
 export interface MapboxMapInput extends MapboxOptions {
   mapStyle: string;
   accessToken: string;
+  height: string;
+  width: string;
   flyToOptions: FlyToOptions
 }
 
