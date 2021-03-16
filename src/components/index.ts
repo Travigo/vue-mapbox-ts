@@ -11,12 +11,12 @@ import MapboxAttributionControl from './MapboxAttributionControl.vue';
 import MapboxScaleControl from './MapboxScaleControl.vue';
 import MapboxFullscreenControl from './MapboxFullscreenControl.vue';
 import MapboxSourceGeoJson from './MapboxSource.GeoJson.vue';
-import MapboxIcon from './MapboxIcon.vue';
 
 import MapboxGeolocateControl from './MapboxGeolocateControl.vue';
 import MapboxGeogeometryCircle from './MapboxGeogeometryCircle.vue';
 import MapboxGeogeometryPolygon from './MapboxGeogeometryPolygon.vue';
 import MapboxGeogeometryRectangle from './MapboxGeogeometryRectangle.vue';
+import MapboxGeogeometryRaw from './MapboxGeogeometryRaw.vue';
 
 export {
   MapboxGeocoderControl,
@@ -24,7 +24,6 @@ export {
   // MapboxImages,
   // MapboxLayer,
   MapboxMap,
-  MapboxIcon,  
   MapboxMarker,
   MapboxNavigationControl,
   MapboxPopup,
@@ -35,7 +34,8 @@ export {
   MapboxGeolocateControl,
   MapboxGeogeometryCircle,
   MapboxGeogeometryPolygon,
-  MapboxGeogeometryRectangle
+  MapboxGeogeometryRectangle,
+  MapboxGeogeometryRaw
 };
 
 // export default {

@@ -48,11 +48,11 @@ export default defineComponent({
 ```
 
 ## Current Beta State
-This repository is still in it's early stages. So please keep in mind breaking changes might occur. It is not recommended for production use yet.
+This repository is still in it's early stages. 
 
-Also please keep in mind that this project still has limited functionality compared to mapbox-gl on which it builds up. Also not all features already implemented will also be documented here for now.
+I have moved on from the beta tag but please take not that due to the early stage breaking changes might occor on minor version level also.
 
-I will do my best to add functionality and update this documentation when I find the time.
+If you want to contribute please feel free to post Merge Requests. Also report any issues you might find.
 
 ### Reactiveness
 

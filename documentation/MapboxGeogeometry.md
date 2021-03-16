@@ -4,13 +4,13 @@ All Geogeometry components can be supplied with the following optional features.
 
 The unit for distances in Geogeometry Components is always km.
 
-| Property     | Type    | Interface | Default Value | Mandatory |
-| :----------- | :------ | :-------- | :------------ | :-------- |
-| id           | string  |           | *generated*   |           |
-| fillColor    | string  |           | "#4668F2"     |           |
-| antialias    | boolean |           | true          |           |
-| opacity      | number  |           | 0.6           |           |
-| outlineColor | string  |           | undefined     |           |
+| Property     | Type    | Interface | Default Value | Mandatory             | Reactive              |
+| :----------- | :------ | :-------- | :------------ | --------------------- | :-------------------- |
+| id           | string  |           | *generated*   | :white_medium_square: |                       |
+| fillColor    | string  |           | "#4668F2"     | :white_medium_square: | :white_square_button: |
+| antialias    | boolean |           | true          | :white_medium_square: | :white_square_button: |
+| opacity      | number  |           | 0.6           | :white_medium_square: | :white_square_button: |
+| outlineColor | string  |           | undefined     | :white_medium_square: | :white_square_button: |
 
 You can attach Popups to all Geogeometry Components
 
@@ -51,11 +51,11 @@ A circle will be added to your map.
 
 ### Properties
 
-| Property | Type             | Interface | Default Value | Mandatory |
-| :------- | :--------------- | :-------- | :------------ | :-------- |
-| radius   | number           |           |               | *         |
-| center   | [number, number] |           |               | *         |
-| edges    | number           |           | 10            |           |
+| Property | Type             | Interface | Default Value | Mandatory             | Reactive              |
+| :------- | :--------------- | :-------- | :------------ | --------------------- | :-------------------- |
+| radius   | number           |           |               | :white_medium_square: | :white_square_button: |
+| center   | [number, number] |           |               | :white_medium_square: | :white_square_button: |
+| edges    | number           |           | 10            | :white_square_button: | :white_square_button: |
 
 #### radius
 
@@ -76,11 +76,11 @@ Rectangles will be drawn with a specific height and width.
 
 ### Properties
 
-| Property | Type             | Interface | Default Value | Mandatory |
-| :------- | :--------------- | :-------- | :------------ | :-------- |
-| center   | [number, number] |           |               | *         |
-| height   | number           |           |               | *         |
-| width    | number           |           |               | *         |
+| Property | Type             | Interface | Default Value | Mandatory             | Reactive              |
+| :------- | :--------------- | :-------- | :------------ | :-------------------- | --------------------- |
+| center   | [number, number] |           |               | :white_square_button: | :white_square_button: |
+| height   | number           |           |               | :white_square_button: | :white_square_button: |
+| width    | number           |           |               | :white_square_button: | :white_square_button: |
 
 
 #### center
@@ -103,9 +103,9 @@ If you need more flexibility you can also draw polygons. All you need is a path 
 
 ### Properties
 
-| Property | Type               | Interface | Default Value | Mandatory |
-| :------- | :----------------- | :-------- | :------------ | :-------- |
-| path     | [number, number][] |           |               | *         |
+| Property | Type               | Interface | Default Value | Mandatory             | Reactive              |
+| :------- | :----------------- | :-------- | :------------ | :-------------------- | --------------------- |
+| path     | [number, number][] |           |               | :white_square_button: | :white_square_button: |
 
 #### path
 

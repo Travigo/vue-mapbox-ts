@@ -1,6 +1,10 @@
-import { AnySourceData, FillPaint } from 'mapbox-gl';
+import { removeLayerIfPresent } from '../services/MapboxLayer';
+import { AnyLayer, AnySourceData, FillPaint, GeoJSONSource, GeoJSONSourceRaw, Map } from 'mapbox-gl';
+import Deferred from 'my-deferred/dist/src';
 import { Circle } from './GeogeometryCircle';
 import { Polygon } from './GeogeometryPolygon';
+import { Rectangle } from './GeogeometryRectangle';
+import { Raw } from './GeogeometryRaw';
 
 export interface GeogeometryInput {
   id: string;
@@ -9,15 +13,14 @@ export interface GeogeometryInput {
   opacity?: number;
   antialias?: boolean;
 }
-
 export class Geogeometry {
   id: string;
-  fillColor: string;
+  public fillColor: string;
   outlineColor?: string;
   opacity?: number;
   antialias?: boolean;
   
-  static getGeoJSON: () => AnySourceData;
+  static getGeoJSON: () => GeoJSONSourceRaw;
   static center: [number, number];
 
   constructor(input: GeogeometryInput){
@@ -37,7 +40,6 @@ export class Geogeometry {
       this.antialias = input.antialias;
     if(typeof input.opacity === 'number')
       this.opacity = input.opacity;
-
     if(input.outlineColor)
       this.outlineColor = input.outlineColor;
   }
@@ -55,7 +57,17 @@ export class Geogeometry {
       paint['fill-outline-color'] = this.outlineColor;
 
     return paint;
+  }  
+
+  getLayer():AnyLayer {
+    return {
+      'id': this.id,
+      'type': 'fill',
+      'source': this.id,
+      'layout': {},
+      'paint': this.getPaint()
+    }; 
   }
 }
 
-export type GeogeometryType = Circle | Polygon;
+export type GeogeometryType = Circle | Polygon | Rectangle | Raw;

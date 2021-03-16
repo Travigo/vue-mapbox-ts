@@ -2,7 +2,7 @@
 <div>
   <div ref="icon">
     <slot name="icon">
-        <svg display="block" height="41px" width="27px" viewBox="0 0 27 41">
+        <svg display="block" :height="42*scale+'px'" :width="27*scale+'px'" viewBox="0 0 27 41">
           <g fill-rule="nonzero">
             <g transform="translate(3.0, 29.0)" fill="#000000">
               <ellipse opacity="0.04" cx="10.5" cy="5.80029008" rx="10.5" ry="5.25002273">

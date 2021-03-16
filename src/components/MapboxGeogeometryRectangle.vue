@@ -10,7 +10,8 @@ import { Map } from 'mapbox-gl';
 import Deferred from 'my-deferred';
 
 import { Rectangle } from '../classes/GeogeometryRectangle';
-import { updateRectangle } from '../services/MapboxGeogeometryRectangle';
+import { mountGeogeometry, updateGeogeometry } from '../services/MapboxGeogeometry';
+import { filterObject } from '../services/VueHelpers';
 
 let polygonsAdded = 0;
 
@@ -40,31 +41,33 @@ export default defineComponent({
       type: String,      
     },
     opacity: {
-      type: Number
+      type: Number,
+      default: 0.6
     },
     antialias: {
-      type: Boolean
+      type: Boolean,
+      default: true
     }
   },
   setup(props) {
 
     const vmb_map = inject('vmb_map', null) as Deferred<Map> | null;
-    const vmb_rectangle = new Rectangle({
-      id: props.id,
-      width: props.width,
-      height: props.height,
-      center: props.center,
-      fillColor: props.fillColor,
-      outlineColor: props.outlineColor,
-      opacity: props.opacity,
-      antialias: props.antialias
-    });
+    const vmb_rectangle = new Rectangle(filterObject(props, [
+      'id',
+      'width',
+      'height',
+      'center',
+      'fillColor',
+      'outlineColor',
+      'opacity',
+      'antialias'
+    ]));
 
     provide('vmb_rectangle', vmb_rectangle);
 
     onMounted(async () => {
       if(vmb_map)
-        await updateRectangle(vmb_map, vmb_rectangle);
+        await mountGeogeometry(vmb_map, vmb_rectangle);
     });
 
     onUnmounted(async () => {
@@ -76,8 +79,7 @@ export default defineComponent({
 
     watch(props, async () => {
       if(vmb_map){
-        vmb_rectangle.updateOptions(props);
-        await updateRectangle(vmb_map, vmb_rectangle);
+        await updateGeogeometry(props, vmb_map, vmb_rectangle);
       }      
     });
 

@@ -1,5 +1,5 @@
-import { Geogeometry, GeogeometryInput } from './Geogeomerty';
-import { AnySourceData, FillPaint } from 'mapbox-gl';
+import { Geogeometry, GeogeometryInput } from './Geogeometry';
+import { AnySourceData, FillPaint, GeoJSONSourceRaw } from 'mapbox-gl';
 
 export type RadiusType = 'absolute' | 'relative';
 
@@ -26,7 +26,7 @@ export class Polygon extends Geogeometry {
     return [ sum[0] / this.path.length, sum[1]/this.path.length ];
   }
 
-  getGeoJSON():AnySourceData{
+  getGeoJSON():GeoJSONSourceRaw{
     return {
       type: 'geojson',
       data: {

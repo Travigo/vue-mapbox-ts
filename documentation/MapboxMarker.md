@@ -48,17 +48,17 @@ You can also replace mapboxs' default maker by your own. Just put it in the icon
 
 The properties will match mapbox documentations properties as much as possible. Here are the current properties for Markers
 
-| Property          | Type                      | Interface   | Default Value | Reactive           |
-| :---------------- | :------------------------ | :---------- | :------------ | ------------------ |
-| lngLat            | [number, number]          | LngLatInput | [0,0]         | :white_check_mark: |
-| offset            | number; [number, number ] | Offset      | undefined     | :white_check_mark: |
-| anchor            | string                    | Anchor      | "left"        |                    |
-| color             | string                    |             | "#4668F2"     | :white_check_mark: |
-| scale             | number                    |             | 1             |                    |
-| draggable         | boolean                   |             | false         | :white_check_mark: |
-| rotation          | number                    |             | 0             | :white_check_mark: |
-| pitchAlignment    | string                    | Alignment   | "auto"        | :white_check_mark: |
-| rotationAlignment | string                    | Alignment   | "auto"        | :white_check_mark: |
+| Property          | Type                      | Interface   | Default Value | Mandatiry             | Reactive              |
+| :---------------- | :------------------------ | :---------- | :------------ | --------------------- | --------------------- |
+| lngLat            | [number, number]          | LngLatInput | [0,0]         | :white_medium_square: | :white_check_mark:    |
+| offset            | number; [number, number ] | Offset      | undefined     | :white_medium_square: | :white_check_mark:    |
+| anchor            | string                    | Anchor      | "left"        | :white_medium_square: | :white_medium_square: |
+| color             | string                    |             | "#4668F2"     | :white_medium_square: | :white_check_mark:    |
+| scale             | number                    |             | 1             | :white_medium_square: | :white_check_mark:    |
+| draggable         | boolean                   |             | false         | :white_medium_square: | :white_check_mark:    |
+| rotation          | number                    |             | 0             | :white_medium_square: | :white_check_mark:    |
+| pitchAlignment    | string                    | Alignment   | "auto"        | :white_medium_square: | :white_check_mark:    |
+| rotationAlignment | string                    | Alignment   | "auto"        | :white_medium_square: | :white_check_mark:    |
 
 
 ## Events

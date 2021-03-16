@@ -1,6 +1,6 @@
 import { distanceToLat, distanceToLong } from '../services/MapboxGeogeometry';
-import { AnySourceData } from 'mapbox-gl';
-import { Geogeometry, GeogeometryInput } from './Geogeomerty';
+import { AnySourceData, GeoJSONSourceRaw } from 'mapbox-gl';
+import { Geogeometry, GeogeometryInput } from './Geogeometry';
 
 export interface RectangleInput extends GeogeometryInput {
   width: number;
@@ -28,7 +28,7 @@ export class Rectangle extends Geogeometry {
       this.height = input.height;
   }
 
-  getGeoJSON():AnySourceData{
+  getGeoJSON():GeoJSONSourceRaw{
     const long = distanceToLong(this.width, this.center[1]);
     const lat = distanceToLat(this.height);
 

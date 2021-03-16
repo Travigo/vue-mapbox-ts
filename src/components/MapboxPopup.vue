@@ -12,7 +12,7 @@ import Deferred from 'my-deferred/dist/src';
 import LngLatInput from '../classes/LngLatInput';
 import { Circle } from '../classes/GeogeometryCircle';
 import { Polygon } from '../classes/GeogeometryPolygon';
-import { GeogeometryType } from '../classes/Geogeomerty';
+import { GeogeometryType } from '../classes/Geogeometry';
 import { Rectangle } from '../classes/GeogeometryRectangle';
 
 export default defineComponent({

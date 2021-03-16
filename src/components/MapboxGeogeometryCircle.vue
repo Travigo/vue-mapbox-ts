@@ -10,7 +10,8 @@ import { Map } from 'mapbox-gl';
 import Deferred from 'my-deferred';
 
 import { Circle } from '../classes/GeogeometryCircle';
-import { updateCircle } from '../services/MapboxGeogeometryCircle';
+import { mountGeogeometry, updateGeogeometry } from '../services/MapboxGeogeometry';
+import { filterObject } from '../services/VueHelpers';
 
 let circlesAdded = 0;
 
@@ -49,22 +50,29 @@ export default defineComponent({
   setup(props) {
 
     const vmb_map = inject('vmb_map', null) as Deferred<Map> | null;
-    const vmb_circle = new Circle({
-      id: props.id,
-      radius: props.radius,
-      center: props.center,
-      edges: props.edges,
-      fillColor: props.fillColor,
-      outlineColor: props.outlineColor,
-      opacity: props.opacity,
-      antialias: props.antialias
-    });
+    const vmb_circle = new Circle(filterObject(props, [
+      'id',
+      'radius',
+      'center',
+      'edges',
+      'fillColor',
+      'outlineColor',
+      'opacity',
+      'antialias'
+    ]));      
 
     provide('vmb_circle', vmb_circle);
 
     onMounted(async () => {
       if(vmb_map)
-        await updateCircle(vmb_map, vmb_circle);
+        await mountGeogeometry(vmb_map, vmb_circle);
+    });
+
+    
+    watch(props, async () => {
+      if(vmb_map){
+        await updateGeogeometry(props, vmb_map, vmb_circle);
+      }      
     });
 
     onUnmounted(async () => {
@@ -72,14 +80,6 @@ export default defineComponent({
         const map = await vmb_map.promise;
         map.removeLayer(vmb_circle.id); 
       }
-      
-    });
-
-    watch(props, async () => {
-      if(vmb_map){
-        vmb_circle.updateOptions(props);
-        await updateCircle(vmb_map, vmb_circle);
-      }      
     });
 
     return {

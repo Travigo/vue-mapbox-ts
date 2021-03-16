@@ -4,7 +4,7 @@ import { Ref } from 'vue';
 import { ComponentInternalInstance } from 'vue';
 
 import { parentIsMarker } from './MapboxMarker';
-import { GeogeometryType } from '../classes/Geogeomerty';
+import { GeogeometryType } from '../classes/Geogeometry';
 import { parentIsGeogeometry } from './MapboxGeogeometry';
 import { duplicateEvents, filterObject } from './VueHelpers';
 import { MapboxPopupInput } from '../classes/Popup';
