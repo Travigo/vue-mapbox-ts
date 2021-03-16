@@ -7,3 +7,4 @@ import 'mapbox-gl/dist/mapbox-gl.css';
 // Export the install function as default
 export default install;
 export * from './components';
+export * from './classes';

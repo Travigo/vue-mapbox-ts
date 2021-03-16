@@ -56,7 +56,7 @@ export class Circle extends Geogeometry {
           type: 'Feature',
           geometry: {
             type: 'Polygon',
-            coordinates: [path]
+            coordinates: [ path ]
           },
           properties: {}
         }],

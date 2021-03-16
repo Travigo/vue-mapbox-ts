@@ -1,6 +1,6 @@
 import { Geogeometry, GeogeometryInput, GeogeometryType } from '../classes/Geogeometry';
 import { GeoJsonTypes } from 'geojson';
-import { GeoJSONSource, GeoJSONSourceRaw, Map } from 'mapbox-gl';
+import { FillPaint, GeoJSONSource, GeoJSONSourceRaw, Map } from 'mapbox-gl';
 import Deferred from 'my-deferred/dist/src';
 import { filterObject, parentNameContains } from './VueHelpers';
 import { GeoJSON } from 'geojson';
@@ -24,13 +24,7 @@ export const mountGeogeometry = async (vmb_map:Deferred<Map>, vmb_geogeometry: G
   removeSourceIfPresent(geogeometry.id, map);
 
   map.addSource(geogeometry.id, geogeometry.getGeoJSON());
-  map.addLayer({
-    'id': geogeometry.id,
-    'type': 'fill',
-    'source': geogeometry.id,
-    'layout': {},
-    'paint': geogeometry.getPaint()
-  });
+  map.addLayer(geogeometry.getLayer());
 };
 
 export const updateGeogeometry = async (props:Partial<GeogeometryInput>, vmb_map:Deferred<Map>, vmb_geogeometry:GeogeometryType) => {

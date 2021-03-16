@@ -128,13 +128,26 @@ To demonstrate the reactiveness of our component, we will create a circle that i
 </mapbox-map>
 ```
 
-Now in our setup function we'll write the following
+Now in our setup function we'll write the following. For animating there is a little class implemented in vue-mapbox-ts that wraps around the [requestAnimationFrame](https://developer.mozilla.org/en-US/docs/Web/API/window/requestAnimationFrame) to make animating a little easier. Of course you could also write your own function with requestAnimationFrame like in the [example by mapbox](https://docs.mapbox.com/mapbox-gl-js/example/animate-point-along-line/)
 
+The Constructors first argument is the data you want to be present in your animation. In this case we just need the radius.
+
+The second argument is the function itsself. Data will contain the data you injected in the first argument. The timestamp is identical as how you would use it in requestAnimationFrame. One thing to keep in mind is you won't need to call the animation function recursivly like you normally would.
+
+The last argument is the options object. Which currently only contains the options speed. Speed defaults to 1 but you can set it as you like to in- or decrease the speed of your animation.
+
+You then start the animation with animation.start(). There are also the options *pause* *reset* and *stop*
 ```ts
 let radius = ref(20);
-setInterval(() => {
-  radius.value = 5 + 3*Math.abs(Math.sin(new Date()).getTime()/500)
-}, 30)
+const animation = new Animation(
+  { radius },
+  (data, timestamp) => {
+    data.radius.value = 5 + Math.abs(Math.sin(timestamp/1000))*5
+  }, {
+    speed: 1
+  }
+);
+animation.start();
 
 return { radius }
 ```
