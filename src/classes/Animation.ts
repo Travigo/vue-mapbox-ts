@@ -1,5 +1,3 @@
-import { render } from 'vue';
-
 export type RenderFuncInput<DataType> =(timestamp:DOMHighResTimeStamp, data:DataType) => void;
 export type RenderFunc = (t:DOMHighResTimeStamp) => void;
 
