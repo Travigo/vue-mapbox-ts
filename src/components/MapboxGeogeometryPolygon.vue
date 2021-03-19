@@ -71,11 +71,6 @@ export default defineComponent({
         map.removeLayer(vmb_polygon.id);
       }      
     });
-
-    return {
-      vmb_map,
-      vmb_polygon
-    };
   }
 });
 </script>

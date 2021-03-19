@@ -73,10 +73,6 @@ export default defineComponent({
     watch(props, async () => {
     
     });
-
-    return {
-      vmb_geocoder
-    };
   }
 });
 </script>

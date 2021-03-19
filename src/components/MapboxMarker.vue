@@ -113,7 +113,7 @@ export default defineComponent({
       await updateMarker(p, vmb_marker);
     });
 
-    return { vmb_map, vmb_marker, options, icon };
+    return { icon };
   },
 });
 </script>
