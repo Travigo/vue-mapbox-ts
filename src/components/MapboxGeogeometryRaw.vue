@@ -71,10 +71,6 @@ export default defineComponent({
         map.removeLayer(vmb_raw.id);
       }
     });
-
-    return {
-      vmb_map, vmb_raw
-    };
   }
 });
 </script>

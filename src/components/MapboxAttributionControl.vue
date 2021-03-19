@@ -39,10 +39,6 @@ export default defineComponent({
       }      
     });
 
-    return {
-      vmb_attributionControl,
-      vmb_map,
-    };
   }
 });
 </script>

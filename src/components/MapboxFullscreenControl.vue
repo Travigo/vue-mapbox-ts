@@ -33,11 +33,6 @@ export default defineComponent({
         map.removeControl(vmb_fullscreenControl);
       }      
     });
-
-    return {
-      vmb_map,
-      vmb_fullscreenControl
-    };
   }
 });
 </script>

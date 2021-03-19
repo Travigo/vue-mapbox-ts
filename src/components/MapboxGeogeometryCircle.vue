@@ -81,11 +81,6 @@ export default defineComponent({
         map.removeLayer(vmb_circle.id); 
       }
     });
-
-    return {
-      vmb_map,
-      vmb_circle
-    };
   }
 });
 </script>

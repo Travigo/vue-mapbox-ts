@@ -49,10 +49,6 @@ export default defineComponent({
         map.removeControl(vmb_navigationControl);
       }      
     });
-
-    return {
-      vmb_map
-    };
   }
 });
 </script>

@@ -52,11 +52,6 @@ export default defineComponent({
         map.removeControl(vmb_geolocationControl);
       }      
     });
-
-    return {
-      vmb_map,
-      vmb_geolocationControl
-    };
   }
 });
 </script>

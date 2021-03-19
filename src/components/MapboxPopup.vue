@@ -87,7 +87,7 @@ export default defineComponent({
       vmb_popup.remove();
     });
 
-    return { vmb_marker, vmb_popup, popupOptions, content, vmb_map };
+    return { content };
   }
 });
 </script>

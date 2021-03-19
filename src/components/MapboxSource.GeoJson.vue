@@ -29,10 +29,6 @@ export default defineComponent({
         map.addSource;
       }      
     });
-
-    return {
-      vmb_map
-    };
   }
 });
 </script>

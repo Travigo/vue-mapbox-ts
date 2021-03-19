@@ -82,11 +82,6 @@ export default defineComponent({
         await updateGeogeometry(props, vmb_map, vmb_rectangle);
       }      
     });
-
-    return {
-      vmb_map,
-      vmb_rectangle
-    };
   }
 });
 </script>

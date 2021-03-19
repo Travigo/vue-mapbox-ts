@@ -40,11 +40,6 @@ export default defineComponent({
       }
       
     });
-
-    return {
-      vmb_scaleControl,
-      vmb_map
-    };
   }
 });
 </script>
