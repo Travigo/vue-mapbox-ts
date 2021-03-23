@@ -65,7 +65,8 @@ export default defineComponent({
 
       if(vmb_map){
         const map = await vmb_map.promise;
-        map.removeControl(geocoder);
+        if(!(map as any)._removed)
+          map.removeControl(geocoder);
       }
       
     });
