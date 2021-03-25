@@ -1,6 +1,15 @@
 <template>
 <div ref="features">
-  <slot />
+  <slot name="default">
+    <mapbox-geogeometry-fill 
+      :color="fillColor" 
+      :outlineColor="outlineColor" 
+      :opacity="opacity"
+      :antialias="antialias"
+    >
+      <slot name="popup" />
+    </mapbox-geogeometry-fill>
+  </slot>
 </div>
 </template>
 
@@ -52,7 +61,8 @@ export default defineComponent({
   setup(props) {
 
     const vmb_map = inject('vmb_map', null) as Deferred<Map> | null;
-    const vmb_rectangle = new Rectangle(filterObject(props, [
+    const vmb_rectangle = new Deferred<Rectangle>();
+    const rectangle = new Rectangle(filterObject(props, [
       'id',
       'width',
       'height',
@@ -66,20 +76,24 @@ export default defineComponent({
     provide('vmb_rectangle', vmb_rectangle);
 
     onMounted(async () => {
-      if(vmb_map)
-        await mountGeogeometry(vmb_map, vmb_rectangle);
+      if(vmb_map){
+        await mountGeogeometry(vmb_map, rectangle);
+        vmb_rectangle.resolve(rectangle);
+        rectangle.deferred.resolve(rectangle);
+      }
+        
     });
 
     onUnmounted(async () => {
       if(vmb_map){
         const map = await vmb_map.promise;
-        map.removeLayer(vmb_rectangle.id);
+        map.removeLayer(rectangle.id);
       }      
     });
 
     watch(props, async () => {
       if(vmb_map){
-        await updateGeogeometry(props, vmb_map, vmb_rectangle);
+        await updateGeogeometry(props, vmb_map, rectangle);
       }      
     });
   }

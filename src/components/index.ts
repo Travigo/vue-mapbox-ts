@@ -18,6 +18,9 @@ import MapboxGeogeometryPolygon from './MapboxGeogeometryPolygon.vue';
 import MapboxGeogeometryRectangle from './MapboxGeogeometryRectangle.vue';
 import MapboxGeogeometryRaw from './MapboxGeogeometryRaw.vue';
 
+import MapboxGeogeometryFill from './MapboxGeogeometry.Fill.vue';
+import MapboxGeogeometryLine from './MapboxGeogeometry.Line.vue';
+
 export {
   MapboxGeocoderControl,
   // MapboxImage,
@@ -35,7 +38,9 @@ export {
   MapboxGeogeometryCircle,
   MapboxGeogeometryPolygon,
   MapboxGeogeometryRectangle,
-  MapboxGeogeometryRaw
+  MapboxGeogeometryRaw,
+  MapboxGeogeometryFill,
+  MapboxGeogeometryLine
 };
 
 // export default {

@@ -168,7 +168,7 @@ You can also use the Geocoder control as a standalone component in your app. pro
 
 ### Geogeometry
 
-Geogemetry components allow you to easily add simple geometry to your map. Currently those are circle, rectangle and polygon. You can also add popups to geogeometry just like you can with [Markers](#adding-a-marker)
+Geogemetry components allow you to easily add simple geometry to your map. Currently those are circle, rectangle and polygon and raw. You can also add popups to geogeometry. See the full API for more information
 
 
 #### Circle

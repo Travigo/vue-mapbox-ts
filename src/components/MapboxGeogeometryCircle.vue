@@ -1,6 +1,15 @@
 <template>
 <div ref="features">
-  <slot />
+  <slot name="default">
+    <mapbox-geogeometry-fill 
+      :color="fillColor" 
+      :outlineColor="outlineColor" 
+      :opacity="opacity"
+      :antialias="antialias"
+    >
+      <slot name="popup" />
+    </mapbox-geogeometry-fill>
+  </slot>
 </div>
 </template>
 
@@ -50,7 +59,8 @@ export default defineComponent({
   setup(props) {
 
     const vmb_map = inject('vmb_map', null) as Deferred<Map> | null;
-    const vmb_circle = new Circle(filterObject(props, [
+    const vmb_circle = new Deferred<Circle>();
+    const circle = new Circle(filterObject(props, [
       'id',
       'radius',
       'center',
@@ -59,26 +69,30 @@ export default defineComponent({
       'outlineColor',
       'opacity',
       'antialias'
-    ]));      
+    ]));
 
     provide('vmb_circle', vmb_circle);
 
     onMounted(async () => {
-      if(vmb_map)
-        await mountGeogeometry(vmb_map, vmb_circle);
+      if(vmb_map){
+        await mountGeogeometry(vmb_map, circle);
+        vmb_circle.resolve(circle);
+        circle.deferred.resolve(circle);
+      }
+      
     });
 
     
     watch(props, async () => {
       if(vmb_map){
-        await updateGeogeometry(props, vmb_map, vmb_circle);
+        await updateGeogeometry(props, vmb_map, circle);
       }      
     });
 
     onUnmounted(async () => {
       if(vmb_map){
         const map = await vmb_map.promise;
-        map.removeLayer(vmb_circle.id); 
+        map.removeLayer(circle.id); 
       }
     });
   }

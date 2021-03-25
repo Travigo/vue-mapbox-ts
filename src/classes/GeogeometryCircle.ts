@@ -47,6 +47,7 @@ export class Circle extends Geogeometry {
 
       path.push([ this.center[0]+x, this.center[1]+y ]);
     }
+    path.push(path[0]);
 
     return {
       type: 'geojson',

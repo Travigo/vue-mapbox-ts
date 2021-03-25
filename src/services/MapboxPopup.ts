@@ -4,10 +4,11 @@ import { Ref } from 'vue';
 import { ComponentInternalInstance } from 'vue';
 
 import { parentIsMarker } from './MapboxMarker';
-import { GeogeometryType } from '../classes/Geogeometry';
 import { parentIsGeogeometry } from './MapboxGeogeometry';
 import { duplicateEvents, filterObject } from './VueHelpers';
 import { MapboxPopupInput } from '../classes/Popup';
+import { GeogeometryPaintType } from '../classes/Geogeometry.Paint';
+import { GeogeometryType } from '../classes/Geogeometry';
 
 export const attachToMarker = async (instance: any, vmb_marker: Deferred<Marker> | null, popup:Popup) => {
   if(vmb_marker){
@@ -16,11 +17,18 @@ export const attachToMarker = async (instance: any, vmb_marker: Deferred<Marker>
   }
 };
 
-export const attachToGeogeometry = async (vmb_map: Deferred<Map>, vmb_geo: GeogeometryType | null, popup:Popup) => {
-  if(vmb_geo){
-    const map = await vmb_map.promise;
-    map.on('click', vmb_geo.id, e => {
-      const coordinates = vmb_geo.center;
+export const attachToGeogeometry = async (
+  vmb_map: Deferred<Map>, 
+  vmb_geo_paint: Deferred<GeogeometryPaintType>, 
+  popup:Popup
+) => {
+  const paint = await vmb_geo_paint.promise;
+  const map = await vmb_map.promise;
+  if(paint.id){    
+    const geo = await paint.geogeometry.promise;    
+    
+    map.on('click', paint.id, e => {
+      const coordinates = geo.center;
       popup
         .setLngLat(coordinates)
         .addTo(map);
@@ -46,8 +54,8 @@ export const mountPopup = async (
   instance: any | null,
   vmb_map: Deferred<Map>,
   vmb_popup: Popup, 
-  vmb_marker:Deferred<Marker> | null, 
-  vmb_geogeometry: GeogeometryType | null,  
+  vmb_marker:Deferred<Marker> | null,
+  vmb_geogeometry_paint: Deferred<GeogeometryPaintType> | null,  
   content: Ref<any>
 ) => {
   const map = await vmb_map.promise;
@@ -57,8 +65,8 @@ export const mountPopup = async (
 
   if(parentIsMarker(instance))
     await attachToMarker(instance, vmb_marker, popup);
-  else if (parentIsGeogeometry(instance)){
-    await attachToGeogeometry(vmb_map, vmb_geogeometry, popup);
+  else if (parentIsGeogeometry(instance) && vmb_geogeometry_paint){    
+    await attachToGeogeometry(vmb_map, vmb_geogeometry_paint, popup);
   }
   else{
     popup.addTo(map);
