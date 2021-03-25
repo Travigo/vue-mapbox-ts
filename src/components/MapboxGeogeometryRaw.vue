@@ -1,5 +1,16 @@
 <template>
-<div />
+<div ref="features">
+  <slot name="default">
+    <mapbox-geogeometry-fill 
+      :color="fillColor" 
+      :outlineColor="outlineColor" 
+      :opacity="opacity"
+      :antialias="antialias"
+    >
+      <slot name="popup" />
+    </mapbox-geogeometry-fill>
+  </slot>
+</div>
 </template>
 
 <script lang="ts">
@@ -40,7 +51,8 @@ export default defineComponent({
   },
   setup(props) {
     const vmb_map = inject('vmb_map', null) as Deferred<Map> | null;
-    const vmb_raw = new Raw(filterObject(props, [
+    const vmb_raw = new Deferred<Raw>();
+    const raw = new Raw(filterObject(props, [
       'source',
       'id',
       'fillColor',
@@ -53,22 +65,24 @@ export default defineComponent({
 
     onMounted(async () => {
       if(vmb_map){
-        await mountGeogeometry(vmb_map, vmb_raw);
+        await mountGeogeometry(vmb_map, raw);
+        vmb_raw.resolve(raw);
+        raw.deferred.resolve(raw);
       }
-      (window as any).$raw = vmb_raw;
+      
     });
 
     watch(props, async () => {
       if(vmb_map){
-        vmb_raw.updateOptions(props);
-        await updateGeogeometry(props, vmb_map, vmb_raw);
+        raw.updateOptions(props);
+        await updateGeogeometry(props, vmb_map, raw);
       }        
     });
 
     onUnmounted(async () => {
       if(vmb_map){
         const map = await vmb_map.promise;
-        map.removeLayer(vmb_raw.id);
+        map.removeLayer(raw.id);
       }
     });
   }

@@ -5,6 +5,7 @@ import { Circle } from './GeogeometryCircle';
 import { Polygon } from './GeogeometryPolygon';
 import { Rectangle } from './GeogeometryRectangle';
 import { Raw } from './GeogeometryRaw';
+import { provide } from 'vue';
 
 export interface GeogeometryInput {
   id: string;
@@ -19,6 +20,7 @@ export class Geogeometry {
   outlineColor?: string;
   opacity?: number;
   antialias?: boolean;
+  deferred: Deferred<GeogeometryType>;
   
   static getGeoJSON: () => GeoJSONSourceRaw;
   static center: [number, number];
@@ -31,6 +33,9 @@ export class Geogeometry {
     
     if(input.outlineColor)
       this.outlineColor = input.outlineColor;
+    
+    this.deferred = new Deferred<GeogeometryType>();
+    provide('vmb_geogeometry', this.deferred);
   }
 
   updateOptions(input:Partial<GeogeometryInput>){

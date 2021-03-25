@@ -14,6 +14,9 @@ import { Circle } from '../classes/GeogeometryCircle';
 import { Polygon } from '../classes/GeogeometryPolygon';
 import { GeogeometryType } from '../classes/Geogeometry';
 import { Rectangle } from '../classes/GeogeometryRectangle';
+import { GeogeometryFill } from '../classes/Geogeometry.Paint.Fill';
+import { GeogeometryLine } from '../classes/Geogeometry.Paint.Line';
+import { GeogeometryPaintType } from '../classes/Geogeometry.Paint';
 
 export default defineComponent({
   name: 'MapboxPopup',
@@ -59,12 +62,7 @@ export default defineComponent({
 
     const vmb_map = inject('vmb_map', null) as Deferred<Map> | null;
     const vmb_marker: Deferred<Marker> | null = inject('vmb_marker', null);
-    
-    const vmb_circle: Circle | null = inject('vmb_circle', null);
-    const vmb_polygon: Polygon | null = inject('vmb_polygon', null);
-    const vmb_rectangle: Rectangle | null = inject('vmb_rectangle', null);
-
-    const vmb_geometry:GeogeometryType | null = vmb_circle || vmb_polygon || vmb_rectangle || null;
+    const vmb_paint = inject('vmb_geogeometry_paint', null) as Deferred<GeogeometryPaintType> | null;
 
     const popupOptions = getPopupOptions(props);
     const vmb_popup = new mapboxgl.Popup(popupOptions)    
@@ -73,7 +71,7 @@ export default defineComponent({
     onMounted(async () => {
       const instance = getCurrentInstance();
       if(vmb_map && instance){
-        await mountPopup(instance, vmb_map, vmb_popup, vmb_marker, vmb_geometry, content);
+        await mountPopup(instance, vmb_map, vmb_popup, vmb_marker, vmb_paint, content);
         registerPopupEvents(vmb_popup, instance);
       }
         

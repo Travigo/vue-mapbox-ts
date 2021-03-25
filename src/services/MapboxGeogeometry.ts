@@ -24,7 +24,7 @@ export const mountGeogeometry = async (vmb_map:Deferred<Map>, vmb_geogeometry: G
   removeSourceIfPresent(geogeometry.id, map);
 
   map.addSource(geogeometry.id, geogeometry.getGeoJSON());
-  map.addLayer(geogeometry.getLayer());
+  // map.addLayer(geogeometry.getLayer());
 };
 
 export const updateGeogeometry = async (props:Partial<GeogeometryInput>, vmb_map:Deferred<Map>, vmb_geogeometry:GeogeometryType) => {
@@ -32,15 +32,6 @@ export const updateGeogeometry = async (props:Partial<GeogeometryInput>, vmb_map
   const geo = vmb_geogeometry;
   const opts = filterObject(props);  
   const source = (map.getSource(geo.id) as any);
-  
-  if(opts.fillColor && geo.fillColor !== opts.fillColor)
-    map.setPaintProperty(geo.id, 'fill-color', opts.fillColor);
-  if(typeof opts.antialias === 'boolean' && geo.antialias !== opts.antialias)
-    map.setPaintProperty(geo.id, 'fill-antialias', opts.antialias);
-  if(typeof opts.opacity ==='number' && geo.opacity !== opts.opacity)
-    map.setPaintProperty(geo.id, 'fill-opacity', opts.opacity);
-  if(opts.outlineColor && geo.outlineColor !== opts.outlineColor)
-    map.setPaintProperty(geo.id, 'fill-outline-color', opts.outlineColor);  
     
   geo.updateOptions(opts);
   source.setData(geo.getGeoJSON().data);

@@ -1,6 +1,15 @@
 <template>
 <div ref="features">
-  <slot />
+  <slot name="default">
+    <mapbox-geogeometry-fill 
+      :color="fillColor" 
+      :outlineColor="outlineColor" 
+      :opacity="opacity"
+      :antialias="antialias"
+    >
+      <slot name="popup" />
+    </mapbox-geogeometry-fill>
+  </slot>
 </div>
 </template>
 
@@ -42,7 +51,8 @@ export default defineComponent({
   setup(props) {
 
     const vmb_map = inject('vmb_map', null) as Deferred<Map> | null;
-    const vmb_polygon = new Polygon(filterObject(props, [
+    const vmb_polygon = new Deferred<Polygon>();
+    const polygon = new Polygon(filterObject(props, [
       'id',
       'path',
       'fillColor',
@@ -54,21 +64,24 @@ export default defineComponent({
     provide('vmb_polygon', vmb_polygon);
 
     onMounted(async () => {
-      if(vmb_map)
-        await mountGeogeometry(vmb_map, vmb_polygon);
+      if(vmb_map){
+        await mountGeogeometry(vmb_map, polygon);
+        vmb_polygon.resolve(polygon);
+        polygon.deferred.resolve(polygon);
+      }      
     });
 
     watch(props, async () => {
       if(vmb_map){
-        vmb_polygon.updateOptions(props);
-        await updateGeogeometry(props, vmb_map, vmb_polygon);
+        polygon.updateOptions(props);
+        await updateGeogeometry(props, vmb_map, polygon);
       }      
     });
 
     onUnmounted(async () => {
       if(vmb_map){
         const map = await vmb_map.promise;
-        map.removeLayer(vmb_polygon.id);
+        map.removeLayer(polygon.id);
       }      
     });
   }
