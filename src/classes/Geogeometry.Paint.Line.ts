@@ -2,7 +2,7 @@ import { filterObject } from '../services/VueHelpers';
 import { FillLayer, FillPaint, LineLayer, LinePaint, Map } from 'mapbox-gl';
 import Deferred from 'my-deferred';
 import { GeogeometryPaint, GeogeometryPaintInput } from './Geogeometry.Paint';
-import { GeogeometryType } from './Geogeometry';
+import deepEqual from 'fast-deep-equal';
 
 export interface GeogeometryLineInput extends GeogeometryPaintInput {
   blur?: number;
@@ -13,8 +13,16 @@ export interface GeogeometryLineInput extends GeogeometryPaintInput {
   opacity?: number;
   translate?: [number, number];
   offset?: number;
+  dasharray?: number[];
+  gapWidth?: number;
+  gradient?: string;
+  miterLimit?: number;
+  roundLimit?: number;
+  sortKey?: number;
+  translateAnchor?: TranslateAnchor;
 }
 
+export type TranslateAnchor = 'map' | 'viewport';
 
 let linesAdded = 0;
 export class GeogeometryLine extends GeogeometryPaint {
@@ -26,6 +34,13 @@ export class GeogeometryLine extends GeogeometryPaint {
   width?: number;
   translate?: [number, number];
   offset?: number;
+  dasharray?: number[];
+  gapWidth?: number;
+  gradient?: string;
+  miterLimit?: number;
+  roundLimit?: number;
+  sortKey?: number;
+  translateAnchor?: TranslateAnchor;
 
   constructor(input:GeogeometryLineInput){
     super(input);
@@ -48,6 +63,20 @@ export class GeogeometryLine extends GeogeometryPaint {
       this.translate = input.translate;
     if(typeof input.offset === 'number')
       this.offset = input.offset;
+    if(input.dasharray)
+      this.dasharray = input.dasharray;
+    if(typeof input.gapWidth === 'number')
+      this.gapWidth = input.gapWidth;
+    if(input.gradient)
+      this.gradient = input.gradient;
+    if(typeof input.miterLimit === 'number')
+      this.miterLimit = input.miterLimit;
+    if(typeof input.roundLimit === 'number')
+      this.roundLimit = input.roundLimit;
+    if(typeof input.sortKey === 'number')
+      this.sortKey = input.sortKey;
+    if(input.translateAnchor)
+      this.translateAnchor = input.translateAnchor;
   }
 
   getPaint():LinePaint{
@@ -59,7 +88,14 @@ export class GeogeometryLine extends GeogeometryPaint {
       'line-color': this.color,
       'line-width': this.width,
       'line-translate': this.translate,
-      'line-offset': this.offset
+      'line-offset': this.offset,
+      'line-dasharray': this.dasharray,
+      'line-gap-width': this.gapWidth,
+      // 'line-gradient': this.gradient,
+      'line-miter-limit': this.miterLimit,
+      'line-round-limimt': this.roundLimit,
+      'line-sort-key': this.sortKey,
+      'line-translate-anchor': this.translateAnchor,
     } as LinePaint;
 
     const paint = filterObject(paintRaw);    
@@ -76,22 +112,80 @@ export class GeogeometryLine extends GeogeometryPaint {
     const map = await vmb_map.promise;
     const opts = filterObject(props);
     if(this.id){
-      if(opts.color && opts.color !== this.color)
+      if(opts.color && opts.color !== this.color){
         map.setPaintProperty(this.id, 'line-color', opts.color);
-      if(typeof opts.blur === 'number' && opts.blur !== this.blur)
+        this.color = opts.color;        
+      }
+        
+      if(typeof opts.blur === 'number' && opts.blur !== this.blur){
         map.setPaintProperty(this.id, 'line-blur', opts.blur);
-      if(opts.cap && opts.cap !== this.cap)
+        this.blur = opts.blur;
+      }
+        
+      if(opts.cap && opts.cap !== this.cap){
         map.setPaintProperty(this.id, 'line-cap', opts.cap);
-      if(opts.join && opts.join !== this.join)
-        map.setPaintProperty(this.id,'line-join', this.join);
-      if(typeof opts.opacity === 'number' && opts.opacity !== this.opacity)
+        this.cap = opts.cap;
+      }
+        
+      if(opts.join && opts.join !== this.join){
+        map.setPaintProperty(this.id,'line-join', opts.join);
+        this.join = opts.join;
+      }
+        
+      if(typeof opts.opacity === 'number' && opts.opacity !== this.opacity){
         map.setPaintProperty(this.id, 'line-opacity', opts.opacity);
-      if(typeof opts.width === 'number' && opts.width !== this.width)
+        this.opacity = opts.opacity;
+      }
+        
+      if(typeof opts.width === 'number' && opts.width !== this.width){
         map.setPaintProperty(this.id,'line-width', opts.width);
-      if(opts.translate)
+        this.width = opts.width;
+      }
+        
+      if(opts.translate && this.translate && (opts.translate[0] !== this.translate[0] || opts.translate[1] !== this.translate[1])){
         map.setPaintProperty(this.id, 'line-translate', opts.translate);
-      if(typeof opts.offset === 'number')
+        this.translate = opts.translate;
+      }
+        
+      if(typeof opts.offset === 'number' && this.offset !== opts.offset){
         map.setPaintProperty(this.id, 'line-offset', opts.offset);
+        this.offset = opts.offset;
+      }
+        
+      if(opts.dasharray && !deepEqual(this.dasharray, opts.dasharray)){
+        map.setPaintProperty(this.id, 'line-dasharray', opts.dasharray);
+        this.dasharray = opts.dasharray;
+      }
+        
+      if(typeof opts.gapWidth === 'number' && this.gapWidth !== opts.gapWidth){
+        map.setPaintProperty(this.id, 'line-gap-width', opts.gapWidth);
+        this.gapWidth = opts.gapWidth;
+      }
+        
+      // if(opts.gradient && this.gradient !== opts.gradient){
+      //   map.setPaintProperty(this.id, 'line-gradient', opts.gradient);
+      //   this.gradient = opts.gradient;
+      // }
+        
+      if(typeof opts.miterLimit === 'number' && this.miterLimit !== opts.miterLimit){
+        map.setPaintProperty(this.id, 'line-miter-limit', opts.miterLimit);
+        this.miterLimit = opts.miterLimit;
+      }
+        
+      if(typeof opts.roundLimit === 'number' && this.roundLimit !== opts.roundLimit){
+        map.setPaintProperty(this.id, 'line-round-limit', opts.roundLimit);
+        this.roundLimit = opts.roundLimit;
+      }
+        
+      if(typeof opts.sortKey === 'number'){
+        map.setPaintProperty(this.id, 'line-sort-key', opts.sortKey);
+        this.sortKey = opts.sortKey;
+      }
+        
+      if(opts.translateAnchor && this.translateAnchor !== opts.translateAnchor){
+        map.setPaintProperty(this.id, 'line-translate-anchor', opts.translateAnchor);
+        this.translateAnchor = opts.translateAnchor;
+      }
     }
   }
 

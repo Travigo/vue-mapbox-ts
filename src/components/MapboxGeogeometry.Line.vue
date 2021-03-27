@@ -5,9 +5,9 @@
 <script lang="ts">
 import { Geogeometry, GeogeometryType } from '../classes/Geogeometry';
 import { defineComponent, inject, onMounted, onUnmounted, provide, ref, watch } from 'vue';
-import { Map } from 'mapbox-gl';
+import { Map, ImageSource, Visibility } from 'mapbox-gl';
 import Deferred from 'my-deferred/dist/src';
-import { GeogeometryLine, GeogeometryLineInput } from '../classes/Geogeometry.Paint.Line';
+import { GeogeometryLine, GeogeometryLineInput, TranslateAnchor } from '../classes/Geogeometry.Paint.Line';
 import { filterObject } from '../services/VueHelpers';
 
 export default defineComponent({
@@ -38,7 +38,28 @@ export default defineComponent({
     },
     offset: {
       type: Number
-    }
+    },
+    dasharray: {
+      type: Array as () => number[]
+    },
+    gapWidth: {
+      type: Number
+    },
+    // gradient: {
+    //   type: String
+    // },
+    // miterLimit: {
+    //   type: Number
+    // },
+    // roundLimit: {
+    //   type: Number
+    // },
+    // sortKey: {
+    //   type: Number
+    // },
+    // translateAnchor: {
+    //   type: String as () => TranslateAnchor
+    // }
   },
   setup(props) {
     const vmb_geogeometry = inject('vmb_geogeometry', null) as Deferred<GeogeometryType> | null;
@@ -72,6 +93,10 @@ export default defineComponent({
     });
 
     onUnmounted(async () => {
+      if(vmb_map && line.id){
+        const map = await vmb_map.promise;
+        map.removeLayer(line.id);
+      }
     });
 
     return {
