@@ -52,16 +52,26 @@ export class GeogeometryFill extends GeogeometryPaint {
     const map = await vmb_map.promise;
     const opts = filterObject(props);
     if(this.id){
-      if(opts.color && opts.color !== this.color)
+      if(opts.color && opts.color !== this.color){
         map.setPaintProperty(this.id, 'fill-color', opts.color);
-      if(typeof opts.antialias === 'boolean' && opts.antialias !== this.antialias)
+        this.color = opts.color;
+      }
+        
+      if(typeof opts.antialias === 'boolean' && opts.antialias !== this.antialias){
         map.setPaintProperty(this.id, 'fill-antialias', opts.antialias);
-      if(typeof opts.opacity === 'number' && opts.opacity !== this.opacity)
+        this.antialias = opts.antialias;
+      }
+        
+      if(typeof opts.opacity === 'number' && opts.opacity !== this.opacity){
         map.setPaintProperty(this.id, 'fill-opacity', opts.opacity);
-      if(opts.outlineColor && opts.outlineColor !== this.outlineColor)
-        map.setPaintProperty(this.id, 'fill-outline-color', opts.outlineColor);    
+        this.opacity = opts.opacity;
+      }
+        
+      if(opts.outlineColor && opts.outlineColor !== this.outlineColor){
+        map.setPaintProperty(this.id, 'fill-outline-color', opts.outlineColor);
+        this.outlineColor = opts.outlineColor;
+      }
     }
-    
   }
 
   getLayer():FillLayer{

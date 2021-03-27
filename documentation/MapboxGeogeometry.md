@@ -222,7 +222,8 @@ You can also specify a line used instead or in addition to the fill option. Curr
 | width     | number           |                | undefined     | :white_medium_square: | :white_square_button: |
 | translate | [number, number] |                | undefined     | :white_medium_square: | :white_square_button: |
 | offset    | number           |                | undefined     | :white_medium_square: | :white_square_button: |
-
+| dasharray | number[]         |                | undefined     | :white_medium_square: | :white_square_button: |
+| gapWidth  | number           |                | undefined     | :white_medium_square: | :white_square_button: |
 
 
 ## Examples

@@ -63,6 +63,10 @@ export default defineComponent({
     });
 
     onUnmounted(async () => {
+      if(vmb_map && fill.id){
+        const map = await vmb_map.promise;
+        map.removeLayer(fill.id);
+      }
     });
 
     return {
