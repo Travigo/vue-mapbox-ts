@@ -3,7 +3,7 @@
   "logo": {
     "file": "./documentation/logo.png"
   },
-  "version": "0.3.2",
+  "version": "0.3.3",
   "description": "Vue3 Mapbox Framework for Vue.js written in Typescript",
   "author": {
     "name": "Relief Melone",
