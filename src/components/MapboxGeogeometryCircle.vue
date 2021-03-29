@@ -29,7 +29,7 @@ export default defineComponent({
   props: {
     id: {
       type: String,
-      default: `circle-${circlesAdded++}`
+      default: 'circle'
     },
     center: {
       type: Array as any as () => [number, number],
@@ -60,7 +60,9 @@ export default defineComponent({
 
     const vmb_map = inject('vmb_map', null) as Deferred<Map> | null;
     const vmb_circle = new Deferred<Circle>();
-    const circle = new Circle(filterObject(props, [
+    const id = `${props.id}-${circlesAdded++}`;
+
+    const circle = new Circle(filterObject({ ...props, id }, [
       'id',
       'radius',
       'center',

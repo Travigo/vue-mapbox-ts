@@ -29,7 +29,7 @@ export default defineComponent({
   props: {
     id: {
       type: String,
-      default: `polygon-${polygonsAdded++}`
+      default: 'polygon'
     },
     path: {
       type: Array as any as () => Array<[number, number]>,
@@ -52,7 +52,9 @@ export default defineComponent({
 
     const vmb_map = inject('vmb_map', null) as Deferred<Map> | null;
     const vmb_polygon = new Deferred<Polygon>();
-    const polygon = new Polygon(filterObject(props, [
+    const id = `${props.id}-${polygonsAdded++}`;
+
+    const polygon = new Polygon(filterObject({ ...props, id }, [
       'id',
       'path',
       'fillColor',

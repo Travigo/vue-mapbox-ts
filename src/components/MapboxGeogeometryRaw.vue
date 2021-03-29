@@ -33,7 +33,7 @@ export default defineComponent({
     },
     id: {
       type: String,
-      default: `raw-${rawDataAdded++}`
+      default: 'raw'
     },
     fillColor: {
       type: String,
@@ -52,7 +52,9 @@ export default defineComponent({
   setup(props) {
     const vmb_map = inject('vmb_map', null) as Deferred<Map> | null;
     const vmb_raw = new Deferred<Raw>();
-    const raw = new Raw(filterObject(props, [
+    const id = `${props.id}-${rawDataAdded++}`;
+
+    const raw = new Raw(filterObject({ ...props, id }, [
       'source',
       'id',
       'fillColor',
