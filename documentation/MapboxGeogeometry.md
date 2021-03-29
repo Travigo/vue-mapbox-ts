@@ -88,11 +88,12 @@ Rectangles will be drawn with a specific height and width.
 
 ### Properties
 
-| Property | Type             | Interface | Default Value | Mandatory             | Reactive              |
-| :------- | :--------------- | :-------- | :------------ | :-------------------- | --------------------- |
-| center   | [number, number] |           |               | :white_square_button: | :white_square_button: |
-| height   | number           |           |               | :white_square_button: | :white_square_button: |
-| width    | number           |           |               | :white_square_button: | :white_square_button: |
+| Property    | Type             | Interface | Default Value | Mandatory             | Reactive              |
+| :---------- | :--------------- | :-------- | :------------ | :-------------------- | --------------------- |
+| center      | [number, number] |           |               | :white_square_button: | :white_square_button: |
+| height      | number           |           |               | :white_square_button: | :white_square_button: |
+| width       | number           |           |               | :white_square_button: | :white_square_button: |
+| rotationDeg | number           |           |               | :white_square_button: | :white_square_button: |
 
 
 #### center
@@ -106,6 +107,10 @@ Height of your rectangle in km
 #### width
 
 Width of your rectangle in km
+
+#### rotationDeg
+
+Rotation for your rectangle in degrees
 
 
 
