@@ -22,14 +22,14 @@ import { Rectangle } from '../classes/GeogeometryRectangle';
 import { mountGeogeometry, updateGeogeometry } from '../services/MapboxGeogeometry';
 import { filterObject } from '../services/VueHelpers';
 
-let polygonsAdded = 0;
+let rectanglesAdded = 0;
 
 export default defineComponent({
   name: 'MapboxGeogeometryRectangle',
   props: {
     id: {
       type: String,
-      default: `rectangle-${polygonsAdded++}`
+      default: 'rectangle'
     },
     center: {
       type: Array as any as () => [number, number],
@@ -56,13 +56,17 @@ export default defineComponent({
     antialias: {
       type: Boolean,
       default: true
+    },
+    rotationDeg: {
+      type: Number
     }
   },
   setup(props) {
 
     const vmb_map = inject('vmb_map', null) as Deferred<Map> | null;
     const vmb_rectangle = new Deferred<Rectangle>();
-    const rectangle = new Rectangle(filterObject(props, [
+    const id = `${props.id}-${rectanglesAdded++}`;
+    const rectangle = new Rectangle(filterObject({ ...props, id }, [
       'id',
       'width',
       'height',
@@ -70,7 +74,8 @@ export default defineComponent({
       'fillColor',
       'outlineColor',
       'opacity',
-      'antialias'
+      'antialias',
+      'rotationDeg'
     ]));
 
     provide('vmb_rectangle', vmb_rectangle);
