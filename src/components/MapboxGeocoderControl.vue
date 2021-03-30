@@ -22,7 +22,7 @@ import { FitBoundsOptions, FlyToOptions, Map } from 'mapbox-gl';
 import Deferred from 'my-deferred/dist/src';
 
 import { mountGeocoderControl, mountGeocoderEvents } from '../services/MapboxGeocoderControl';
-import { FilterFunction, ExternalGeocoderFunction, RenderFunction, GetItemValueFunction, LocalGeocoderFunction } from '../classes/GeocoderControl';
+import { FilterFunction, ExternalGeocoderFunction, RenderFunction, GetItemValueFunction, LocalGeocoderFunction, GeocoderComponentInstance } from '../classes/GeocoderControl';
 
 export default defineComponent({
   name: 'MapboxGeocoderControl',
@@ -69,7 +69,7 @@ export default defineComponent({
     }) as Ref<any>;
 
     onMounted(async () => {
-      const instance = getCurrentInstance();
+      const instance = getCurrentInstance() as GeocoderComponentInstance;
       if(instance)
         await mountGeocoderControl(vmb_map, vmb_geocoder, props, instance);
       
