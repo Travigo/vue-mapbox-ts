@@ -1,4 +1,4 @@
-import { Marker, Popup, PopupOptions, Map, LngLatLike } from 'mapbox-gl';
+import { Marker, Popup, PopupOptions, Map } from 'mapbox-gl';
 import Deferred from 'my-deferred';
 import { Ref } from 'vue';
 import { ComponentInternalInstance } from 'vue';
@@ -8,7 +8,6 @@ import { parentIsGeogeometry } from './MapboxGeogeometry';
 import { duplicateEvents, filterObject } from './VueHelpers';
 import { MapboxPopupInput } from '../classes/Popup';
 import { GeogeometryPaintType } from '../classes/Geogeometry.Paint';
-import { GeogeometryType } from '../classes/Geogeometry';
 
 export const attachToMarker = async (instance: any, vmb_marker: Deferred<Marker> | null, popup:Popup) => {
   if(vmb_marker){

@@ -1,12 +1,22 @@
 <template>
-<div ref="geocoder"/>
+<div>
+  <div ref="geocoder" v-show="showOriginalGeocoder" />
+  <div ref="custom-input">
+    <slot name="input"
+      :result="geocoderState.result" 
+      :results="geocoderState.results"
+      :error="geocoderState.error"
+      :loading="geocoderState.loading"
+    />
+  </div>
+</div>
 </template>
 
 <script lang="ts">
 import '@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css';
 
-import { defineComponent, inject, onMounted, watch, getCurrentInstance, onUnmounted } from 'vue';
-import MapboxGeocoder, { LngLatLiteral } from '@mapbox/mapbox-gl-geocoder';
+import { defineComponent, Ref, inject, onMounted, watch, getCurrentInstance, onUnmounted, ref } from 'vue';
+import MapboxGeocoder, { LngLatLiteral, Result, Results } from '@mapbox/mapbox-gl-geocoder';
 import { FitBoundsOptions, FlyToOptions, Map } from 'mapbox-gl';
 
 import Deferred from 'my-deferred/dist/src';
@@ -49,6 +59,14 @@ export default defineComponent({
     const vmb_map = inject('vmb_map', null) as Deferred<Map> | null;
   
     const vmb_geocoder = new Deferred<MapboxGeocoder>();
+    const showOriginalGeocoder = ref(true);
+    
+    const geocoderState = ref({
+      result: {} as Result,
+      results: {} as Results,
+      error: null as string | null,
+      loading: null as string | null,
+    }) as Ref<any>;
 
     onMounted(async () => {
       const instance = getCurrentInstance();
@@ -74,6 +92,8 @@ export default defineComponent({
     watch(props, async () => {
     
     });
+
+    return { showOriginalGeocoder, geocoderState };
   }
 });
 </script>

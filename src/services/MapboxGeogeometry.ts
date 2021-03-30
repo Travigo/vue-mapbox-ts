@@ -1,9 +1,7 @@
-import { Geogeometry, GeogeometryInput, GeogeometryType } from '../classes/Geogeometry';
-import { GeoJsonTypes } from 'geojson';
-import { FillPaint, GeoJSONSource, GeoJSONSourceRaw, Map } from 'mapbox-gl';
+import { GeogeometryInput, GeogeometryType } from '../classes/Geogeometry';
+import { Map } from 'mapbox-gl';
 import Deferred from 'my-deferred/dist/src';
 import { filterObject, parentNameContains } from './VueHelpers';
-import { GeoJSON } from 'geojson';
 import { removeLayerIfPresent } from './MapboxLayer';
 import { removeSourceIfPresent } from './MapboxSource';
 
