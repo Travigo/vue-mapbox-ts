@@ -2,8 +2,8 @@ import Deferred from 'my-deferred';
 import mapboxgl, { Map } from 'mapbox-gl';
 import MapboxGeocoder, { GeocoderOptions, Result, Results } from '@mapbox/mapbox-gl-geocoder';
 
-import { filterObject, parentIsInput, parentsNameIs, slotIsNotEmpty } from '../services/VueHelpers';
-import { App, Component, ComponentInternalInstance, ConcreteComponent } from 'vue';
+import { filterObject, parentsNameIs, slotIsNotEmpty } from '../services/VueHelpers';
+import { ComponentInternalInstance } from 'vue';
 
 
 export const mountGeocoderControl = async (vmb_map:Deferred<Map> | null, vmb_geocoder:Deferred<MapboxGeocoder>, props:GeocoderOptions, instance: ComponentInternalInstance):Promise<void> => {

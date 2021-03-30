@@ -1,6 +1,6 @@
 import mapboxgl, { MapboxOptions, Map } from 'mapbox-gl';
 import Deferred from 'my-deferred';
-import { ref, Ref } from 'vue';
+import { Ref } from 'vue';
 import { ComponentInternalInstance } from 'vue';
 
 import { DivStyle, MapboxMapInput } from '../classes/MapboxMap';

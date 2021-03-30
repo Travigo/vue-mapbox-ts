@@ -1,5 +1,5 @@
 import { NavigationControl, Map } from 'mapbox-gl';
-import Deferred from 'my-deferred/dist/src';
+import Deferred from 'my-deferred';
 import { NavigationControlOptions, NavigationControlPosition } from '../classes/NavigationControll';
 
 export const getNavigationControlOptions = (props:Partial<NavigationControlOptions>):Partial<NavigationControlOptions> => {
