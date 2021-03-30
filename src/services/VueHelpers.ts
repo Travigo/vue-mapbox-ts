@@ -20,6 +20,15 @@ export const filterObject = <T>(object:T, keys?:(keyof T)[], blacklist:Array<any
   return result;
 };
 
+export const parentIsInput = (instance:any):boolean => {
+  if(!instance.parent)
+    return false;
+  if(instance.parent)
+    return true;
+
+  return false;
+};
+
 export const parentsNameIs = (instance:any, parentName: string) => {
   if(!instance.parent)
     return false;

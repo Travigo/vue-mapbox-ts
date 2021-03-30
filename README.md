@@ -47,12 +47,12 @@ export default defineComponent({
 })
 ```
 
-## Current Beta State
+## Current state of development
 This repository is still in it's early stages. 
 
-I have moved on from the beta tag but please take not that due to the early stage breaking changes might occor on minor version level also.
+While the API is pretty stable by now please note that breaking changes might still occur on minor version updates (like 0.3.x -> 0.4.0) until the major version 1 is released.
 
-If you want to contribute please feel free to post Merge Requests. Also report any issues you might find.
+If you want to contribute please feel free to post Merge Requests. Also report any issues you might find [here](https://gitlab.com/relief-melone/vue-mapbox-ts/-/issues)
 
 ### Reactiveness
 

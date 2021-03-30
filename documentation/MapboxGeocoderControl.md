@@ -15,6 +15,23 @@ You can also use the Geocoder control as a standalone component in your app. pro
 ```html
 <mapbox-geocoder-control :accessToken="myAccessToken" @result="handleResult" />
 ```
+## Custom Input
+
+As the default design of the geocoder control from mapbox does not integrate well with all designs you can also use your own custom input
+
+**Geocoder Control with custom input**
+```html
+<mapbox-geocoder-control :accessToken="myAccessToken" @result="handleResult">
+  <template v-slot:input="{result, results}">
+    <input>
+    <div>{{ result ? result.place_name : 'no result' }}</div>
+    <div>{{ results.features ? results.features.map(f => f.place_name) : 'no results' }}</div>
+</mapbox-geocoder-control>
+```
+Available apart from result and results is also error and loading. Also take a look at the [official documentation](https://github.com/mapbox/mapbox-gl-geocoder/blob/master/API.md#on) of mapbox geocoder for more details.
+
+This should also work for frameworks like vuetify as the geocoder control will search for any input down the slot and attach the geocoder to it.
+
 
 ## Properties
 
