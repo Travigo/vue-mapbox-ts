@@ -6,6 +6,8 @@ The goal is that it is easy to use and to have the look and feel of a vue compon
 
 For that reason additional components like Geogeometry have been added to add simple geometry like circles rectangles or polygons to your map without the need of an understanding of geoJSON
 
+Current Minified size: ~35KB
+
 ## Installation
 
 To install Vue Mapbox TS use npm
