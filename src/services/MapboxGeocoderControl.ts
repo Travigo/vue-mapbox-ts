@@ -3,7 +3,6 @@ import mapboxgl, { Map } from 'mapbox-gl';
 import MapboxGeocoder, { GeocoderOptions, Result, Results } from '@mapbox/mapbox-gl-geocoder';
 
 import { filterObject, parentsNameIs, slotIsNotEmpty } from '../services/VueHelpers';
-import { ComponentInternalInstance } from 'vue';
 import { GeocoderComponentInstance } from '../classes/GeocoderControl';
 
 export const mountGeocoderControl = async (vmb_map:Deferred<Map> | null, vmb_geocoder:Deferred<MapboxGeocoder>, props:GeocoderOptions, instance: GeocoderComponentInstance):Promise<void> => {

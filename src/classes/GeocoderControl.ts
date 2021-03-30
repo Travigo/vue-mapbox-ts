@@ -1,5 +1,5 @@
 import { Result, Results } from '@mapbox/mapbox-gl-geocoder';
-import { ComponentInternalInstance } from '@vue/runtime-core';
+import { ComponentInternalInstance } from 'vue';
 import { FeatureCollection, GeoJsonProperties, Geometry } from 'geojson';
 
 export type FilterFunction = (r:Result) => boolean;
