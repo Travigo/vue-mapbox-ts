@@ -1,10 +1,12 @@
 # Vue Mapbox TS
 
-This project has been created to bring a modern vue component library utilizing TypeScript and Vue3.
+This project has been created to bring a modern mapbox component library utilizing TypeScript and Vue3.
 
-The goal is that it is easy to use and to have the look and feel of a vue component. This should also be possible if you are not completely familiar with Mapboxs' 'mapbox-gl'-API.
+The Framework is highly reactive to ensure interacting with the components is possible in the way you are used to in vue.
 
-For that reason additional components like Geogeometry have been added to add simple geometry like circles rectangles or polygons to your map without the need of an understanding of geoJSON
+Working with vue-mapbox-ts is easy even if you are not completely familiar with Mapboxs' 'mapbox-gl'-API.
+
+To make use even easier additional components like Geogeometry have been added to add simple geometry like circles rectangles or polygons to your map without the need of a deep understanding of geoJSON
 
 Current Minified size: ~35KB
 
@@ -50,19 +52,9 @@ export default defineComponent({
 ```
 
 ## Current state of development
-This repository is still in it's early stages. 
-
 While the API is pretty stable by now please note that breaking changes might still occur on minor version updates (like 0.3.x -> 0.4.0) until the major version 1 is released.
 
 If you want to contribute please feel free to post Merge Requests. Also report any issues you might find [here](https://gitlab.com/relief-melone/vue-mapbox-ts/-/issues)
-
-### Reactiveness
-
-Making the components themselves reactive is a work in progress. While it is no problem to add and remove components dyanamically a lot of them currently don't react to property changes.
-
-The current focus is on making the components reactive. While mapbox-gl provides some methods to change some parameters during runtime for others no methods have been implemented (e.g. Marker colors). Making those reactive is a bigger challenge.
-
-Because of this I will first focus on making the properties with methods provided by mapbox-gl reactive and then look for ways to get as much parameters reactive with no provided methods. I will update the readme for the specific components with information about which properties have been made reactive at the moment.
 
 ## Use
 

@@ -3,8 +3,8 @@
   "logo": {
     "file": "./documentation/logo.png"
   },
-  "version": "0.3.5",
-  "description": "Vue3 Mapbox Framework for Vue.js written in Typescript",
+  "version": "0.3.6",
+  "description": "Highly reactive Vue3 Mapbox Framework for Vue.js written in Typescript",
   "author": {
     "name": "Relief Melone",
     "email": "relief.melone@gmail.com"
@@ -84,14 +84,16 @@
     "rollup": "rollup.config.js",
     "createRollup": "util/write.rollup.config"
   },
-  "es2015": "lib/index.min.js",
+  "es2015": "lib/index.esm.js",
   "homepage": "https://gitlab.com/relief-melone/vue-mapbox-ts",
   "keywords": [
     "vue3",
     "mapbox",
     "typescript",
     "vue.js",
-    "vue"
+    "vue",
+    "mapbox-gl",
+    "geocoding"
   ],
   "license": "MIT",
   "publishConfig": {
