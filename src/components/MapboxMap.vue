@@ -102,6 +102,7 @@ export default defineComponent({
     },
     scrollZoom: {
       type: [ Boolean, Object ],
+      default: true
     },
     boxZoom: {
       type: Boolean,
