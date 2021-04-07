@@ -188,14 +188,19 @@ export const MapEmits = [
   'update:center',
   'update:zoom',
   'update:pitch',
+  'update:bearing',
+  'loaded'
 ];
 
 export const registerMapEvents = async (vmb_map:Deferred<Map>, instance:ComponentInternalInstance) => {
   const map = await vmb_map.promise;
   duplicateEvents<Map>(map, instance, MapGlEvents);
   
+  instance.emit('loaded', map);
+  
   map.on('zoomend', evt => {
     instance.emit('update:zoom', evt.target.getZoom());
+    instance.emit('update:center', evt.target.getCenter().toArray());
   });
 
   map.on('dragend', evt => {
@@ -204,6 +209,10 @@ export const registerMapEvents = async (vmb_map:Deferred<Map>, instance:Componen
 
   map.on('pitchend', evt => {
     instance.emit('update:pitch', evt.target.getPitch());
+  });
+
+  map.on('rotateend', evt => {
+    instance.emit('update:bearing', evt.target.getBearing());
   });
 
 };

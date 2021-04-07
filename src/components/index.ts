@@ -10,6 +10,8 @@ import MapboxPopup from './MapboxPopup.vue';
 import MapboxAttributionControl from './MapboxAttributionControl.vue';
 import MapboxScaleControl from './MapboxScaleControl.vue';
 import MapboxFullscreenControl from './MapboxFullscreenControl.vue';
+import MapboxDrawControl from './MapboxDrawControl.vue';
+
 import MapboxSourceGeoJson from './MapboxSource.GeoJson.vue';
 
 import MapboxGeolocateControl from './MapboxGeolocateControl.vue';
@@ -33,6 +35,7 @@ export {
   MapboxAttributionControl,
   MapboxScaleControl,
   MapboxFullscreenControl,
+  MapboxDrawControl,
   MapboxSourceGeoJson,
   MapboxGeolocateControl,
   MapboxGeogeometryCircle,

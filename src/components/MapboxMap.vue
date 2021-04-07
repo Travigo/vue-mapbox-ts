@@ -12,7 +12,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, getCurrentInstance, onMounted, onUnmounted, provide, ref, watch } from 'vue';
+import { defineComponent, getCurrentInstance, onMounted, onUnmounted, provide, reactive, ref, watch } from 'vue';
 import mapboxgl, { LngLatBounds, Map } from 'mapbox-gl';
 import Deferred from 'my-deferred';
 import { registerMapEvents, getStyle, mountMap, updateMap, MapEmits, updateStyle } from '../services/MapboxMap';
@@ -60,7 +60,6 @@ export default defineComponent({
     },
     hash: {
       type: Boolean,
-      default: false,
     },
     interactive: {
       type: Boolean,
@@ -68,23 +67,19 @@ export default defineComponent({
     },
     bearingSnap: {
       type: Number,
-      default: 7,
     },
     pitchWithRotate: {
       type: Boolean,
-      default: true,
+      default: true
     },
     clickTolerance: {
       type: Number,
-      default: 3,
     },
     attributionControl: {
       type: Boolean,
-      default: true,
     },
     customAttribution: {
       type: Array as () => string | Array<any> | null,
-      default: null,
     },
     logoPosition: {
       type: String,
@@ -92,78 +87,61 @@ export default defineComponent({
     },
     failIfMajorPerformanceCaveat: {
       type: Boolean,
-      default: false,
     },
     preserveDrawingBuffer: {
       type: Boolean,
-      default: false,
     },
     antialias: {
       type: Boolean,
-      default: false,
     },
     refreshExpiredTiles: {
       type: Boolean,
-      default: true,
     },
     maxBounds: {
       type: Array as () => LngLatBounds | Array<any>,
-      default: undefined,
     },
     scrollZoom: {
       type: [ Boolean, Object ],
-      default: true,
     },
     boxZoom: {
       type: Boolean,
-      default: true,
     },
     dragRotate: {
       type: Boolean,
-      default: true,
+      default: true
     },
     dragPan: {
       type: [Object, Boolean] as any as () => boolean | Record<string, any>,
-      default: true,
     },
     keyboard: {
       type: Boolean,
-      default: true,
     },
     doubleClickZoom: {
       type: Boolean,
-      default: true,
     },
     touchZoomRotate: {
       type: [Boolean, Object] as any as () => boolean | Record<string, any>,
-      default: true,
     },
     trackResize: {
       type: Boolean,
-      default: true,
     },
     center: {
       default: () => [ 0, 0 ] as [number, number],
     },
     zoom: {
       type: Number,
-      default: 0,
     },
     bearing: {
       type: Number,
-      default: 0,
     },
     pitch: {
       type: Number,
-      default: 0,
     },
     bounds: {
       type: Array as any as () => LngLatBounds | Array<number>,
-      default: undefined,
     },
     fitBoundsOptions: {
       type: Object,
-      default: null,
     },
     renderWorldCopies: {
       type: Boolean,
@@ -217,7 +195,6 @@ export default defineComponent({
     });
 
     watch(props, async p => {
-      console.log('UPDATED MAP');
       updateMap(vmb_map, p as any as MapboxMapInput, root);
       updateStyle(p, style);
     });
