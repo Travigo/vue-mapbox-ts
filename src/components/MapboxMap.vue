@@ -12,7 +12,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, getCurrentInstance, onMounted, onUnmounted, provide, reactive, ref, watch } from 'vue';
+import { defineComponent, getCurrentInstance, onMounted, onUnmounted, provide, ref, watch } from 'vue';
 import mapboxgl, { LngLatBounds, Map } from 'mapbox-gl';
 import Deferred from 'my-deferred';
 import { registerMapEvents, getStyle, mountMap, updateMap, MapEmits, updateStyle } from '../services/MapboxMap';
@@ -77,6 +77,7 @@ export default defineComponent({
     },
     attributionControl: {
       type: Boolean,
+      default: true
     },
     customAttribution: {
       type: Array as () => string | Array<any> | null,
