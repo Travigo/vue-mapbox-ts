@@ -9,7 +9,7 @@ export const getAttributionControlOptions = (props:AttributionControllOptions):A
 
 export const mountAttributionControl = async (
   vmb_map: Deferred<Map>, 
-  vmb_attributionControl: AttributionControl
+  vmb_attributionControl: AttributionControl,
 ) => {
   const map = await vmb_map.promise;
   map.addControl(vmb_attributionControl);

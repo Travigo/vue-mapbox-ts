@@ -21,5 +21,3 @@ export interface FlyToOptions {
   screenSpeed?: number;
   maxDuration?: number;
 }
-
-// export type MapEvents = 'click' | 'contextmenu' |;

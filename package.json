@@ -3,7 +3,7 @@
   "logo": {
     "file": "./documentation/logo.png"
   },
-  "version": "0.3.6",
+  "version": "0.4.0",
   "description": "Highly reactive Vue3 Mapbox Framework for Vue.js written in Typescript",
   "author": {
     "name": "Relief Melone",
@@ -27,6 +27,7 @@
     "lib"
   ],
   "dependencies": {
+    "@mapbox/mapbox-gl-draw": "^1.2.2",
     "@mapbox/mapbox-gl-geocoder": "^4.7.0",
     "@types/chai": "^4.2.11",
     "@types/geojson": "^7946.0.7",
@@ -46,6 +47,7 @@
     "@rollup/plugin-node-resolve": "^11.2.0",
     "@rollup/plugin-replace": "^2.4.1",
     "@rollup/plugin-url": "^6.0.0",
+    "@types/mapbox__mapbox-gl-draw": "^1.2.1",
     "@typescript-eslint/eslint-plugin": "^2.33.0",
     "@typescript-eslint/parser": "^2.33.0",
     "@vue/cli-plugin-eslint": "~4.5.0",

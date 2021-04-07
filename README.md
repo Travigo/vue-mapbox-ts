@@ -160,6 +160,32 @@ You can also use the Geocoder control as a standalone component in your app. pro
 
 [Full API of mapbox-geocoder-control](https://gitlab.com/relief-melone/vue-mapbox-ts/-/tree/master/documentation/MapboxGeocoderControl.md)
 
+### Mapbox Draw Control
+
+You can also add a drawing control to add new features to your map. Here is an example where after drawing a polygon a geogeometry polygon will be added dynamically.
+
+```html
+<mapbox-map :accessToken="myAccessToken">
+  <mapbox-draw-control @create="addPolygon" />    
+  <mapbox-geogeometry-polygon v-for="path in polygons" :path="path">
+</mapbox-map>
+```
+
+**setup-section**
+```ts
+const polygons = ref([]) as Ref<[number,number][][]>
+const addPolygon = (poly:any) => {
+  polygons.value.push(poly.features[0].geometry.coordinates[0])
+}
+
+return {
+  polygons,
+  addPolygon
+}
+```
+
+[Full API of mapbox-draw-control](https://gitlab.com/relief-melone/vue-mapbox-ts/-/tree/master/documentation/MapboxDrawControl.md)
+
 ### Geogeometry
 
 Geogemetry components allow you to easily add simple geometry to your map. Currently those are circle, rectangle and polygon and raw. You can also add popups to geogeometry. See the full API for more information
@@ -179,3 +205,4 @@ To add a circle to your map add the component to it. *center* and *radius* are m
 ```
 
 [Full API of mapbox-geogeometry](https://gitlab.com/relief-melone/vue-mapbox-ts/-/tree/master/documentation/MapboxGeogeometry.md)
+
