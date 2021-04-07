@@ -65,6 +65,9 @@ All Events from mapbox-gl are also emitted by mapbox-map. See their [documentati
 
 Additionally events are emitted to enable updating your properties
 
+
+#### loaded
+Loaded will be emitted after the map is mounted and returns the mapbox map object itsself. Can be used to further manipulate the map directly
 #### update:center
 Will be emitted on dragend and contains the new center of the map in the form of [number, number]
 
