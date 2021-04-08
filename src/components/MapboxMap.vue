@@ -114,6 +114,7 @@ export default defineComponent({
     },
     dragPan: {
       type: [Object, Boolean] as any as () => boolean | Record<string, any>,
+      default: true
     },
     keyboard: {
       type: Boolean,
