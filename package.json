@@ -3,7 +3,7 @@
   "logo": {
     "file": "./documentation/logo.png"
   },
-  "version": "0.4.1",
+  "version": "0.5.0",
   "description": "Highly reactive Vue3 Mapbox Framework for Vue.js written in Typescript",
   "author": {
     "name": "Relief Melone",
@@ -76,6 +76,7 @@
     "rollup-plugin-vue": "^6.0.0-beta.10",
     "sass": "^1.26.5",
     "sass-loader": "^8.0.2",
+    "tslib": "^2.2.0",
     "typescript": "~3.9.3",
     "yarn": "^1.22.10"
   },

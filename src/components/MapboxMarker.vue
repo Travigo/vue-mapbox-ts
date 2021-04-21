@@ -58,7 +58,7 @@ export default defineComponent({
     },
     anchor: {
       type: String as () => Anchor,
-      default: () => 'left',
+      default: () => 'bottom',
     },
     color: {
       type: String,

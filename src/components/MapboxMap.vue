@@ -1,6 +1,6 @@
 <template>
-<div :style="style">
-  <div v-if="vmb_map.isResolved" ref="root" :style="{height: '100%', width: '100%' }">
+<div :style="style" ref="root" class="mapbox-map">
+  <div v-if="vmb_map.isResolved" ref="mapContainer" class="map-container" :style="{ height, width }">
     <slot />
   </div>
   <div v-else>
@@ -12,11 +12,12 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, getCurrentInstance, onMounted, onUnmounted, provide, ref, watch } from 'vue';
-import mapboxgl, { LngLatBounds, Map } from 'mapbox-gl';
+import { defineComponent, getCurrentInstance, onMounted, onUnmounted, provide, ref, watch, UnwrapRef, Ref } from 'vue';
+import mapboxgl, { LngLatBounds, LngLatLike, Map } from 'mapbox-gl';
 import Deferred from 'my-deferred';
-import { registerMapEvents, getStyle, mountMap, updateMap, MapEmits, updateStyle } from '../services/MapboxMap';
-import { MapboxMapInput, FlyToOptions } from '../classes/MapboxMap';
+import { registerMapEvents, getStyle, mountMap, MapEmits, updateStyle, mapWatcher } from '../services/MapboxMap';
+import { FlyToOptions } from '../classes/MapboxMap';
+import vmodel from '../services/helpers/vmodel';
 
 export default defineComponent({
   name: 'MapboxMap',
@@ -28,7 +29,7 @@ export default defineComponent({
     },
     height: {
       type: String,
-      default: '500px'
+      default: '100%'
     },
     width: {
       type: String,
@@ -99,7 +100,7 @@ export default defineComponent({
       type: Boolean,
     },
     maxBounds: {
-      type: Array as () => LngLatBounds | Array<any>,
+      type: [Array, Object] as any as () => LngLatLike,
     },
     scrollZoom: {
       type: [ Boolean, Object ],
@@ -180,37 +181,51 @@ export default defineComponent({
     },
     flyToOptions: {
       default: () => ({ } as FlyToOptions)
+    },
+    autoResize: {
+      type: Boolean,
+      default: false
     }
   },
-  setup: (props:any) => {
-    const root = ref(null);
+  setup: (props) => {
+    const root:Ref<null|HTMLElement> = ref(null);
+    const mapContainer:Ref<null|HTMLElement> = ref(null);
     const vmb_map = new Deferred<Map>();
     provide('vmb_map', vmb_map);
 
+    const i_center = vmodel<LngLatLike, UnwrapRef<LngLatLike>>(props, 'update:center', 'center');    
+    const i_flyToOptions = vmodel<FlyToOptions, UnwrapRef<FlyToOptions>> (props, 'update:flyToOptions', 'flyToOptions');
+
     const style = ref(getStyle(props));
+
+    watch(props, async p => {
+      updateStyle(p, style);
+    });
+
+    mapWatcher(vmb_map, props, { center: i_center, flyToOptions: i_flyToOptions });
+    
 
     onMounted(async () => {
       const instance = getCurrentInstance();
       mapboxgl.accessToken = props.accessToken;
-      mountMap(props, vmb_map, root);
+      mountMap(props as any, vmb_map, mapContainer, root);
       if(instance)
         await registerMapEvents(vmb_map, instance);
     });
-
-    watch(props, async p => {
-      updateMap(vmb_map, p as any as MapboxMapInput, root);
-      updateStyle(p, style);
-    });
+    
 
     onUnmounted(async () => {
       const map = await vmb_map.promise;
       map.remove();
     });
 
-    
-
     return {
-      vmb_map, root, style
+      vmb_map,
+      root,
+      style,
+      i_center,
+      i_flyToOptions,
+      mapContainer
     };
   },
 });

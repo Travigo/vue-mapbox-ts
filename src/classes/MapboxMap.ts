@@ -1,4 +1,5 @@
-import { Map, MapboxOptions } from 'mapbox-gl';
+import { UnwrapRef } from 'vue';
+import { MapboxOptions } from 'mapbox-gl';
 
 export interface DivStyle {
   height: string;
@@ -11,7 +12,8 @@ export interface MapboxMapInput extends MapboxOptions {
   accessToken: string;
   height: string;
   width: string;
-  flyToOptions: FlyToOptions
+  flyToOptions: UnwrapRef<FlyToOptions>;
+  autoResize: boolean;
 }
 
 export interface FlyToOptions {
@@ -21,3 +23,4 @@ export interface FlyToOptions {
   screenSpeed?: number;
   maxDuration?: number;
 }
+

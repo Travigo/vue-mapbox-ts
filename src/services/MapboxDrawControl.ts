@@ -3,7 +3,7 @@ import MapboxDraw, { DrawEvent } from '@mapbox/mapbox-gl-draw';
 import Deferred from 'my-deferred/dist/src';
 import { DrawControlOptions } from '../classes/DrawControl';
 import { filterObject } from './VueHelpers';
-import { ComponentInternalInstance } from '@vue/runtime-core';
+import { ComponentInternalInstance } from 'vue';
 
 export const getDrawControlOptions = (props:DrawControlOptions):DrawControlOptions => 
   filterObject(props, ['position']);
