@@ -22,11 +22,12 @@ All parameters from mapbox-gl can also be used to configure your map with the ex
 
 Please note that the parameter style cannot be used as it is already reserved by Vue to configure css styling. to use a different style for your map use the property *mapStyle* In addition to the mapbox-gl parameters properties are
 
-| Property     | Type   | Interface    | Default Value | Mandatory             | Reactive              |
-| :----------- | :----- | :----------- | :------------ | --------------------- | --------------------- |
-| height       | string |              | "500px"       | :white_medium_square: | :white_square_button: |
-| width        | string |              | "100%"        | :white_medium_square: | :white_square_button: |
-| flyToOptions | Object | FlyToOptions | {}            | :white_medium_square: | :white_square_button: |
+| Property     | Type    | Interface    | Default Value | Mandatory             | Reactive              |
+| :----------- | :------ | :----------- | :------------ | --------------------- | --------------------- |
+| height       | string  |              | "500px"       | :white_medium_square: | :white_square_button: |
+| width        | string  |              | "100%"        | :white_medium_square: | :white_square_button: |
+| flyToOptions | Object  | FlyToOptions | {}            | :white_medium_square: | :white_square_button: |
+| auto-resize  | boolean |              | false         | :white_medium_square: | :white_medium_square: |
 
 
 #### height
@@ -47,6 +48,10 @@ An example to implement would be
   :flyToOptions="{ maxDuration: 2000, speed: 1.2 }"
 />
 ```
+
+#### auto-resize
+
+Auto Resize will enable the map to resize when it's container has been changed. This will not only be triggered if you actively change the width or height properties but also if you have set a relative width and the parent containers dimensions change
 
 ### Currently Reactive
 - center

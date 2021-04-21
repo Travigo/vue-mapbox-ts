@@ -1,10 +1,13 @@
-import mapboxgl, { MapboxOptions, Map } from 'mapbox-gl';
+import { positionProps, positionPropsUnwrapped, reactiveProps, regularProps } from '../classes/map';
+import mapboxgl, { MapboxOptions, Map, FlyToOptions, LngLatLike } from 'mapbox-gl';
 import Deferred from 'my-deferred';
-import { Ref } from 'vue';
+import { Ref, toRef, toRefs, UnwrapRef, watch } from 'vue';
 import { ComponentInternalInstance } from 'vue';
 
 import { DivStyle, MapboxMapInput } from '../classes/MapboxMap';
 import { duplicateEvents, filterObject } from './VueHelpers';
+import conditionalWatch from './helpers/conditionalWatch';
+import resizeListener from './MapboxMap/resizeListener';
 
 export const getStyle = (props:any):DivStyle =>({
   height: props.height,
@@ -65,15 +68,25 @@ export const getMapboxOptions = (props: MapboxMapInput, el: any): MapboxOptions 
 
 };
 
-export const mountMap = (props:MapboxMapInput, vmb_map:Deferred<Map>, rootRef: Ref<any>) =>
+export const mountMap = (props:MapboxMapInput, vmb_map:Deferred<Map>, mapContainerRef: Ref<any>, rootContainerRef: Ref<any>) =>
   (() => {
-    const element = rootRef.value;
+    const element = mapContainerRef.value;
     const mapOptions = getMapboxOptions(props, element);
     const map = new mapboxgl.Map(mapOptions);
 
     map.on('load', () => {
       vmb_map.resolve(map);
     });
+
+    if(props.autoResize){
+      const containerSize = resizeListener(rootContainerRef);
+      watch(containerSize, () => {
+        map.resize();
+      });
+    }
+      
+
+
   })();
 
 export const coordsChanged = (newCoords:[number, number], oldCorrds: [number, number]) => 
@@ -84,57 +97,70 @@ export const updateStyle = (props:any, style:Ref<DivStyle>):void => {
   style.value = getStyle(props);
 };
 
+export async function mapWatcher(vmb_map:Deferred<Map>, props:Record<string,any>, propsReactive: reactiveProps){
+  const {
+    width,
+    height,
+    bearing,
+    maxBounds,
+    maxPitch,
+    minZoom,
+    maxZoom,
+    minPitch,
+    pitch,
+    renderWorldCopies,
+    zoom,
+  } = toRefs(props);
 
-export const updateMap = async (vmb_map:Deferred<Map>, props:MapboxMapInput, rootRef: Ref<any>) => {
+  const { center, flyToOptions } = propsReactive;
+  
+
+  await watchDimensions(vmb_map, width, height);
+  await watchRegular(vmb_map, { bearing, maxBounds, maxPitch, minPitch, pitch, renderWorldCopies });
+  await watchPosition(vmb_map, { maxZoom, center, flyToOptions, minZoom, zoom });
+
+}
+
+
+export async function watchDimensions(vmb_map:Deferred<Map>, width:Ref<string>, height:Ref<string>){
   const map = await vmb_map.promise;
-  const element = rootRef.value;
-  const opts = getMapboxOptions(props, element);
-  const flyToOptions = filterObject(props.flyToOptions, ['curve', 'maxDuration', 'minZoom', 'screenSpeed', 'speed']);
-  const dimentionOptions = filterObject(props, ['width', 'height']);
-  let positionUpdated = false;
+  watch(width, () => map.resize());
+  watch(height, () => map.resize());
+}
 
-  if(dimentionOptions.width || dimentionOptions.height)
-    map.resize();
-  
-  if(typeof opts.bearing === 'number')
-    map.setBearing(opts.bearing);  
-  if(opts.maxBounds)
-    map.setMaxBounds(opts.maxBounds);
-  if(typeof opts.maxPitch === 'number')
-    map.setMaxPitch(opts.maxPitch);
-  if(typeof opts.maxZoom === 'number')
-    map.setMaxZoom(opts.maxZoom);
-  if(typeof opts.minPitch === 'number')
-    map.setMinPitch(opts.minPitch);
-  if(typeof opts.pitch === 'number')
-    map.setPitch(opts.pitch);
-  if(typeof opts.renderWorldCopies === 'boolean')
-    map.setRenderWorldCopies(opts.renderWorldCopies);
+export async function watchRegular(vmb_map:Deferred<Map>, refs:regularProps){
+  const map = await vmb_map.promise;
+  conditionalWatch(refs.bearing, val => map.setBearing(val));
+  conditionalWatch(refs.maxBounds, val => map.setMaxBounds(val));
+  conditionalWatch(refs.maxPitch, val => map.setMaxPitch(val));
+  conditionalWatch(refs.minPitch, val => map.setMinPitch(val));
+  conditionalWatch(refs.pitch, val => map.setPitch(val));
+  conditionalWatch(refs.renderWorldCopies, val => map.setRenderWorldCopies(val));
+}
 
-  if(opts.center && !positionUpdated){
-    const newCenter = opts.center as [number, number];
-    const currentCenter = map.getCenter().toArray() as [number, number];
-    if(coordsChanged(newCenter, currentCenter)){
-      map.flyTo({
-        center: opts.center,
-        zoom: opts.zoom,
-        ...flyToOptions
-      });
-      positionUpdated = true;
-    }
-  }
+export function watchPosition(vmb_map:Deferred<Map>, refs:positionProps){
+
+  conditionalWatch(refs.center as any as [number, number], center => updateMapPosition(vmb_map, { center }), { deep: true });
+  conditionalWatch(refs.flyToOptions, flyToOptions => updateMapPosition(vmb_map, { flyToOptions }), { deep: true });
+  conditionalWatch(refs.maxZoom, maxZoom => updateMapPosition(vmb_map, { maxZoom }));
+  conditionalWatch(refs.minZoom, minZoom => updateMapPosition(vmb_map, { minZoom }));
+  conditionalWatch(refs.zoom, zoom => updateMapPosition(vmb_map, { zoom }));
+
+}
+
+export async function updateMapPosition(vmb_map:Deferred<Map>, posProps: positionPropsUnwrapped){
+  const map = await vmb_map.promise;
+  const opts = posProps.flyToOptions 
+    ? filterObject(posProps.flyToOptions, ['curve', 'maxDuration', 'minZoom', 'screenSpeed', 'speed'])
+    : {};
   
-  if(typeof opts.zoom === 'number' && !positionUpdated)
-    if(map.getZoom() !== opts.zoom && !positionUpdated){
-      map.flyTo({
-        center: opts.center,
-        zoom: opts.zoom,
-        ...flyToOptions
-      });
-      positionUpdated = true;
-    }
-      
-};
+  if(posProps.center)
+    opts.center = posProps.center;
+  if(posProps.zoom)
+    opts.zoom = posProps.zoom;
+
+  map.flyTo(opts);
+}
 
 export const MapGlEvents = [
   'boxzoomstart',
@@ -163,7 +189,7 @@ export const MapGlEvents = [
   'pitchend',
   'pitchstart',
   'remove',
-  'render',
+  // 'render',
   'resize',
   'rotate',
   'rotateend',
@@ -186,6 +212,7 @@ export const MapGlEvents = [
 export const MapEmits = [
   ...MapGlEvents, 
   'update:center',
+  'update:flyToOptions',
   'update:zoom',
   'update:pitch',
   'update:bearing',
