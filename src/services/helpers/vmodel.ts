@@ -1,5 +1,5 @@
 import { getCurrentInstance, Ref, ref, UnwrapRef, watch } from 'vue';
-import equal from 'deep-equal';
+import equal from 'fast-deep-equal';
 import { isPrimitive } from './refForClasses';
 
 
