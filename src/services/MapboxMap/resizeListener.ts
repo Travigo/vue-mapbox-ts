@@ -16,10 +16,9 @@ export default (watchedRef:Ref<HTMLElement | null>):UnwrapRef<DOMRect> => {
         const boundingBoxHasChanged = boundingBox.width !== newBoundingBox.width || boundingBox.height !== newBoundingBox.height;
         boundingBox = newBoundingBox;
 
-        if(boundingBoxHasChanged){
-          console.log('CONTAINER SIZE FOR MAP HAS CHANGED');
+        if(boundingBoxHasChanged)
           Object.assign(result,newBoundingBox);
-        }  
+        
       }
            
     });

@@ -240,7 +240,7 @@ if (!argv.format || argv.format === 'iife') {
     external,
     output: {
       compact: true,
-      file: 'lib/index.js',
+      file: 'lib/index.min.js',
       format: 'iife',
       name: 'index',
       exports: 'named',
