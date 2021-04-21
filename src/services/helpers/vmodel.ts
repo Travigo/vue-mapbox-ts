@@ -1,7 +1,6 @@
 import { getCurrentInstance, Ref, ref, UnwrapRef, watch } from 'vue';
 import equal from 'deep-equal';
 import { isPrimitive } from './refForClasses';
-import { Primitive } from '../VueHelpers';
 
 
 export default function <T, U=Ref<T> | UnwrapRef<T>>(propertyValue:Record<string,any>, eventName:string|string[] = 'change', modelName='value'):U{

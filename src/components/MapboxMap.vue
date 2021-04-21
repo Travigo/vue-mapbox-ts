@@ -12,13 +12,12 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, getCurrentInstance, onMounted, onUnmounted, provide, ref, watch, toRef, computed, UnwrapRef, Ref } from 'vue';
+import { defineComponent, getCurrentInstance, onMounted, onUnmounted, provide, ref, watch, UnwrapRef, Ref } from 'vue';
 import mapboxgl, { LngLatBounds, LngLatLike, Map } from 'mapbox-gl';
 import Deferred from 'my-deferred';
 import { registerMapEvents, getStyle, mountMap, MapEmits, updateStyle, mapWatcher } from '../services/MapboxMap';
-import { MapboxMapInput, FlyToOptions } from '../classes/MapboxMap';
+import { FlyToOptions } from '../classes/MapboxMap';
 import vmodel from '../services/helpers/vmodel';
-import resizeListener from '../services/MapboxMap/resizeListener';
 
 export default defineComponent({
   name: 'MapboxMap',
@@ -197,7 +196,6 @@ export default defineComponent({
     const i_center = vmodel<LngLatLike, UnwrapRef<LngLatLike>>(props, 'update:center', 'center');    
     const i_flyToOptions = vmodel<FlyToOptions, UnwrapRef<FlyToOptions>> (props, 'update:flyToOptions', 'flyToOptions');
 
-
     const style = ref(getStyle(props));
 
     watch(props, async p => {
@@ -205,10 +203,6 @@ export default defineComponent({
     });
 
     mapWatcher(vmb_map, props, { center: i_center, flyToOptions: i_flyToOptions });
-    
-    
-    
-
     
 
     onMounted(async () => {
@@ -224,8 +218,6 @@ export default defineComponent({
       const map = await vmb_map.promise;
       map.remove();
     });
-
-    
 
     return {
       vmb_map,

@@ -1,5 +1,5 @@
-import { UnwrapRef } from '@vue/reactivity';
-import { Map, MapboxOptions } from 'mapbox-gl';
+import { UnwrapRef } from 'vue';
+import { MapboxOptions } from 'mapbox-gl';
 
 export interface DivStyle {
   height: string;

@@ -1,7 +1,7 @@
 import { positionProps, positionPropsUnwrapped, reactiveProps, regularProps } from '../classes/map';
-import mapboxgl, { MapboxOptions, Map, FlyToOptions, LngLatLike } from 'mapbox-gl';
+import mapboxgl, { MapboxOptions, Map } from 'mapbox-gl';
 import Deferred from 'my-deferred';
-import { Ref, toRef, toRefs, UnwrapRef, watch } from 'vue';
+import { Ref, toRefs, watch } from 'vue';
 import { ComponentInternalInstance } from 'vue';
 
 import { DivStyle, MapboxMapInput } from '../classes/MapboxMap';
@@ -84,8 +84,6 @@ export const mountMap = (props:MapboxMapInput, vmb_map:Deferred<Map>, mapContain
         map.resize();
       });
     }
-      
-
 
   })();
 

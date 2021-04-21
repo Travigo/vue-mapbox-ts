@@ -1,4 +1,3 @@
-import deepEqual from 'deep-equal';
 import { getCurrentInstance, reactive, Ref, ref, UnwrapRef } from 'vue';
 
 export default (watchedRef:Ref<HTMLElement | null>):UnwrapRef<DOMRect> => {
