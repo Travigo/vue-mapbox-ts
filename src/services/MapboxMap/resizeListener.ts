@@ -8,19 +8,24 @@ export default (watchedRef:Ref<HTMLElement | null>, autoResizeDelay?: number):Un
     let boundingBox:DOMRect = watchedRef.value
       ? watchedRef.value.getBoundingClientRect()
       : new DOMRect(0,0,0,0);
+
+    if(ResizeObserver){
+
+    } else {
+      addEventListener('resize', val => {
+        setTimeout(() => {
+          if(watchedRef.value){
+            const newBoundingBox = watchedRef.value.getBoundingClientRect().toJSON();
+            const boundingBoxHasChanged = boundingBox.width !== newBoundingBox.width || boundingBox.height !== newBoundingBox.height;
+            boundingBox = newBoundingBox;
     
-    addEventListener('resize', val => {
-      setTimeout(() => {
-        if(watchedRef.value){
-          const newBoundingBox = watchedRef.value.getBoundingClientRect().toJSON();
-          const boundingBoxHasChanged = boundingBox.width !== newBoundingBox.width || boundingBox.height !== newBoundingBox.height;
-          boundingBox = newBoundingBox;
-  
-          if(boundingBoxHasChanged)
-            Object.assign(result,newBoundingBox);
-        }    
-      }, autoResizeDelay || 0);
-    });
+            if(boundingBoxHasChanged)
+              Object.assign(result,newBoundingBox);
+          }    
+        }, autoResizeDelay || 0);
+      });
+    }
+    
   }
 
   return result;
