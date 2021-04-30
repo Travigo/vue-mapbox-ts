@@ -16,10 +16,7 @@ export function enableAutoResizeWithResizeObserver(rootContainerRef:Ref<HTMLElem
   if(!rootContainerRef.value)
     throw new Error('Could not enable auto-resize because root container could not be found');
 
-  const observer = new (window as any).ResizeObserver(() =>{ 
-    console.log('resizing with resizeObserver');
-    map.resize();
-  });
+  const observer = new (window as any).ResizeObserver(() => map.resize());
   observer.observe(rootContainerRef.value);
 }
 
