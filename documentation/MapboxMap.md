@@ -52,11 +52,11 @@ An example to implement would be
 
 #### auto-resize
 
-Auto Resize will enable the map to resize when it's container has been changed. This will not only be triggered if you actively change the width or height properties but also if you have set a relative width and the parent containers dimensions change
+Auto Resize will enable the map to resize when it's container has been changed. This will not only be triggered if you actively change the width or height properties but also if you have set a relative width and the parent containers dimensions change. This feature utilizes the [ResizeObserver](https://developer.mozilla.org/en-US/docs/Web/API/ResizeObserver) as well as a listener on the resize event if an older browser is used that does not support the ResizeObserver yet
 
 #### auto-resize-delay
 
-If you are using transitons with your map container you might want to use a delay for the resize of the map to make sure the transition has been finished before resizing the map
+If you are using transitons with your map container you might want to use a delay for the resize of the map to make sure the transition has been finished before resizing the map. This property is beeing ignored on newer browsers where a Resize Observer is present
 
 ### Currently Reactive
 - center
