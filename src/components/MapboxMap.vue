@@ -185,6 +185,9 @@ export default defineComponent({
     autoResize: {
       type: Boolean,
       default: false
+    },
+    autoResizeDelay: {
+      type: Number
     }
   },
   setup: (props) => {

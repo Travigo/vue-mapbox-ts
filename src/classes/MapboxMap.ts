@@ -14,6 +14,7 @@ export interface MapboxMapInput extends MapboxOptions {
   width: string;
   flyToOptions: UnwrapRef<FlyToOptions>;
   autoResize: boolean;
+  autoResizeDelay?: number;
 }
 
 export interface FlyToOptions {

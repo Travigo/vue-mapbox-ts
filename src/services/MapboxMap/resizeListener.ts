@@ -1,6 +1,6 @@
 import { getCurrentInstance, reactive, Ref, ref, UnwrapRef } from 'vue';
 
-export default (watchedRef:Ref<HTMLElement | null>):UnwrapRef<DOMRect> => {
+export default (watchedRef:Ref<HTMLElement | null>, autoResizeDelay?: number):UnwrapRef<DOMRect> => {
   const instance = getCurrentInstance();
   let result:UnwrapRef<DOMRect> = reactive(new DOMRect(0,0,0,0).toJSON());
   
@@ -10,16 +10,16 @@ export default (watchedRef:Ref<HTMLElement | null>):UnwrapRef<DOMRect> => {
       : new DOMRect(0,0,0,0);
     
     addEventListener('resize', val => {
-      if(watchedRef.value){
-        const newBoundingBox = watchedRef.value.getBoundingClientRect().toJSON();
-        const boundingBoxHasChanged = boundingBox.width !== newBoundingBox.width || boundingBox.height !== newBoundingBox.height;
-        boundingBox = newBoundingBox;
-
-        if(boundingBoxHasChanged)
-          Object.assign(result,newBoundingBox);
-        
-      }
-           
+      setTimeout(() => {
+        if(watchedRef.value){
+          const newBoundingBox = watchedRef.value.getBoundingClientRect().toJSON();
+          const boundingBoxHasChanged = boundingBox.width !== newBoundingBox.width || boundingBox.height !== newBoundingBox.height;
+          boundingBox = newBoundingBox;
+  
+          if(boundingBoxHasChanged)
+            Object.assign(result,newBoundingBox);
+        }    
+      }, autoResizeDelay || 0);
     });
   }
 

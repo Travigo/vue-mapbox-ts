@@ -79,7 +79,7 @@ export const mountMap = (props:MapboxMapInput, vmb_map:Deferred<Map>, mapContain
     });
 
     if(props.autoResize){
-      const containerSize = resizeListener(rootContainerRef);
+      const containerSize = resizeListener(rootContainerRef, props.autoResizeDelay);
       watch(containerSize, () => {
         map.resize();
       });
