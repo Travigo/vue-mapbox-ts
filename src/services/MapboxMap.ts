@@ -7,7 +7,7 @@ import { ComponentInternalInstance } from 'vue';
 import { DivStyle, MapboxMapInput } from '../classes/MapboxMap';
 import { duplicateEvents, filterObject } from './VueHelpers';
 import conditionalWatch from './helpers/conditionalWatch';
-import resizeListener from './MapboxMap/resizeListener';
+import { enableAutoResize } from './MapboxMap/index';
 
 export const getStyle = (props:any):DivStyle =>({
   height: props.height,
@@ -79,10 +79,7 @@ export const mountMap = (props:MapboxMapInput, vmb_map:Deferred<Map>, mapContain
     });
 
     if(props.autoResize){
-      const containerSize = resizeListener(rootContainerRef, props.autoResizeDelay);
-      watch(containerSize, () => {
-        map.resize();
-      });
+      enableAutoResize(rootContainerRef, map, props.autoResizeDelay);
     }
 
   })();
