@@ -34,9 +34,7 @@ export const registerMarkerEvents = (marker: mapboxgl.Marker, component: Compone
     component.emit('update:lngLat', evt.target._lngLat.toArray())
   );
 
-  marker.getElement().addEventListener('click', _ev => {
-    component.emit('click', marker);
-  });
+  marker.getElement().addEventListener('click', _ev => component.emit('click', _ev));
 };
 
 export const updateMarker = async (props:MarkerProps, vmb_marker:Deferred<Marker>) => {
