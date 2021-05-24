@@ -125,9 +125,11 @@ export default defineComponent({
     },
     touchZoomRotate: {
       type: [Boolean, Object] as any as () => boolean | Record<string, any>,
+      default: true
     },
     trackResize: {
       type: Boolean,
+      default: true
     },
     center: {
       default: () => [ 0, 0 ] as [number, number],
