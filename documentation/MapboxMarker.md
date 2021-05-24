@@ -68,7 +68,7 @@ The properties will match mapbox documentations properties as much as possible. 
 | drag          | Object           |
 | dragstart     | Object           |
 | dragend       | Object           |
-| click         | Object           |
+| click         | MouseEvent       |
 | update:lngLat | [number, number] |
 
 #### drag
