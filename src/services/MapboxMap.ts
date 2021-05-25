@@ -1,13 +1,13 @@
 import { positionProps, positionPropsUnwrapped, reactiveProps, regularProps } from '../classes/map';
 import mapboxgl, { MapboxOptions, Map } from 'mapbox-gl';
 import Deferred from 'my-deferred';
-import { Ref, toRefs, watch } from 'vue';
+import { Ref, toRef, toRefs, watch } from 'vue';
 import { ComponentInternalInstance } from 'vue';
 
 import { DivStyle, MapboxMapInput } from '../classes/MapboxMap';
 import { duplicateEvents, filterObject } from './VueHelpers';
 import conditionalWatch from './helpers/conditionalWatch';
-import { enableAutoResize } from './MapboxMap/index';
+import { enableAutoResize, enableTouchZoomRotate } from './MapboxMap/index';
 
 export const getStyle = (props:any):DivStyle =>({
   height: props.height,
@@ -82,6 +82,9 @@ export const mountMap = (props:MapboxMapInput, vmb_map:Deferred<Map>, mapContain
       enableAutoResize(rootContainerRef, map, props.autoResizeDelay);
     }
 
+    if(props.touchZoomRotate){
+      enableTouchZoomRotate(map, toRef(props, 'touchZoomRotate'));
+    }
   })();
 
 export const coordsChanged = (newCoords:[number, number], oldCorrds: [number, number]) => 
@@ -104,7 +107,7 @@ export async function mapWatcher(vmb_map:Deferred<Map>, props:Record<string,any>
     minPitch,
     pitch,
     renderWorldCopies,
-    zoom,
+    zoom
   } = toRefs(props);
 
   const { center, flyToOptions } = propsReactive;
@@ -140,7 +143,6 @@ export function watchPosition(vmb_map:Deferred<Map>, refs:positionProps){
   conditionalWatch(refs.maxZoom, maxZoom => updateMapPosition(vmb_map, { maxZoom }));
   conditionalWatch(refs.minZoom, minZoom => updateMapPosition(vmb_map, { minZoom }));
   conditionalWatch(refs.zoom, zoom => updateMapPosition(vmb_map, { zoom }));
-
 }
 
 export async function updateMapPosition(vmb_map:Deferred<Map>, posProps: positionPropsUnwrapped){
