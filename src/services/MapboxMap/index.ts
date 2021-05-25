@@ -12,6 +12,18 @@ export function enableAutoResize(rootContainerRef:Ref<HTMLElement | null>, map:M
   }
 }
 
+export function enableTouchZoomRotate(map:Map, touchZoomRotate: Ref<boolean>){
+  if(touchZoomRotate.value)
+    map.touchZoomRotate.enable();
+  
+  watch(touchZoomRotate, val => {
+    if(val)
+      map.touchZoomRotate.enable();
+    else
+      map.touchZoomRotate.disable();
+  });
+}
+
 export function enableAutoResizeWithResizeObserver(rootContainerRef:Ref<HTMLElement | null>, map:Map){
   if(!rootContainerRef.value)
     throw new Error('Could not enable auto-resize because root container could not be found');

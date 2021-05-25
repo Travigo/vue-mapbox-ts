@@ -15,6 +15,7 @@ export interface MapboxMapInput extends MapboxOptions {
   flyToOptions: UnwrapRef<FlyToOptions>;
   autoResize: boolean;
   autoResizeDelay?: number;
+  touchZoomRotate: boolean;
 }
 
 export interface FlyToOptions {

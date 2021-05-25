@@ -22,7 +22,8 @@ export interface positionProps {
   minZoom?: ORef<number>,
   maxZoom?: ORef<number>,
   center?: UnwrapRef<LngLatLike>,
-  flyToOptions?: UnwrapRef<FlyToOptions>
+  flyToOptions?: UnwrapRef<FlyToOptions>,
+  touchZoomRotate?: any
 }
 
 export interface positionPropsUnwrapped {
