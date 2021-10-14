@@ -21,7 +21,7 @@ Please note that the parameter style cannot be used as it is already reserved by
 | create          | DrawEvent          |           |               | :white_medium_square: | :white_square_button: |
 | update          | DrawEvent          |           |               | :white_medium_square: | :white_square_button: |
 | delete          | DrawEvent          |           |               | :white_medium_square: | :white_square_button: |
-| selectionChange | DrawEvent          |           |               | :white_medium_square: | :white_square_button: |
+| selectionchange | DrawEvent          |           |               | :white_medium_square: | :white_square_button: |
 
 
 #### loaded

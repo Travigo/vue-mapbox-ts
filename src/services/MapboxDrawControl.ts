@@ -21,8 +21,8 @@ export const mapDrawEvents = (vmb_map: Map, component: ComponentInternalInstance
     component.emit('delete', e);
   });
 
-  vmb_map.on('draw.selectionChange', (e:DrawEvent) => {
-    component.emit('selectionChange', e);
+  vmb_map.on('draw.selectionchange', (e:DrawEvent) => {
+    component.emit('selectionchange', e);
   });
 
 };
