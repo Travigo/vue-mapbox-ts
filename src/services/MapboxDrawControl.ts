@@ -22,7 +22,7 @@ export const mapDrawEvents = (vmb_map: Map, component: ComponentInternalInstance
   });
 
   vmb_map.on('draw.selectionchange', (e:DrawEvent) => {
-    component.emit('selectionChange', e);
+    component.emit('selectionchange', e);
   });
 
 };
