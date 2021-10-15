@@ -165,7 +165,7 @@ export const MapGlEvents = [
   'contextmenu',
   'data',
   'dataloading',
-  'dbclick',
+  'dblclick',
   'drag',
   'dragend',
   'dragstart',

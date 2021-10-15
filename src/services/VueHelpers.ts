@@ -49,7 +49,6 @@ export const parentNameContains = (instance:any, parentNameFragment:string):bool
   
   return false;
 };
-
 export const duplicateEvents = <
   T extends InstanceWithOn<any>, 
 >(object:T, instance: ComponentInternalInstance, events:Array<string>) => {
