@@ -19,7 +19,7 @@
     "docs:dev": "vuepress dev docs",
     "fix": "vue-cli-service lint",
     "prepublishOnly": "npm run build",
-    "test": "vue-cli-service test:unit"
+    "test": "echo \"no tests implemented\""
   },
   "main": "lib/index.min.js",
   "module": "lib/index.esm.js",
