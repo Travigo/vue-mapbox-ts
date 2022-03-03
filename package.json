@@ -3,7 +3,7 @@
   "logo": {
     "file": "./documentation/logo.png"
   },
-  "version": "0.6.4",
+  "version": "0.6.5",
   "description": "Highly reactive Vue3 Mapbox Framework for Vue.js written in Typescript",
   "author": {
     "name": "Relief Melone",
@@ -19,7 +19,7 @@
     "docs:dev": "vuepress dev docs",
     "fix": "vue-cli-service lint",
     "prepublishOnly": "npm run build",
-    "test": "vue-cli-service test:unit"
+    "test": "echo \"no tests implemented\""
   },
   "main": "lib/index.min.js",
   "module": "lib/index.esm.js",
