@@ -5,11 +5,10 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, getCurrentInstance, inject, onMounted, onUnmounted, Ref, ref, watch } from 'vue';
-import mapboxgl, {  Marker, Anchor, Map } from 'mapbox-gl';
+import { defineComponent, getCurrentInstance, inject, onMounted, onUnmounted, PropType, Ref, ref, watch } from 'vue';
+import mapboxgl, {  Marker, Anchor, Map, LngLatLike, Offset, } from 'mapbox-gl';
 import { getPopupOptions, mountPopup, PopupEmits, registerPopupEvents, updatePopup } from '../services/MapboxPopup';
 import Deferred from 'my-deferred/dist/src';
-import LngLatInput from '../classes/LngLatInput';
 import { Circle } from '../classes/GeogeometryCircle';
 import { Polygon } from '../classes/GeogeometryPolygon';
 import { GeogeometryType } from '../classes/Geogeometry';
@@ -23,7 +22,8 @@ export default defineComponent({
   emits: PopupEmits,
   props: {
     lngLat: {
-      default: () => [0,0] as LngLatInput,
+      type: [Object, Array] as PropType<LngLatLike>,
+      default: (): LngLatLike => [0,0],
     },
     closeButton: {
       type: Boolean,
@@ -38,11 +38,11 @@ export default defineComponent({
       default: false
     },
     anchor: {
-      type: String as () => Anchor,
+      type: String as PropType<Anchor>,
       default: undefined
     },
     offset: {
-      type: Number as () => mapboxgl.Offset,
+      type: [Number, Array] as PropType<Offset>,
       default: undefined
     },
     className: {
