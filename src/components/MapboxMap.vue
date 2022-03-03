@@ -190,6 +190,10 @@ export default defineComponent({
     },
     autoResizeDelay: {
       type: Number
+    },
+    cooperativeGestures: {
+      type: Boolean,
+      default: false
     }
   },
   setup: (props) => {

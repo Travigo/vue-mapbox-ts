@@ -50,15 +50,15 @@ The properties will match mapbox documentations properties as much as possible. 
 
 | Property          | Type                      | Interface   | Default Value | Mandatory             | Reactive              |
 | :---------------- | :------------------------ | :---------- | :------------ | --------------------- | --------------------- |
-| lngLat            | [number, number]          | LngLatInput | [0,0]         | :white_medium_square: | :white_square_button:    |
-| offset            | number; [number, number ] | Offset      | undefined     | :white_medium_square: | :white_square_button:    |
-| anchor            | string                    | Anchor      | "left"        | :white_medium_square: | :white_medium_square: |
-| color             | string                    |             | "#4668F2"     | :white_medium_square: | :white_square_button:    |
-| scale             | number                    |             | 1             | :white_medium_square: | :white_square_button:    |
-| draggable         | boolean                   |             | false         | :white_medium_square: | :white_square_button:    |
-| rotation          | number                    |             | 0             | :white_medium_square: | :white_square_button:    |
-| pitchAlignment    | string                    | Alignment   | "auto"        | :white_medium_square: | :white_square_button:    |
-| rotationAlignment | string                    | Alignment   | "auto"        | :white_medium_square: | :white_square_button:    |
+| lngLat            | [number, number]          | LngLatInput | [0,0]         | &#x2612; | &#x2611; |
+| offset            | number; [number, number ] | Offset      | undefined     | &#x2612; | &#x2611; |
+| anchor            | string                    | Anchor      | "left"        | &#x2612; | &#x2612; |
+| color             | string                    |             | "#4668F2"     | &#x2612; | &#x2611; |
+| scale             | number                    |             | 1             | &#x2612; | &#x2611; |
+| draggable         | boolean                   |             | false         | &#x2612; | &#x2611; |
+| rotation          | number                    |             | 0             | &#x2612; | &#x2611; |
+| pitchAlignment    | string                    | Alignment   | "auto"        | &#x2612; | &#x2611; |
+| rotationAlignment | string                    | Alignment   | "auto"        | &#x2612; | &#x2611; |
 
 
 ## Events

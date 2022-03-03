@@ -8,15 +8,15 @@ Most of the properties will be exactly as defined by mapbox-gl in it's options. 
 
 | Property     | Type                      | Interface   | Default Value | Mandatory             | Reactive              |
 | :----------- | :------------------------ | :---------- | :------------ | --------------------- | --------------------- |
-| lngLat       | [number, number]          | LngLatInput | [0,0]         | :white_medium_square: | :white_square_button: |
-| closeButton  | boolean                   |             | false         | :white_medium_square: | :white_medium_square: |
-| closeOnClick | boolean                   |             | true          | :white_medium_square: | :white_medium_square: |
-| closeOnMove  | boolean                   |             | false         | :white_medium_square: | :white_medium_square: |
-| anchor       | String                    | Anchor      | undefined     | :white_medium_square: | :white_medium_square: |
-| offset       | number; [number, number ] | Offset      | undefined     | :white_medium_square: | :white_square_button: |
-| className    | string                    |             | undefined     | :white_medium_square: | :white_medium_square: |
-| maxWidth     | string                    |             | 500px'        | :white_medium_square: | :white_square_button: |
-| renderless   | boolean                   |             | false         | :white_medium_square: | :white_medium_square: |
+| lngLat       | [number, number]          | LngLatInput | [0,0]         | &#x2612; | &#x2611; |
+| closeButton  | boolean                   |             | false         | &#x2612; | &#x2612; |
+| closeOnClick | boolean                   |             | true          | &#x2612; | &#x2612; |
+| closeOnMove  | boolean                   |             | false         | &#x2612; | &#x2612; |
+| anchor       | String                    | Anchor      | undefined     | &#x2612; | &#x2612; |
+| offset       | number; [number, number ] | Offset      | undefined     | &#x2612; | &#x2611; |
+| className    | string                    |             | undefined     | &#x2612; | &#x2612; |
+| maxWidth     | string                    |             | 500px'        | &#x2612; | &#x2611; |
+| renderless   | boolean                   |             | false         | &#x2612; | &#x2612; |
 
 ## Events
 

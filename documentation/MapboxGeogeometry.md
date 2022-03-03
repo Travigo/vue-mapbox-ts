@@ -8,11 +8,11 @@ Be default Geogeometry is generated with a fill. But you can change this. See
 
 | Property     | Type    | Interface | Default Value | Mandatory             | Reactive              |
 | :----------- | :------ | :-------- | :------------ | --------------------- | :-------------------- |
-| id           | string  |           | *generated*   | :white_medium_square: |                       |
-| fillColor    | string  |           | "#4668F2"     | :white_medium_square: | :white_square_button: |
-| antialias    | boolean |           | true          | :white_medium_square: | :white_square_button: |
-| opacity      | number  |           | 0.6           | :white_medium_square: | :white_square_button: |
-| outlineColor | string  |           | undefined     | :white_medium_square: | :white_square_button: |
+| id           | string  |           | *generated*   | &#x2612; |                       |
+| fillColor    | string  |           | "#4668F2"     | &#x2612; | &#x2611; |
+| antialias    | boolean |           | true          | &#x2612; | &#x2611; |
+| opacity      | number  |           | 0.6           | &#x2612; | &#x2611; |
+| outlineColor | string  |           | undefined     | &#x2612; | &#x2611; |
 
 You can attach Popups to all Geogeometry Components
 
@@ -55,9 +55,9 @@ A circle will be added to your map.
 
 | Property | Type             | Interface | Default Value | Mandatory             | Reactive              |
 | :------- | :--------------- | :-------- | :------------ | --------------------- | :-------------------- |
-| radius   | number           |           |               | :white_medium_square: | :white_square_button: |
-| center   | [number, number] |           |               | :white_medium_square: | :white_square_button: |
-| edges    | number           |           | 10            | :white_square_button: | :white_square_button: |
+| radius   | number           |           |               | &#x2612; | &#x2611; |
+| center   | [number, number] |           |               | &#x2612; | &#x2611; |
+| edges    | number           |           | 10            | &#x2611; | &#x2611; |
 
 #### radius
 
@@ -90,10 +90,10 @@ Rectangles will be drawn with a specific height and width.
 
 | Property    | Type             | Interface | Default Value | Mandatory             | Reactive              |
 | :---------- | :--------------- | :-------- | :------------ | :-------------------- | --------------------- |
-| center      | [number, number] |           |               | :white_square_button: | :white_square_button: |
-| height      | number           |           |               | :white_square_button: | :white_square_button: |
-| width       | number           |           |               | :white_square_button: | :white_square_button: |
-| rotationDeg | number           |           |               | :white_square_button: | :white_square_button: |
+| center      | [number, number] |           |               | &#x2611; | &#x2611; |
+| height      | number           |           |               | &#x2611; | &#x2611; |
+| width       | number           |           |               | &#x2611; | &#x2611; |
+| rotationDeg | number           |           |               | &#x2611; | &#x2611; |
 
 
 #### center
@@ -130,7 +130,7 @@ If you need more flexibility you can also draw polygons. All you need is a path 
 
 | Property | Type               | Interface | Default Value | Mandatory             | Reactive              |
 | :------- | :----------------- | :-------- | :------------ | :-------------------- | --------------------- |
-| path     | [number, number][] |           |               | :white_square_button: | :white_square_button: |
+| path     | [number, number][] |           |               | &#x2611; | &#x2611; |
 
 #### path
 
@@ -210,25 +210,25 @@ For more information on the fill properties please see mapboxs' [official Docume
 
 | Property     | Type    | Interface | Default Value | Mandatory             | Reactive              |
 | :----------- | :------ | :-------- | :------------ | :-------------------- | --------------------- |
-| color        | string  |           | '#4668F2'     | :white_medium_square: | :white_square_button: |
-| antialias    | boolean |           | true          | :white_medium_square: | :white_square_button: |
-| opacity      | number  |           | 0.6           | :white_medium_square: | :white_square_button: |
-| outlineColor | string  |           | undefined     | :white_medium_square: | :white_square_button: |
+| color        | string  |           | '#4668F2'     | &#x2612; | &#x2611; |
+| antialias    | boolean |           | true          | &#x2612; | &#x2611; |
+| opacity      | number  |           | 0.6           | &#x2612; | &#x2611; |
+| outlineColor | string  |           | undefined     | &#x2612; | &#x2611; |
 
 ### Line Option
 You can also specify a line used instead or in addition to the fill option. Currently the following Line Properties are supported. For more information about the properties please see mapboxs' [official Documentation](https://docs.mapbox.com/mapbox-gl-js/style-spec/layers/#line)
 
 | Property  | Type             | Interface      | Default Value | Mandatory             | Reactive              |
 | :-------- | :--------------- | :------------- | :------------ | :-------------------- | --------------------- |
-| blur      | number           |                | undefined     | :white_medium_square: | :white_square_button: |
-| cap       | string           | CanvasLineCap  | undefined     | :white_medium_square: | :white_square_button: |
-| join      | string           | CanvasLineJoin | undefined     | :white_medium_square: | :white_square_button: |
-| opacity   | number           |                | 1             | :white_medium_square: | :white_square_button: |
-| width     | number           |                | undefined     | :white_medium_square: | :white_square_button: |
-| translate | [number, number] |                | undefined     | :white_medium_square: | :white_square_button: |
-| offset    | number           |                | undefined     | :white_medium_square: | :white_square_button: |
-| dasharray | number[]         |                | undefined     | :white_medium_square: | :white_square_button: |
-| gapWidth  | number           |                | undefined     | :white_medium_square: | :white_square_button: |
+| blur      | number           |                | undefined     | &#x2612; | &#x2611; |
+| cap       | string           | CanvasLineCap  | undefined     | &#x2612; | &#x2611; |
+| join      | string           | CanvasLineJoin | undefined     | &#x2612; | &#x2611; |
+| opacity   | number           |                | 1             | &#x2612; | &#x2611; |
+| width     | number           |                | undefined     | &#x2612; | &#x2611; |
+| translate | [number, number] |                | undefined     | &#x2612; | &#x2611; |
+| offset    | number           |                | undefined     | &#x2612; | &#x2611; |
+| dasharray | number[]         |                | undefined     | &#x2612; | &#x2611; |
+| gapWidth  | number           |                | undefined     | &#x2612; | &#x2611; |
 
 
 ## Examples

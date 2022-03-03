@@ -31,6 +31,7 @@ export const getMapboxOptions = (props: MapboxMapInput, el: any): MapboxOptions 
     'clickTolerance',
     'collectResourceTiming',
     'container',
+    'cooperativeGestures',
     'crossSourceCollisions',
     'customAttribution',
     'doubleClickZoom',
@@ -95,8 +96,13 @@ export const updateStyle = (props:any, style:Ref<DivStyle>):void => {
   style.value = getStyle(props);
 };
 
-export async function mapWatcher(vmb_map:Deferred<Map>, props:Record<string,any>, propsReactive: reactiveProps){
+export async function mapWatcher(
+  vmb_map:Deferred<Map>, 
+  props:Record<string,any>, 
+  propsReactive: reactiveProps
+){
   const {
+    cooperativeGestures,
     width,
     height,
     bearing,
