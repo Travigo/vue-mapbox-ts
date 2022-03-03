@@ -22,13 +22,14 @@ All parameters from mapbox-gl can also be used to configure your map with the ex
 
 Please note that the parameter style cannot be used as it is already reserved by Vue to configure css styling. to use a different style for your map use the property *mapStyle* In addition to the mapbox-gl parameters properties are
 
-| Property          | Type    | Interface    | Default Value | Mandatory             | Reactive              |
-| :---------------- | :------ | :----------- | :------------ | --------------------- | --------------------- |
-| height            | string  |              | "500px"       | :white_medium_square: | :white_square_button: |
-| width             | string  |              | "100%"        | :white_medium_square: | :white_square_button: |
-| flyToOptions      | Object  | FlyToOptions | {}            | :white_medium_square: | :white_square_button: |
-| auto-resize       | boolean |              | false         | :white_medium_square: | :white_medium_square: |
-| auto-resize-delay | number  |              | undefined     | :white_medium_square: | :white_medium_square: |
+| Property            | Type    | Interface    | Default Value | Mandatory | Reactive |
+| :------------------ | :------ | :----------- | :------------ | --------- | -------- |
+| height              | string  |              | "500px"       | &#x2612;  | &#x2611; |
+| width               | string  |              | "100%"        | &#x2612;  | &#x2611; |
+| flyToOptions        | Object  | FlyToOptions | {}            | &#x2612;  | &#x2611; |
+| auto-resize         | boolean |              | false         | &#x2612;  | &#x2612; |
+| auto-resize-delay   | number  |              | undefined     | &#x2612;  | &#x2612; |
+| cooperativeGestures | boolean |              | false         | &#x2612;  | &#x2612;         |
 
 
 #### height
