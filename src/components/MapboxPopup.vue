@@ -48,6 +48,10 @@ export default defineComponent({
     className: {
       type: String
     },
+    focusAfterOpen: {
+      type: Boolean,
+      default: true
+    },
     maxWidth: {
       type: String,
       default: '500px'
