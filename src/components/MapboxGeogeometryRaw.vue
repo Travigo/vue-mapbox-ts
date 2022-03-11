@@ -1,14 +1,16 @@
 <template>
 <div ref="features">
   <slot name="default">
-    <mapbox-geogeometry-fill 
-      :color="fillColor" 
-      :outlineColor="outlineColor" 
-      :opacity="opacity"
-      :antialias="antialias"
-    >
-      <slot name="popup" />
-    </mapbox-geogeometry-fill>
+    <div v-if="false">
+      <mapbox-geogeometry-fill 
+        :color="fillColor" 
+        :outlineColor="outlineColor" 
+        :opacity="opacity"
+        :antialias="antialias"
+      >
+        <slot name="popup" />
+      </mapbox-geogeometry-fill>
+    </div>
   </slot>
 </div>
 </template>
@@ -18,14 +20,19 @@ import { mountGeogeometry, updateGeogeometry } from '../services/MapboxGeogeomet
 import { filterObject } from '../services/VueHelpers';
 import { GeoJSONSource, Map } from 'mapbox-gl';
 import Deferred from 'my-deferred/dist/src';
-import { defineComponent, inject, onMounted, onUnmounted, provide, ref, watch } from 'vue';
+import { Component, defineComponent, inject, onMounted, onUnmounted, provide, ref, watch } from 'vue';
 import { Raw } from '../classes/GeogeometryRaw';
 import { Feature, FeatureCollection } from 'geojson';
+import MapboxGeogeometryFill from './MapboxGeogeometry.Fill.vue';
 
 let rawDataAdded = 0;
 
 export default defineComponent({
   name: 'MapboxGeogeometryRaw',
+  components: {
+    // WORKAROUND FIX NEEDED BUT CURRENTLY DOES NOT COMPILE (MAYBE PROBLEM WITH DEFINECOMPONENTS RETURN TYPE)
+    MapboxGeogeometryFill: MapboxGeogeometryFill as any as Component
+  },
   props: {
     source: {
       type: Object as () => GeoJSONSource | FeatureCollection | Feature,
@@ -87,6 +94,8 @@ export default defineComponent({
         map.removeLayer(raw.id);
       }
     });
+
+    // return { MapboxGeogeometryFill };
   }
 });
 </script>
