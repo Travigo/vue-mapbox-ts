@@ -14,7 +14,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, inject, onMounted, onUnmounted, provide, watch, } from 'vue';
+import { Component, defineComponent, inject, onMounted, onUnmounted, provide, watch, } from 'vue';
 import { Map } from 'mapbox-gl';
 import Deferred from 'my-deferred';
 
@@ -22,10 +22,16 @@ import { Circle } from '../classes/GeogeometryCircle';
 import { mountGeogeometry, updateGeogeometry } from '../services/MapboxGeogeometry';
 import { filterObject } from '../services/VueHelpers';
 
+import MapboxGeogeometryFill from './MapboxGeogeometry.Fill.vue';
+
 let circlesAdded = 0;
 
 export default defineComponent({
   name: 'MapboxGeogeometryCircle',
+  components: {
+    // WORKAROUND FIX NEEDED BUT CURRENTLY DOES NOT COMPILE (MAYBE PROBLEM WITH DEFINECOMPONENTS RETURN TYPE)
+    MapboxGeogeometryFill: MapboxGeogeometryFill as any as Component
+  },
   props: {
     id: {
       type: String,
