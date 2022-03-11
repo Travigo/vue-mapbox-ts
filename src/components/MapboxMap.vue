@@ -1,8 +1,9 @@
 <template>
 <div :style="style" ref="root" class="mapbox-map">
-  <div v-if="vmb_map.isResolved" ref="mapContainer" class="map-container" :style="{ height, width }">
+  <div>
     <slot />
   </div>
+  <div v-if="vmb_map.isResolved" ref="mapContainer" class="map-container" :style="{ height, width }" />
   <div v-else>
     <slot name="loader">
       <div :style="style" />
@@ -25,7 +26,7 @@ export default defineComponent({
   props: {
     accessToken: {
       type: String,
-      default: undefined
+      required: true
     },
     height: {
       type: String,

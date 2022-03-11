@@ -9,7 +9,7 @@ import { duplicateEvents, filterObject } from './VueHelpers';
 import { MapboxPopupInput } from '../classes/Popup';
 import { GeogeometryPaintType } from '../classes/Geogeometry.Paint';
 
-export const attachToMarker = async (instance: any, vmb_marker: Deferred<Marker> | null, popup:Popup) => {
+export const attachToMarker = async (instance: any, vmb_marker: Deferred<Marker> | null, popup:Popup):Promise<void> => {
   if(vmb_marker){
     const marker = await vmb_marker.promise;
     marker.setPopup(popup);
