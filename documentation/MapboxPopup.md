@@ -1,6 +1,6 @@
 # Mapbox Popup
 
-To add a popup to your map just add one to your map like this
+To use a popup in your map just add one like this
 
 
 ```html
