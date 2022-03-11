@@ -94,8 +94,6 @@ export default defineComponent({
         map.removeLayer(raw.id);
       }
     });
-
-    // return { MapboxGeogeometryFill };
   }
 });
 </script>
