@@ -3,11 +3,11 @@
 </template>
 
 <script lang="ts">
-import { Geogeometry, GeogeometryType } from '../classes/Geogeometry';
+import { GeogeometryType } from '../classes/Geogeometry';
 import { defineComponent, inject, onMounted, onUnmounted, provide, ref, watch } from 'vue';
-import { Map, ImageSource, Visibility } from 'mapbox-gl';
+import { Map } from 'mapbox-gl';
 import Deferred from 'my-deferred/dist/src';
-import { GeogeometryLine, GeogeometryLineInput, TranslateAnchor } from '../classes/Geogeometry.Paint.Line';
+import { GeogeometryLine } from '../classes/Geogeometry.Paint.Line';
 import { filterObject } from '../services/VueHelpers';
 
 export default defineComponent({

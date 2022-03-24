@@ -18,7 +18,7 @@ You can also attach your popups to markers. To learn how to do this check the do
 Most of the properties will be exactly as defined by mapbox-gl in it's options. Here is a list of the properties for Popups
 
 | Property       | Type                      | Interface   | Default Value | Mandatory | Reactive |
-| :------------- | :------------------------ | :---------- | :------------ | --------- | -------- |a
+| :------------- | :------------------------ | :---------- | :------------ | --------- | -------- |
 | anchor         | String                    | Anchor      | undefined     | &#x2612;  | &#x2612; |
 | className      | string                    |             | undefined     | &#x2612;  | &#x2612; |
 | closeButton    | boolean                   |             | false         | &#x2612;  | &#x2612; |
