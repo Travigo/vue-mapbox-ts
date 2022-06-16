@@ -113,7 +113,8 @@ export async function mapWatcher(
     minPitch,
     pitch,
     renderWorldCopies,
-    zoom
+    zoom,
+    mapStyle
   } = toRefs(props);
 
   const { center, flyToOptions } = propsReactive;
@@ -122,9 +123,14 @@ export async function mapWatcher(
   await watchDimensions(vmb_map, width, height);
   await watchRegular(vmb_map, { bearing, maxBounds, maxPitch, minPitch, pitch, renderWorldCopies });
   await watchPosition(vmb_map, { maxZoom, center, flyToOptions, minZoom, zoom });
+  await watchMapStyle(vmb_map, mapStyle);
 
 }
 
+export async function watchMapStyle (vmb_map:Deferred<Map>, mapStyle:Ref<string>){
+  const map = await vmb_map.promise;
+  watch(mapStyle, (newStyle:string) => map.setStyle(newStyle));
+}
 
 export async function watchDimensions(vmb_map:Deferred<Map>, width:Ref<string>, height:Ref<string>){
   const map = await vmb_map.promise;
