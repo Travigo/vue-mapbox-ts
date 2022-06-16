@@ -47,7 +47,7 @@ All Events from Mapbox-Gl-Geocoder are also available as component events. These
 | results | Object      |
 | error   | string      |
 | loading | Object      |
-|         |             |
+| clear   | -           |
 
 
 #### result
@@ -61,6 +61,9 @@ Triggered when an error occurs
 
 #### loading
 Gets triggered every time a user hits a key and represents his search query
+
+#### clear
+Gets triggered every time a user clears the input field
 
 ## Examples
 
