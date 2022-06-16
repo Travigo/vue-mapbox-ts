@@ -48,6 +48,10 @@ export const mountGeocoderEvents = async (vmb_geocoder:Deferred<MapboxGeocoder>,
     instance.emit('loading', query);
     instance.proxy.geocoderState.loading = query;
   });
+
+  geocoder.on('clear', () => {
+    instance.emit('clear');
+  });
 };
 
 
@@ -67,7 +71,7 @@ export const attachToInput = (ref:HTMLElement, geocoder: MapboxGeocoder, instanc
     if(instance.proxy.showOriginalGeocoder)
       instance.proxy.showOriginalGeocoder = false;
     // instance.setupState.showOriginalGeocoder = false;
-    let inputs = ref.getElementsByTagName('input');  
+    const inputs = ref.getElementsByTagName('input');  
   
     if(!inputs )
       throw new Error('MapboxGeocoderControl: No inputs found');

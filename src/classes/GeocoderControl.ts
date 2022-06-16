@@ -12,8 +12,8 @@ export interface GeocoderComponentInstanceAdditions {
   proxy: {
     showOriginalGeocoder: boolean;
     geocoderState: {
-      result: Result,
-      results: Results,
+      result: Result;
+      results: Results;
       error: null | string;
       loading: null | string;
     }
