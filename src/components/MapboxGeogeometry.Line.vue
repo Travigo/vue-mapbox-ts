@@ -17,9 +17,11 @@ export default defineComponent({
       type: Number
     },
     cap: {
+      // eslint-disable-next-line no-undef
       type: String as () => CanvasLineCap
     },
     join: {
+      // eslint-disable-next-line no-undef
       type: String as () => CanvasLineJoin
     },
     opacity: {

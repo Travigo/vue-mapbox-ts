@@ -1,20 +1,22 @@
 <template lang="pug">
 div#main
-  mapbox-map(:accessToken="accessToken")
+  mapbox-map(:accessToken="accessToken" :center="[0,0]")
+    mapbox-marker(:lngLat="[0,0]" :draggable="draggable")
 </template>
 
 <script lang="ts">
 import { defineComponent, onMounted, onUnmounted } from 'vue';
 
-import { MapboxMap } from '@/components';
+import { MapboxMap, MapboxMarker } from '@/components';
 
 export default defineComponent({
-  name: 'MapboxMapBase',
+  name: 'MapboxMarkerBase',
   components: {
-    MapboxMap
+    MapboxMap, MapboxMarker
   },
   props: {
-    accessToken: { type: String, required: true }
+    accessToken: { type: String, required: true },
+    draggable: { type: Boolean, default: false }
   },
   setup(props){
 

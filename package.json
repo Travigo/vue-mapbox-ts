@@ -71,6 +71,7 @@
     "postcss-simple-vars": "^6.0.3",
     "postcss-url": "^10.1.1",
     "pug": "^3.0.2",
+    "pug-plain-loader": "^1.1.0",
     "rollup": "^2.40.0",
     "rollup-plugin-css-only": "^3.1.0",
     "rollup-plugin-peer-deps-external": "^2.2.4",

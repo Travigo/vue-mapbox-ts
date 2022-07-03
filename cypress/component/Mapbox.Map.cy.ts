@@ -1,5 +1,6 @@
 import MapboxMapBase from './scenarios/MapboxMap.base.vue';
 
+
 describe('MapboxMap.base', () => {
   it('successfully mounts a map', () => {
     cy.mount(MapboxMapBase as any, {

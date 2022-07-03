@@ -1,20 +1,24 @@
 <template lang="pug">
 div#main
-  mapbox-map(:accessToken="accessToken")
+  mapbox-map(:accessToken="accessToken" :center="[0,0]")
+    mapbox-popup(:lngLat="[0,0]")
+      div Hello World
+    
 </template>
 
 <script lang="ts">
 import { defineComponent, onMounted, onUnmounted } from 'vue';
 
-import { MapboxMap } from '@/components';
+import { MapboxMap, MapboxPopup } from '@/components';
 
 export default defineComponent({
-  name: 'MapboxMapBase',
+  name: 'MapboxPopupBase',
   components: {
-    MapboxMap
+    MapboxMap, MapboxPopup
   },
   props: {
-    accessToken: { type: String, required: true }
+    accessToken: { type: String, required: true },
+
   },
   setup(props){
 

@@ -67,7 +67,7 @@ export const getCenterForFeatureCollection = (featureCollection:FeatureCollectio
   let visited = inputVisited;
   const center:[number, number] = [inputCenter[0], inputCenter[1]];
 
-  for(let feature of featureCollection.features){
+  for(const feature of featureCollection.features){
     const { center: centerLocal, visited: visitedLocal } = getCenterForFeature(feature);
     center[0] = (center[0]*visited + centerLocal[0]*visitedLocal) / (visitedLocal + visited);
     center[1] = (center[1]*visited + centerLocal[1]*visitedLocal) / (visitedLocal + visited);
