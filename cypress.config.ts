@@ -1,11 +1,16 @@
-import { defineConfig } from "cypress";
+import { defineConfig } from 'cypress';
 
 export default defineConfig({
   component: {
     devServer: {
-      framework: "vue-cli",
-      bundler: "webpack",
+      framework: 'vue-cli',
+      bundler: 'webpack',
     },
+    requestTimeout: 20000,
+    responseTimeout: 20000,
+    execTimeout: 20000,
+    defaultCommandTimeout: 20000,
+    pageLoadTimeout: 20000
   },
 
   e2e: {

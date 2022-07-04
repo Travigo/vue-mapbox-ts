@@ -4,6 +4,7 @@ import MapboxGeocoder, { GeocoderOptions, Result, Results } from '@mapbox/mapbox
 
 import { filterObject, parentsNameIs, slotIsNotEmpty } from '../services/VueHelpers';
 import { GeocoderComponentInstance } from '../classes/GeocoderControl';
+import browserIsSafari from './helpers/browserIsSafari';
 
 export const mountGeocoderControl = async (vmb_map:Deferred<Map> | null, vmb_geocoder:Deferred<MapboxGeocoder>, props:GeocoderOptions, instance: GeocoderComponentInstance):Promise<void> => {
   const map = vmb_map ? await vmb_map.promise : null;
@@ -20,8 +21,6 @@ export const mountGeocoderControl = async (vmb_map:Deferred<Map> | null, vmb_geo
       attachToInput(instance.refs['custom-input'] as HTMLElement, geocoder, instance);
     }
   }
-  window.MapboxGeocoder = MapboxGeocoder;
-  (window as any).geocoder = geocoder;
 
   vmb_geocoder.resolve(geocoder);
 };
@@ -76,10 +75,23 @@ export const attachToInput = (ref:HTMLElement, geocoder: MapboxGeocoder, instanc
     if(!inputs )
       throw new Error('MapboxGeocoderControl: No inputs found');
   
-    const input = inputs[0];
+    const input = inputs[0];    
   
     input.addEventListener('keyup', (evt) => {
-      geocoder.query(input.value);
+      geocoder.query(input.value);      
+
+      // hotfix for safari focussing on body when keydown is pressed
+      // very very ugly still but working. should be investigated further and replaced
+      if(browserIsSafari()){
+        setTimeout(() => {
+          input.focus();
+        },100);
+        setTimeout(() => {
+          input.focus();
+        },200);
+      }
+        
+      
     });
   }
   
