@@ -10,10 +10,10 @@
     "email": "relief.melone@gmail.com"
   },
   "scripts": {
-    "build": "rm -rf lib/ && ./node_modules/.bin/yarn build:js",
+    "build": "rm -rf lib/ && yarn build:js",
     "test:unit": "vue-cli-service test:unit",
     "lint": "vue-cli-service lint --no-fix",
-    "build:js": "rm -rf ./dist && cross-env NODE_ENV=production rollup --config $npm_package_config_rollup && ./node_modules/.bin/yarn build:types",
+    "build:js": "cross-env NODE_ENV=production rollup --config $npm_package_config_rollup && yarn build:types",
     "build:types": "tsc --build tsconfigtypes.json",
     "docs:build": "vuepress build docs",
     "docs:dev": "vuepress dev docs",
