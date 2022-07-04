@@ -5,6 +5,10 @@ import MapboxMarkerPopup from './scenarios/MapboxMarker.popup.vue';
 const accessToken = Cypress.env('ACCESS_TOKEN');
 
 describe('MapboxMarker', () => {
+  beforeEach(() => {
+    setDefaultInterceptors();
+  });
+  
   it('will mount', () => {
     cy.mount(MapboxMarkerBase as any, {
       props: {
@@ -14,6 +18,7 @@ describe('MapboxMarker', () => {
   });
 
   it('will show a marker', () => {
+
     cy.mount(MapboxMarkerBase as any, {
       props: {
         accessToken
@@ -27,7 +32,6 @@ describe('MapboxMarker', () => {
   });
 
   it('will correctly mount a popup to the marker that is initially hidden', () => {
-    setDefaultInterceptors();
 
     cy.mount(MapboxMarkerPopup as any, {
       props: {

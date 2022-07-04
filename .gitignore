@@ -25,3 +25,7 @@ pnpm-debug.log*
 *.sw?
 
 .envrc
+
+# Cypress
+cypress/videos
+cypress/screenshots
