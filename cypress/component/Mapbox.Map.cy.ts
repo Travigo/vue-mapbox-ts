@@ -1,7 +1,12 @@
+import { setDefaultInterceptors } from 'cypress/support/interceptors';
 import MapboxMapBase from './scenarios/MapboxMap.base.vue';
 
 
 describe('MapboxMap.base', () => {
+  beforeEach(() => {
+    setDefaultInterceptors();
+  });
+
   it('successfully mounts a map', () => {
     cy.mount(MapboxMapBase as any, {
       props: {
