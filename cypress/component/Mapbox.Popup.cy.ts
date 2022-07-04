@@ -1,4 +1,4 @@
-import { setDefaultInterceptors } from 'cypress/support/interceptors';
+import { setDefaultInterceptors } from '@/../cypress/support/interceptors';
 import MapboxPopupBase from './scenarios/MapboxPopup.base.vue';
 
 const accessToken = Cypress.env('ACCESS_TOKEN');

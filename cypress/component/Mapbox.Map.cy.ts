@@ -1,4 +1,4 @@
-import { setDefaultInterceptors } from 'cypress/support/interceptors';
+import { setDefaultInterceptors } from '@/../cypress/support/interceptors';
 import MapboxMapBase from './scenarios/MapboxMap.base.vue';
 
 
