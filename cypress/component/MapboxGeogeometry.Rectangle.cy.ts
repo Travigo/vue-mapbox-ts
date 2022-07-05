@@ -2,6 +2,7 @@ import { setDefaultInterceptors } from '@/../cypress/support/interceptors';
 import { saveTempScreenshot } from '@/../cypress/support/visual/saveTempScreenshot';
 import MapboxGeogeometryRectangleBase from './scenarios/MapboxGeogeometryRectangle.base.vue';
 
+import config from '../support/config';
 
 describe('MapboxGeogeometry.Rectangle', () => {
   beforeEach(() => {
@@ -27,7 +28,7 @@ describe('MapboxGeogeometry.Rectangle', () => {
         width: 800,
         height: 400
       }
-    }).wait(5000);
+    }).wait(config.defaultWaitTimes.geogeometryRectangle);
 
     const tempFile = saveTempScreenshot('canvas');
 
@@ -48,7 +49,7 @@ describe('MapboxGeogeometry.Rectangle', () => {
         height: 400,
         rotationDeg: 15
       }
-    }).wait(5000);
+    }).wait(config.defaultWaitTimes.geogeometryRectangle);
 
     const tempFile = saveTempScreenshot('canvas');
 

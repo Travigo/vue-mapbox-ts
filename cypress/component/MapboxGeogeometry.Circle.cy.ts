@@ -2,7 +2,7 @@ import { setDefaultInterceptors } from '@/../cypress/support/interceptors';
 import { saveTempScreenshot } from '@/../cypress/support/visual/saveTempScreenshot';
 import MapboxGeogeometryCircleBase from './scenarios/MapboxGeogeometryCircle.base.vue';
 
-const defaultWaitMs = 2500;
+import config from '../support/config';
 
 describe('MapboxGeogeometry.Circle', () => {
   beforeEach(() => {
@@ -25,10 +25,10 @@ describe('MapboxGeogeometry.Circle', () => {
         accessToken: Cypress.env('ACCESS_TOKEN'),
         center: [0,0],
         radius: 300
-      }
+      },
     });
     
-    cy.wait(defaultWaitMs);
+    cy.wait(config.defaultWaitTimes.geogeometryCircle);
 
     const tempFile = saveTempScreenshot('canvas');
 
@@ -49,7 +49,7 @@ describe('MapboxGeogeometry.Circle', () => {
 
     cy.mount(MapboxGeogeometryCircleBase as any, {
       props
-    }).wait(defaultWaitMs);
+    }).wait(config.defaultWaitTimes.geogeometryCircle);
 
     
     props.radius = 800;
