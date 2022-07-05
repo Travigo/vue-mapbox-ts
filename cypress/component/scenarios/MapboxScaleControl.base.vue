@@ -1,22 +1,22 @@
 <template lang="pug">
 div#main
   mapbox-map(:accessToken="accessToken")
-    mapbox-navigation-control(:position="position")
+    mapbox-scale-control(:unit="unit")
 </template>
 
 <script lang="ts">
 import { defineComponent, onMounted, onUnmounted } from 'vue';
 
-import { MapboxMap, MapboxNavigationControl } from '@/components';
+import { MapboxMap, MapboxScaleControl } from '@/components';
 
 export default defineComponent({
-  name: 'MapboxNavigationControlBase',
+  name: 'MapboxScaleControlBase',
   components: {
-    MapboxMap, MapboxNavigationControl
+    MapboxMap, MapboxScaleControl
   },
   props: {
     accessToken: { type: String, required: true },
-    position: { type: String, default: 'bottom-left' } 
+    unit: { type: String, default: 'metric' } 
   },
   setup(props){
 

@@ -54,6 +54,7 @@ export const getMapboxOptions = (props: MapboxMapInput, el: any): MapboxOptions 
     'pitch',
     'pitchWithRotate',
     'preserveDrawingBuffer',
+    'projection',
     'refreshExpiredTiles',
     'renderWorldCopies',
     'scrollZoom',
@@ -65,6 +66,10 @@ export const getMapboxOptions = (props: MapboxMapInput, el: any): MapboxOptions 
 
   opts.style = getMapStyle(props.mapStyle);
   opts.container = el;
+
+  console.log('Initializing map with options...');
+  console.log(opts);
+
   return opts;
 
 };
@@ -112,6 +117,7 @@ export async function mapWatcher(
     maxZoom,
     minPitch,
     pitch,
+    projection,
     renderWorldCopies,
     zoom,
     mapStyle
@@ -124,6 +130,7 @@ export async function mapWatcher(
   await watchRegular(vmb_map, { bearing, maxBounds, maxPitch, minPitch, pitch, renderWorldCopies });
   await watchPosition(vmb_map, { maxZoom, center, flyToOptions, minZoom, zoom });
   await watchMapStyle(vmb_map, mapStyle);
+  await watchProjection(vmb_map, projection);
 
 }
 
@@ -155,6 +162,14 @@ export function watchPosition(vmb_map:Deferred<Map>, refs:positionProps){
   conditionalWatch(refs.maxZoom, maxZoom => updateMapPosition(vmb_map, { maxZoom }));
   conditionalWatch(refs.minZoom, minZoom => updateMapPosition(vmb_map, { minZoom }));
   conditionalWatch(refs.zoom, zoom => updateMapPosition(vmb_map, { zoom }));
+}
+
+// Update with type definition after mapbox updates @types/mapbox-gl
+export async function watchProjection(vmb_map:Deferred<Map>, projectionRef: Ref<any>){
+  const map = await vmb_map.promise;
+
+  conditionalWatch(projectionRef, proj => map.setProjection(proj));
+  
 }
 
 export async function updateMapPosition(vmb_map:Deferred<Map>, posProps: positionPropsUnwrapped){

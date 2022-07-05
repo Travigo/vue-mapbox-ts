@@ -12,6 +12,7 @@
     "sourceMap": true,
     "baseUrl": ".",
     "types": [
+      // "src/@types",
       "webpack-env",
       "mocha",
       "chai",
@@ -36,8 +37,8 @@
     "tests/**/*.ts",
     "tests/**/*.tsx",
     // "cypress/component/*.cy.ts",
-    "cypress/**/*.ts"
-
+    "cypress/**/*.ts",
+    "src/@types/MapboxMap.d.ts"
   ],
   "exclude": [
     "node_modules"

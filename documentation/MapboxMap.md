@@ -29,7 +29,7 @@ Please note that the parameter style cannot be used as it is already reserved by
 | flyToOptions        | Object  | FlyToOptions | {}            | &#x2612;  | &#x2611; |
 | auto-resize         | boolean |              | false         | &#x2612;  | &#x2612; |
 | auto-resize-delay   | number  |              | undefined     | &#x2612;  | &#x2612; |
-| cooperativeGestures | boolean |              | false         | &#x2612;  | &#x2612;         |
+| cooperativeGestures | boolean |              | false         | &#x2612;  | &#x2612; |
 
 
 #### height
@@ -68,6 +68,7 @@ If you are using transitons with your map container you might want to use a dela
 - minPitch
 - pitch
 - renderWorldCopies
+- projection
 - zoom
 
 ## Events
