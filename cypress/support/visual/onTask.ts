@@ -10,34 +10,23 @@ export const onTask = (on: Cypress.PluginEvents, config:Cypress.PluginConfigOpti
   let lastScreenshotName:string|null = null;
   
   on('task', {
-    compare: async ({ original, compareTo, options }) => {
-      if(!lastScreenshotPath){
-        console.log('cannot compare. No last screenshot found');
+    compare: async ({ original, options }) => {
+      if(!lastScreenshotPath)
         return;
-      }
+      
 
-      const baseFile = `${pathExamples}/${original}.png`;
-      const tempFile = lastScreenshotPath;
-      const diffFile = `${lastScreenshotPath}.diff.png`;
+      const baseFile:string = `${pathExamples}/${original}.png`;
+      const tempFile = `${lastScreenshotPath}/${lastScreenshotName}.png`;
+      const diffFile = `${lastScreenshotPath}/${lastScreenshotName}.diff.png`;
 
 
-      console.log(`Comparing base image ${baseFile} to new image ${tempFile}`);
-
-      if(options)
-        console.log(`odiff opts: ${options}`);
-
-      const started = Date.now();
-      const result = await compare(baseFile, tempFile, diffFile, options);
-      const elapsed = Date.now()-started;
-
-      console.log(`comparison took ${elapsed} ms`);
-      console.log(result);
-      return result;
+      return await compare(baseFile, tempFile, diffFile, options);
     }
   });
 
   on('after:screenshot', (details) => {
-    lastScreenshotPath = details.path;
+    lastScreenshotPath = details
+      .path.split('/').slice(0,-1).join('/');
     lastScreenshotName = details.name;
   });
 };
