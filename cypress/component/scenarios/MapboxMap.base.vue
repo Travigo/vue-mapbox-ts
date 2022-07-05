@@ -1,6 +1,12 @@
 <template lang="pug">
 div#main
-  mapbox-map(:accessToken="accessToken")
+  mapbox-map(
+    :accessToken="accessToken"
+    :projection="projection"
+    :zoom="zoom"
+    :center="center"
+    :mapStyle="mapStyle"
+  )
 </template>
 
 <script lang="ts">
@@ -14,7 +20,11 @@ export default defineComponent({
     MapboxMap
   },
   props: {
-    accessToken: { type: String, required: true }
+    accessToken: { type: String, required: true },
+    projection: { type: String },
+    zoom: { type: Number },
+    mapStyle: { type: String },
+    center: { type: Array }
   },
   setup(props){
 

@@ -20,8 +20,7 @@ export default defineComponent({
   props: {
     accessToken: { type: String, required: true },
     center: { type: Array },
-    radius: { type: Number }
-
+    radius: { type: Number },
   },
   setup(props){
 
