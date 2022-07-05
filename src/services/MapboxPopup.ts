@@ -60,7 +60,8 @@ export const mountPopup = async (
   const map = await vmb_map.promise;
   const popup = vmb_popup;
 
-  popup.setDOMContent(content.value);
+  if(content.value)
+    popup.setDOMContent(content.value);
 
   if(parentIsMarker(instance))
     await attachToMarker(instance, vmb_marker, popup);

@@ -35,7 +35,7 @@ export function enableAutoResizeWithResizeObserver(rootContainerRef:Ref<HTMLElem
 
 export function enableAutoResizeWithEventListener(watchedRef:Ref<HTMLElement | null>, autoResizeDelay?: number):UnwrapRef<DOMRect> {
   const instance = getCurrentInstance();
-  let result:UnwrapRef<DOMRect> = reactive(new DOMRect(0,0,0,0).toJSON());
+  const result:UnwrapRef<DOMRect> = reactive(new DOMRect(0,0,0,0).toJSON());
   
   if(instance){
     let boundingBox:DOMRect = watchedRef.value

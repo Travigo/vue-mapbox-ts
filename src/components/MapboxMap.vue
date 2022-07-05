@@ -197,6 +197,9 @@ export default defineComponent({
     cooperativeGestures: {
       type: Boolean,
       default: false
+    },
+    projection: {
+      type: String
     }
   },
   setup: (props) => {
@@ -215,7 +218,6 @@ export default defineComponent({
     });
 
     mapWatcher(vmb_map, props, { center: i_center, flyToOptions: i_flyToOptions });
-    
 
     onMounted(async () => {
       const instance = getCurrentInstance();

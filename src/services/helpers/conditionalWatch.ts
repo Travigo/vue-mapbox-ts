@@ -3,7 +3,8 @@ import { Ref, UnwrapRef, watch, WatchCallback, WatchOptions, WatchStopHandle } f
 
 export default <T,U=T>(ref:ORef<T> | UnwrapRef<T> | T , cb: WatchCallback<T>, options?:WatchOptions):WatchStopHandle|null => {
   if(ref && (ref as any).value !== undefined)
-    return watch(ref as any, cb as WatchCallback, options);  else
+    return watch(ref as any, cb as WatchCallback, options);  
+  else
     return null;
     
 };
