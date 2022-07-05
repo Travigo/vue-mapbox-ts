@@ -16,7 +16,8 @@
       "webpack-env",
       "mocha",
       "chai",
-      "cypress"
+      "cypress",
+      "node"
     ],
     "paths": {
       "@/*": [

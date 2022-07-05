@@ -1,5 +1,7 @@
 import { defineConfig } from 'cypress';
 
+import { onTask } from './cypress/support/visual/onTask';
+
 export default defineConfig({
   component: {
     devServer: {
@@ -10,7 +12,10 @@ export default defineConfig({
     responseTimeout: 20000,
     execTimeout: 20000,
     defaultCommandTimeout: 20000,
-    pageLoadTimeout: 20000
+    pageLoadTimeout: 20000,
+    setupNodeEvents: (on, config) => {
+      onTask(on, config);
+    }
   },
 
   e2e: {
