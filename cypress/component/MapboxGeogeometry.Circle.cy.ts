@@ -48,12 +48,13 @@ describe('MapboxGeogeometry.Circle', () => {
     };
 
     cy.mount(MapboxGeogeometryCircleBase as any, {
-      props
+      props,
     }).wait(config.defaultWaitTimes.geogeometryCircle);
 
     
     props.radius = 800;
     cy.wait(500);
+  
     const tempFile = saveTempScreenshot('canvas');
 
 
