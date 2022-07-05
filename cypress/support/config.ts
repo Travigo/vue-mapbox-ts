@@ -1,6 +1,6 @@
 export default {
   defaultWaitTimes: {
-    geogeometryRectangle: 8000,
-    geogeometryCircle: 8000
+    geogeometryRectangle: 10000,
+    geogeometryCircle: 10000
   }
 };
