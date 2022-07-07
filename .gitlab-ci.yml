@@ -1,4 +1,4 @@
 include:
 - project: rm-templates/gitlab_pipelines
-  ref: v2
+  ref: v2.3.0
   file: /templates/typescript/typescript.node.npm_package.gitlab-ci.yml
