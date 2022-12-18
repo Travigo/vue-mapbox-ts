@@ -1,11 +1,11 @@
 <template>
 <div :style="style" ref="root" class="mapbox-map">
   <div>
+    <slot />
     
   </div>
   <div v-if="vmb_map.isResolved" ref="mapContainer" class="map-container" :style="{ height, width }" >
-    <slot />
-    </div>
+  </div>
   <div v-else>
     <slot name="loader">
       <div :style="style" />
