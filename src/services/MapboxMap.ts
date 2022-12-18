@@ -67,9 +67,6 @@ export const getMapboxOptions = (props: MapboxMapInput, el: any): MapboxOptions 
   opts.style = getMapStyle(props.mapStyle);
   opts.container = el;
 
-  console.log('Initializing map with options...');
-  console.log(opts);
-
   return opts;
 
 };
