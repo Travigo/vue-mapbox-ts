@@ -16,7 +16,7 @@ export default defineComponent({
     blur: {
       type: Number
     },
-    cap: {
+    cap: {      
       // eslint-disable-next-line no-undef
       type: String as () => CanvasLineCap
     },

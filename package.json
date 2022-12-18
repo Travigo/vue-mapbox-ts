@@ -3,7 +3,7 @@
   "logo": {
     "file": "./documentation/logo.png"
   },
-  "version": "0.9.5",
+  "version": "0.9.6",
   "description": "Reactive Vue3 Mapbox Framework for Vue.js written in TypeScript",
   "author": {
     "name": "Relief Melone",
