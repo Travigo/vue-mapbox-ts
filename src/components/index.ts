@@ -23,6 +23,8 @@ import MapboxGeogeometryRaw from './MapboxGeogeometryRaw.vue';
 import MapboxGeogeometryFill from './MapboxGeogeometry.Fill.vue';
 import MapboxGeogeometryLine from './MapboxGeogeometry.Line.vue';
 
+console.log('Running dev instance!');
+
 export {
   MapboxGeocoderControl,
   // MapboxImage,

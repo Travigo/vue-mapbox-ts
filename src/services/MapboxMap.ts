@@ -133,7 +133,7 @@ export async function mapWatcher(
 
 export async function watchMapStyle (vmb_map:Deferred<Map>, mapStyle:Ref<string>){
   const map = await vmb_map.promise;
-  watch(mapStyle, (newStyle:string) => map.setStyle(newStyle));
+  watch(mapStyle, (newStyle:string) => map.setStyle(newStyle));  
 }
 
 export async function watchDimensions(vmb_map:Deferred<Map>, width:Ref<string>, height:Ref<string>){
