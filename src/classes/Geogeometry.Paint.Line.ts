@@ -1,5 +1,5 @@
 import { filterObject } from '../services/VueHelpers';
-import { FillLayer, FillPaint, LineLayer, LinePaint, Map } from 'mapbox-gl';
+import { FillLayer, FillPaint, LineLayer, LineLayout, LinePaint, Map } from 'mapbox-gl';
 import Deferred from 'my-deferred';
 import { GeogeometryPaint, GeogeometryPaintInput } from './Geogeometry.Paint';
 import deepEqual from 'fast-deep-equal';
@@ -81,26 +81,35 @@ export class GeogeometryLine extends GeogeometryPaint {
 
   getPaint():LinePaint{
     const paintRaw = {
-      'line-blur': this.blur,
-      'line-cap': this.cap,
-      'line-join': this.join,
-      'line-opacity': this.join,
+      'line-blur': this.blur,      
+      'line-opacity': this.opacity,
       'line-color': this.color,
       'line-width': this.width,
       'line-translate': this.translate,
       'line-offset': this.offset,
       'line-dasharray': this.dasharray,
-      'line-gap-width': this.gapWidth,
-      // 'line-gradient': this.gradient,
-      'line-miter-limit': this.miterLimit,
-      'line-round-limimt': this.roundLimit,
-      'line-sort-key': this.sortKey,
-      'line-translate-anchor': this.translateAnchor,
+      'line-gap-width': this.gapWidth,      
+      'line-translate-anchor': this.translateAnchor,      
     } as LinePaint;
 
     const paint = filterObject(paintRaw);    
-
+    console.log(paint);
     return paint;
+  }
+
+  getLayout():LineLayout{
+    const layoutRaw = {
+      'line-cap': this.cap,
+      'line-join': this.join,
+      'line-miter-limit': this.miterLimit,
+      'line-round-limit': this.roundLimit,
+      'line-sort-key': this.sortKey,
+
+    } as LineLayout;
+
+    const layout = filterObject(layoutRaw);
+    console.log(layout);
+    return layout;
   }
 
   init():GeogeometryLine{
@@ -195,7 +204,7 @@ export class GeogeometryLine extends GeogeometryPaint {
         id: this.id,
         type: 'line',
         source: this.geoId,
-        layout: {},
+        layout: this.getLayout(),
         paint: this.getPaint()
       };  
     } else {
