@@ -12,7 +12,7 @@ export default function <T, U=Ref<T> | UnwrapRef<T>>(propertyValue:Record<string
   if(!instance)
     throw new Error('vmodel: Instance not found');
   
-  const internal = ref(instance.props[modelName] || propertyValue);
+  const internal = ref<Record<string,any>>(instance.props[modelName] || propertyValue);
 
   for(const eventName of eventNames)
     watch(internal, _val => {
@@ -24,7 +24,7 @@ export default function <T, U=Ref<T> | UnwrapRef<T>>(propertyValue:Record<string
       ? instance.props[modelName] !== internal.value 
       : !equal(instance.props[modelName], internal.value)
     )
-      internal.value = instance.props[modelName] as UnwrapRef<T>;
+      internal.value = instance.props[modelName] as any;
       
   });
 

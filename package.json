@@ -3,7 +3,7 @@
   "logo": {
     "file": "./documentation/logo.png"
   },
-  "version": "0.9.6",
+  "version": "0.9.7",
   "description": "Reactive Vue3 Mapbox Framework for Vue.js written in TypeScript",
   "author": {
     "name": "Relief Melone",
@@ -12,6 +12,7 @@
   "scripts": {
     "build": "rm -rf lib/ && yarn build:js",
     "test:unit": "vue-cli-service test:unit",
+    "test:comp": "cypress run --component --browser edge",
     "lint": "vue-cli-service lint --no-fix",
     "build:js": "cross-env NODE_ENV=production rollup --config $npm_package_config_rollup && yarn build:types",
     "build:types": "tsc --build tsconfigtypes.json",
@@ -39,10 +40,10 @@
     "@types/mocha": "^5.2.4",
     "fast-deep-equal": "^3.1.3",
     "mapbox-gl": "^2.11.1",
-    "my-deferred": "^1.1.0"
+    "my-deferred": "^1.2.0"
   },
   "devDependencies": {
-    "@cypress/vue": "^4.0.0",
+    "@cypress/vue": "^5.0.3",
     "@rollup/plugin-alias": "^3.1.9",
     "@rollup/plugin-babel": "^5.3.1",
     "@rollup/plugin-commonjs": "^22.0.1",
@@ -73,16 +74,16 @@
     "pug": "^3.0.2",
     "pug-plain-loader": "^1.1.0",
     "rollup": "^2.40.0",
-    "rollup-plugin-css-only": "^3.1.0",
+    "rollup-plugin-css-only": "^4.3.0",
     "rollup-plugin-peer-deps-external": "^2.2.4",
     "rollup-plugin-postcss": "^4.0.1",
     "rollup-plugin-terser": "^7.0.2",
-    "rollup-plugin-typescript2": "^0.30.0",
+    "rollup-plugin-typescript2": "^0.34.1",
     "rollup-plugin-vue": "^6.0.0",
     "sass": "^1.26.5",
     "sass-loader": "^8.0.2",
-    "tslib": "^2.3.1",
-    "typescript": "^4.6.2",
+    "tslib": "^2.4.1",
+    "typescript": "^4.9.4",
     "yarn": "^1.22.10"
   },
   "bugs": {
