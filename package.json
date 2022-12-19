@@ -62,7 +62,7 @@
     "@wessberg/rollup-plugin-ts": "^2.0.4",
     "chai": "^4.1.2",
     "cross-env": "^7.0.3",
-    "cypress": "^10.3.0",
+    "cypress": "^12.1.0",
     "eslint": "^7.5.0",
     "eslint-plugin-vue": "^8.5.0",
     "odiff-bin": "^2.5.0",
