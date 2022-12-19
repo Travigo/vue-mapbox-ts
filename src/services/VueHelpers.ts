@@ -6,7 +6,7 @@ export const slotIsNotEmpty = (el:HTMLElement):boolean =>
   el && el.outerHTML !== '<div></div>';
 
 
-export const filterObject = <T>(object:T, keys?:(keyof T)[], blacklist:Array<any> = [ undefined ]):T => {
+export const filterObject = <T extends Record<string,any>>(object:T, keys?:(keyof T)[], blacklist:Array<any> = [ undefined ]):T => {
   const result:T = {} as T;
   const _keys = keys || Object.keys(object) as (keyof T)[];
   
