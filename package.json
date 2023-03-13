@@ -14,7 +14,7 @@
     "test:unit": "vue-cli-service test:unit",
     "test:comp": "cypress run --component --browser edge",
     "lint": "vue-cli-service lint --no-fix",
-    "build:js": "cross-env NODE_ENV=production rollup --config $npm_package_config_rollup && yarn build:types",
+    "build:js": "yarn build:types",
     "build:types": "tsc --build tsconfigtypes.json",
     "docs:build": "vuepress build docs",
     "docs:dev": "vuepress dev docs",
