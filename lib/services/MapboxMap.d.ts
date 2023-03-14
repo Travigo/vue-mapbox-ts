@@ -1,0 +1,23 @@
+import { positionProps, positionPropsUnwrapped, reactiveProps, regularProps } from '../classes/map';
+import { MapboxOptions, Map } from 'mapbox-gl';
+import Deferred from 'my-deferred';
+import { Ref } from 'vue';
+import { ComponentInternalInstance } from 'vue';
+import { DivStyle, MapboxMapInput } from '../classes/MapboxMap';
+export declare const getStyle: (props: any) => DivStyle;
+export declare const getMapStyle: (raw: string) => string;
+export declare const getMapboxOptions: (props: MapboxMapInput, el: any) => MapboxOptions;
+export declare const mountMap: (props: MapboxMapInput, vmb_map: Deferred<Map>, mapContainerRef: Ref<any>, rootContainerRef: Ref<any>) => void;
+export declare const coordsChanged: (newCoords: [number, number], oldCorrds: [number, number]) => boolean;
+export declare const updateStyle: (props: any, style: Ref<DivStyle>) => void;
+export declare function mapWatcher(vmb_map: Deferred<Map>, props: Record<string, any>, propsReactive: reactiveProps): Promise<void>;
+export declare function watchMapStyle(vmb_map: Deferred<Map>, mapStyle: Ref<string>): Promise<void>;
+export declare function watchDimensions(vmb_map: Deferred<Map>, width: Ref<string>, height: Ref<string>): Promise<void>;
+export declare function watchRegular(vmb_map: Deferred<Map>, refs: regularProps): Promise<void>;
+export declare function watchPosition(vmb_map: Deferred<Map>, refs: positionProps): void;
+export declare function watchProjection(vmb_map: Deferred<Map>, projectionRef: Ref<any>): Promise<void>;
+export declare function updateMapPosition(vmb_map: Deferred<Map>, posProps: positionPropsUnwrapped): Promise<void>;
+export declare const MapGlEvents: string[];
+export declare const MapEmits: string[];
+export declare const registerMapEvents: (vmb_map: Deferred<Map>, instance: ComponentInternalInstance) => Promise<void>;
+//# sourceMappingURL=MapboxMap.d.ts.map

@@ -1,0 +1,1 @@
+{"version":3,"file":"VueMapbox.d.ts","sourceRoot":"","sources":["../../src/classes/VueMapbox.ts"],"names":[],"mappings":"AAAA,KAAK,gBAAgB,CAAC,YAAY,IAAI,CAAC,EAAE,EAAC,YAAY,KAAK,GAAG,CAAC;AAE/D,MAAM,WAAW,cAAc,CAAC,YAAY;IAC1C,EAAE,EAAE,CAAC,GAAG,EAAC,MAAM,EAAE,EAAE,EAAE,gBAAgB,CAAC,YAAY,CAAC,KAAK,IAAI,CAAC;CAC9D"}

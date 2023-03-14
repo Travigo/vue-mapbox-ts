@@ -1,0 +1,1 @@
+{"version":3,"file":"GeolocationControl.d.ts","sourceRoot":"","sources":["../../src/classes/GeolocationControl.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,gBAAgB,EAAE,eAAe,EAAE,MAAM,WAAW,CAAC;AAE9D,MAAM,WAAW,yBAAyB;IACxC,eAAe,EAAE,eAAe,CAAC;IACjC,gBAAgB,EAAE,gBAAgB,CAAC;IACnC,iBAAiB,EAAE,OAAO,CAAC;IAC3B,kBAAkB,EAAE,OAAO,CAAC;IAC5B,gBAAgB,EAAE,OAAO,CAAA;CAC1B"}
